@@ -1,64 +1,79 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<title>Boda Dahiana & Manuel</title>
-<link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boda Dahiana & Manuel</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
 </head>
-
 <body>
 
-<!-- SOBRE -->
-<div class="envelope" id="envelope">
-  <div class="cover"></div>
-  <div class="letter">
-    <h2>Dahiana & Manuel</h2>
-    <p>03 Octubre 2026</p>
-    <p class="open">Abrir</p>
-  </div>
-</div>
+    <audio id="music" loop>
+        <source src="musica.mp3" type="audio/mpeg">
+    </audio>
 
-<!-- CONTENIDO -->
-<div class="content" id="content">
+    <div class="envelope-wrapper" id="envelope-wrapper">
+        <div class="envelope">
+            <div class="top-flap"></div>
+            <div class="wax-seal">D & M</div>
+            <div class="letter">
+                <h2>Dahiana & Manuel</h2>
+                <p>03.10.2026</p>
+                <small>Toca para abrir</small>
+            </div>
+            <div class="back"></div>
+            <div class="front"></div>
+        </div>
+    </div>
 
-  <h1>Dahiana & Manuel</h1>
+    <div id="content" class="hidden">
+        <div class="header-decor">
+            <p class="subtitle">DALE PLAY PARA ESCUCHAR NUESTRA CANCIÓN</p>
+            <button class="btn-music" onclick="toggleMusic()">🎵 Reproducir</button>
+        </div>
 
-  <p class="mensaje">
-  Con mucha ilusión queremos invitarte a uno de los días más importantes de nuestra vida...
-  </p>
+        <div class="main-card">
+            <p class="pre-title">NOS CASAMOS</p>
+            <h1>Dahiana & Manuel</h1>
+            <p class="mensaje">
+                Con mucha ilusión queremos invitarte a uno de los días más importantes de nuestra vida...
+            </p>
 
-  <h2>Detalles</h2>
-  <p>📅 03 de octubre 2026</p>
-  <p>🕐 13:00</p>
-  <p>📍 Cortijo Triana, Andújar (Jaén)</p>
+            <div class="info-row">
+                <div class="info-item">
+                    <span class="icon">📅</span>
+                    <p>03 DE OCTUBRE 2026</p>
+                </div>
+                <div class="info-item">
+                    <span class="icon">🕐</span>
+                    <p>13:00 HORAS</p>
+                </div>
+            </div>
 
-  <!-- CONTADOR -->
-  <div id="countdown"></div>
+            <div class="location-box">
+                <span class="icon">📍</span>
+                <p>CORTIJO TRIANA<br>Andújar (Jaén)</p>
+                <a href="https://www.google.com/maps?q=Cortijo+Triana+Andujar" target="_blank" class="btn-oliva">VER UBICACIÓN</a>
+            </div>
 
-  <!-- GALERÍA -->
-  <div class="galeria">
-    <img src="https://picsum.photos/300/200">
-    <img src="https://picsum.photos/301/200">
-    <img src="https://picsum.photos/302/200">
-  </div>
+            <div class="countdown-container">
+                <p class="faltan">FALTAN</p>
+                <div id="countdown" class="timer">
+                    </div>
+                <p class="para-el-dia">PARA NUESTRO GRAN DÍA</p>
+            </div>
 
-  <!-- MAPA -->
-  <iframe src="https://www.google.com/maps?q=Cortijo+Triana+Andujar&output=embed"></iframe> 
+            <div class="rsvp-section">
+                <h3>CONFIRMAR ASISTENCIA</h3>
+                <div class="botones">
+                    <a href="https://wa.me/34602732290" class="btn-wa">Confirmar con Dahiana</a>
+                    <a href="https://wa.me/34664593119" class="btn-wa">Confirmar con Manuel</a>
+                </div>
+            </div>
+        </div>
+    </div>
 
-  <!-- WHATSAPP -->
-  <div class="botones">
-    <a href="https://wa.me/34602732290">Confirmar con Dahiana</a>
-    <a href="https://wa.me/34664593119">Confirmar con Manuel</a>
-  </div>
-
-  <!-- MÚSICA -->
-  <button onclick="toggleMusic()">🎵 Música</button>
-  <audio id="music" loop>
-    <source src="musica.mp3" type="audio/mpeg">
-  </audio>
-
-</div>
-
-<script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
