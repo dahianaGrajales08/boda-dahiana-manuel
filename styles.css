@@ -1,4 +1,4 @@
-/* --- FUENTES DE GOOGLE --- */
+/* --- FUENTES Y VARIABLES --- */
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Montserrat:wght@300;400&display=swap');
 
 :root {
@@ -13,7 +13,7 @@ body {
     margin: 0;
     padding: 0;
     background-color: var(--marfil);
-    background-image: url('https://www.transparenttextures.com/patterns/natural-paper.png'); /* Textura de papel */
+    background-image: url('https://www.transparenttextures.com/patterns/natural-paper.png');
     font-family: 'Montserrat', sans-serif;
     color: var(--texto);
     display: flex;
@@ -23,12 +23,12 @@ body {
     overflow-x: hidden;
 }
 
-/* --- ESTILO DEL SOBRE PREMIUM --- */
+/* --- CONTENEDOR DEL SOBRE --- */
 .envelope-wrapper {
     position: relative;
     cursor: pointer;
     z-index: 10;
-    transition: 0.5s;
+    transition: opacity 1.2s ease; /* Desvanecimiento más suave */
 }
 
 .envelope {
@@ -39,66 +39,19 @@ body {
     box-shadow: 0 15px 35px rgba(0,0,0,0.2);
 }
 
-/* Tapa Triangular */
-.envelope .top-flap {
-    position: absolute;
-    top: 0; left: 0; width: 0; height: 0;
-    border-left: 150px solid transparent;
-    border-right: 150px solid transparent;
-    border-top: 115px solid var(--verde-oliva);
-    transform-origin: top;
-    transition: transform 0.6s ease-in-out;
-    z-index: 4;
-}
-
-/* Lados del sobre */
-.envelope .front {
-    position: absolute;
-    width: 0; height: 0;
-    border-right: 150px solid var(--verde-oscuro);
-    border-top: 100px solid transparent;
-    border-bottom: 100px solid var(--verde-oscuro);
-    left: 150px; bottom: 0; z-index: 3;
-}
-
-.envelope .back {
-    position: absolute;
-    width: 0; height: 0;
-    border-left: 150px solid var(--verde-oscuro);
-    border-top: 100px solid transparent;
-    border-bottom: 100px solid var(--verde-oscuro);
-    left: 0; bottom: 0; z-index: 3;
-}
-
-/* Sello de Lacre */
-.wax-seal {
-    position: absolute;
-    top: 95px; left: 130px;
-    width: 45px; height: 45px;
-    background: var(--dorado);
-    border-radius: 50%;
-    z-index: 5;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-size: 11px;
-    font-weight: bold;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-    transition: opacity 0.4s;
-}
-
-/* La tarjeta que sube */
+/* LA CARTA (Corregida para que suba por delante) */
 .letter {
     position: absolute;
-    bottom: 5px; left: 15px;
-    width: 270px; height: 180px;
+    bottom: 5px; 
+    left: 15px;
+    width: 270px; 
+    height: 180px;
     background: white;
     padding: 20px;
     box-sizing: border-box;
     text-align: center;
-    z-index: 2;
-    transition: transform 0.8s ease-in-out;
+    z-index: 6; /* CAPA MÁS ALTA: Ahora pasa por delante de todo */
+    transition: transform 1.8s ease-in-out; /* MÁS LENTA: Se aprecia mejor */
     box-shadow: 0 0 15px rgba(0,0,0,0.1);
 }
 
@@ -109,20 +62,64 @@ body {
     font-size: 1.6rem;
 }
 
-.letter p {
-    font-size: 0.75rem;
-    letter-spacing: 2px;
-    color: #888;
+/* TAPA DEL SOBRE */
+.envelope .top-flap {
+    position: absolute;
+    top: 0; left: 0; width: 0; height: 0;
+    border-left: 150px solid transparent;
+    border-right: 150px solid transparent;
+    border-top: 115px solid var(--verde-oliva);
+    transform-origin: top;
+    transition: transform 1s ease-in-out;
+    z-index: 4; /* Debajo de la carta */
 }
 
-/* Animaciones al abrir */
-.envelope-wrapper.open .top-flap { transform: rotateX(180deg); }
-.envelope-wrapper.open .letter { transform: translateY(-130px); }
-.envelope-wrapper.open .wax-seal { opacity: 0; }
+/* PARTES FRONTALES DEL SOBRE */
+.envelope .front {
+    position: absolute;
+    width: 0; height: 0;
+    border-right: 150px solid var(--verde-oscuro);
+    border-top: 100px solid transparent;
+    border-bottom: 100px solid var(--verde-oscuro);
+    left: 150px; bottom: 0; 
+    z-index: 5; /* Justo debajo de la carta */
+}
 
-/* --- CONTENIDO PRINCIPAL --- */
+.envelope .back {
+    position: absolute;
+    width: 0; height: 0;
+    border-left: 150px solid var(--verde-oscuro);
+    border-top: 100px solid transparent;
+    border-bottom: 100px solid var(--verde-oscuro);
+    left: 0; bottom: 0; 
+    z-index: 5;
+}
+
+/* SELLO */
+.wax-seal {
+    position: absolute;
+    top: 95px; left: 130px;
+    width: 45px; height: 45px;
+    background: var(--dorado);
+    border-radius: 50%;
+    z-index: 7; /* Encima de todo cuando está cerrado */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 11px;
+    font-weight: bold;
+    transition: opacity 0.5s;
+}
+
+/* ANIMACIÓN AL ABRIR */
+.envelope-wrapper.open .top-flap { transform: rotateX(180deg); }
+.envelope-wrapper.open .letter { transform: translateY(-140px); } /* Sube un poco más */
+.envelope-wrapper.open .wax-seal { opacity: 0; pointer-events: none; }
+
+/* --- CONTENIDO DE LA INVITACIÓN (Aparece después) --- */
 #content {
-    display: none; /* Se activa con JS */
+    display: none;
     max-width: 500px;
     width: 90%;
     margin: 40px auto;
@@ -132,77 +129,18 @@ body {
     border: 1px solid #eee;
     box-shadow: 0 10px 40px rgba(0,0,0,0.05);
     opacity: 0;
-    transition: opacity 1s;
+    transition: opacity 2s ease; /* Aparición muy suave */
 }
 
 h1 {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 2.8rem;
+    font-size: 2.5rem;
     color: var(--verde-oliva);
-    margin: 0;
 }
 
-.mensaje {
-    font-style: italic;
-    font-size: 0.95rem;
-    line-height: 1.6;
-    margin: 20px 0;
-    color: #666;
-}
-
-/* Botones estilo TikTok */
-.btn-oliva {
-    display: inline-block;
-    background: var(--verde-oliva);
-    color: white;
-    text-decoration: none;
-    padding: 14px 28px;
-    border-radius: 40px;
-    font-size: 0.85rem;
-    letter-spacing: 1px;
-    margin: 10px 5px;
-    transition: background 0.3s;
-    border: none;
-    cursor: pointer;
-}
-
-.btn-oliva:hover {
-    background: var(--verde-oscuro);
-}
-
-/* Contador */
 .timer {
     display: flex;
     justify-content: center;
     gap: 20px;
     margin: 30px 0;
-}
-
-.timer div {
-    display: flex;
-    flex-direction: column;
-    font-size: 1.8rem;
-    font-weight: 600;
-    color: var(--verde-oliva);
-    font-family: 'Cormorant Garamond', serif;
-}
-
-.timer span {
-    font-size: 0.65rem;
-    color: #999;
-    font-family: 'Montserrat', sans-serif;
-    letter-spacing: 1px;
-}
-
-/* Mapa e Imágenes */
-iframe {
-    width: 100%;
-    border-radius: 15px;
-    margin-top: 20px;
-}
-
-.galeria img {
-    width: 100%;
-    border-radius: 10px;
-    margin-bottom: 10px;
 }
