@@ -26,23 +26,6 @@ body {
     z-index: 2; transition: transform 2s ease-in-out;
 }
 
-/* LIRIOS */
-.lilies-container {
-    position: absolute; top: 0; left: 50%;
-    transform: translateX(-50%);
-    width: 350px; height: 250px;
-    z-index: 1; opacity: 0;
-    transition: all 2s ease;
-    pointer-events: none;
-}
-
-.envelope-wrapper.open .lilies-container {
-    opacity: 1; transform: translateX(-50%) translateY(-150px);
-}
-
-.lily { width: 120px; position: absolute; filter: drop-shadow(0 5px 10px rgba(0,0,0,0.1)); }
-.lily-1 { left: 10px; transform: rotate(-15deg); }
-.lily-2 { right: 10px; transform: rotate(15deg); }
 
 /* ANILLOS Y TEXTO DORADO */
 .gold-text { font-family: 'Cormorant Garamond', serif; color: var(--dorado); margin: 5px 0; }
