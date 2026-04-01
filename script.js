@@ -3,34 +3,40 @@ const wrapper = document.getElementById("envelope-wrapper");
 const content = document.getElementById("content");
 const music = document.getElementById("music");
 const letter = document.querySelector(".letter");
+const musicIcon = document.getElementById("musicIcon");
+const musicText = document.getElementById("musicText");
 
-// CONFIGURACIÓN DE TIEMPO (en segundos)
-const tiempoInicio = 90; // 1:30 = 90 segundos
-const tiempoFin = 130;    // 2:10 = 130 segundos
+// CONFIGURACIÓN DE TIEMPO (Bucle 1:30 a 2:10)
+const tiempoInicio = 90;  // 1:30 en segundos
+const tiempoFin = 130;    // 2:10 en segundos
 
-// 1. ABRIR SOBRE Y CONTROL DE MÚSICA
+// 1. ABRIR SOBRE Y EMPEZAR MÚSICA
 wrapper.addEventListener("click", () => {
     if(wrapper.classList.contains("open")) return;
     
-    // Iniciar música en el segundo 1:40
+    // Iniciar música en el punto exacto
     music.currentTime = tiempoInicio;
-    music.play().catch(e => console.log("Interacción requerida para audio"));
+    music.play().then(() => {
+        musicIcon.innerText = "⏸️";
+        musicText.innerText = "Pausar";
+    }).catch(e => console.log("Audio esperando interacción"));
 
-    // Bucle personalizado: vigilamos el tiempo actual
+    // Bucle personalizado
     music.addEventListener("timeupdate", () => {
         if (music.currentTime >= tiempoFin) {
-            music.currentTime = tiempoInicio; // Salta de nuevo al 1:40
+            music.currentTime = tiempoInicio;
             music.play();
         }
     });
 
-    // Lógica visual del sobre
     wrapper.classList.add("open");
     
+    // Carta pasa al frente al abrirse el sobre
     setTimeout(() => {
         letter.classList.add("front-view");
-    }, 1000); 
+    }, 1100); 
     
+    // Desvanecer sobre y mostrar invitación completa
     setTimeout(() => {
         wrapper.style.transition = "opacity 1.5s ease";
         wrapper.style.opacity = "0";
@@ -40,16 +46,32 @@ wrapper.addEventListener("click", () => {
             content.style.display = "block";
             setTimeout(() => content.style.opacity = "1", 100);
         }, 1500);
-    }, 3500); 
+    }, 4000); 
 });
 
-// 2. CONTADOR (Asegúrate de que el div con id="countdown" exista en tu HTML)
+// 2. BOTÓN DE PLAY/PAUSA
+function toggleMusic() {
+    if (music.paused) {
+        // Si se pausó fuera del rango del bucle, volver al inicio
+        if (music.currentTime < tiempoInicio || music.currentTime >= tiempoFin) {
+            music.currentTime = tiempoInicio;
+        }
+        music.play();
+        musicIcon.innerText = "⏸️";
+        musicText.innerText = "Pausar";
+    } else {
+        music.pause();
+        musicIcon.innerText = "▶️";
+        musicText.innerText = "Reproducir";
+    }
+}
+
+// 3. CONTADOR
 const targetDate = new Date("Oct 3, 2026 13:00:00").getTime();
 
 function updateCountdown() {
     const now = new Date().getTime();
     const diff = targetDate - now;
-
     if (diff <= 0) return;
 
     const d = Math.floor(diff / (1000 * 60 * 60 * 24));
@@ -60,21 +82,12 @@ function updateCountdown() {
     if(countdownDiv) {
         countdownDiv.innerHTML = `
             <div class="timer">
-                <div>${d < 10 ? '0'+d : d}<span> DÍAS 💍</span></div>
-                <div>${h < 10 ? '0'+h : h}<span> HORAS</span></div>
-                <div>${m < 10 ? '0'+m : m}<span> MINS</span></div>
+                <div>${d < 10 ? '0'+d : d}<span> Días 💍</span></div>
+                <div>${h < 10 ? '0'+h : h}<span> Horas</span></div>
+                <div>${m < 10 ? '0'+m : m}<span> Mins</span></div>
             </div>
         `;
     }
 }
 setInterval(updateCountdown, 1000);
 updateCountdown();
-
-// 3. FUNCIÓN TOGGLE (Si tienes botón de pausa)
-function toggleMusic() {
-    if (music.paused) {
-        music.play();
-    } else {
-        music.pause();
-    }
-}
