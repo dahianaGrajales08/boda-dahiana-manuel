@@ -5,11 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Boda Dahiana & Manuel</title>
     <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <audio id="music" loop>
+    <audio id="music">
         <source src="musica.mp3" type="audio/mpeg">
     </audio>
 
@@ -27,50 +26,24 @@
         </div>
     </div>
 
-    <div id="content" class="hidden">
+    <div id="content">
         <div class="header-decor">
-            <p class="subtitle">DALE PLAY PARA ESCUCHAR NUESTRA CANCIÓN</p>
-            <button class="btn-music" onclick="toggleMusic()">🎵 Reproducir</button>
+            <h1>Dahiana & Manuel</h1>
+            
+            <button class="btn-music" id="btnControlMusic" onclick="toggleMusic()">
+                <span id="musicIcon">▶️</span> <span id="musicText">Reproducir</span>
+            </button>
         </div>
 
-        <div class="main-card">
-            <p class="pre-title">NOS CASAMOS</p>
-            <h1>Dahiana & Manuel</h1>
-            <p class="mensaje">
-                Con mucha ilusión queremos invitarte a uno de los días más importantes de nuestra vida...
-            </p>
+        <div class="mensaje">
+            <p>"Te elegí a ti porque eres la persona que me hace feliz, eres la persona que tengo en mi mente cada minuto."</p>
+        </div>
 
-            <div class="info-row">
-                <div class="info-item">
-                    <span class="icon">📅</span>
-                    <p>03 DE OCTUBRE 2026</p>
-                </div>
-                <div class="info-item">
-                    <span class="icon">🕐</span>
-                    <p>13:00 HORAS</p>
-                </div>
-            </div>
+        <div id="countdown"></div>
 
-            <div class="location-box">
-                <span class="icon">📍</span>
-                <p>CORTIJO TRIANA<br>Andújar (Jaén)</p>
-                <a href="https://www.google.com/maps?q=Cortijo+Triana+Andujar" target="_blank" class="btn-oliva">VER UBICACIÓN</a>
-            </div>
-
-            <div class="countdown-container">
-                <p class="faltan">FALTAN</p>
-                <div id="countdown" class="timer">
-                    </div>
-                <p class="para-el-dia">PARA NUESTRO GRAN DÍA</p>
-            </div>
-
-            <div class="rsvp-section">
-                <h3>CONFIRMAR ASISTENCIA</h3>
-                <div class="botones">
-                    <a href="https://wa.me/34602732290" class="btn-wa">Confirmar con Dahiana</a>
-                    <a href="https://wa.me/34664593119" class="btn-wa">Confirmar con Manuel</a>
-                </div>
-            </div>
+        <div class="botones">
+            <a href="https://maps.app.goo.gl/TU-LINK-AQUI" class="btn-oliva" target="_blank">📍 Ver Ubicación</a>
+            <a href="https://wa.me/TU-NUMERO" class="btn-oliva" target="_blank">📱 Confirmar Asistencia</a>
         </div>
     </div>
 
