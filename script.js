@@ -1,4 +1,3 @@
-// ELEMENTOS
 const wrapper = document.getElementById("envelope-wrapper");
 const content = document.getElementById("content");
 const music = document.getElementById("music");
@@ -6,22 +5,18 @@ const letter = document.querySelector(".letter");
 const musicIcon = document.getElementById("musicIcon");
 const musicText = document.getElementById("musicText");
 
-// CONFIGURACIÓN DE TIEMPO (Bucle 1:30 a 2:10)
-const tiempoInicio = 90;  // 1:30 en segundos
-const tiempoFin = 130;    // 2:10 en segundos
+const tiempoInicio = 90; 
+const tiempoFin = 130;   
 
-// 1. ABRIR SOBRE Y EMPEZAR MÚSICA
 wrapper.addEventListener("click", () => {
     if(wrapper.classList.contains("open")) return;
     
-    // Iniciar música en el punto exacto
     music.currentTime = tiempoInicio;
     music.play().then(() => {
         musicIcon.innerText = "⏸️";
         musicText.innerText = "Pausar";
     }).catch(e => console.log("Audio esperando interacción"));
 
-    // Bucle personalizado
     music.addEventListener("timeupdate", () => {
         if (music.currentTime >= tiempoFin) {
             music.currentTime = tiempoInicio;
@@ -31,12 +26,10 @@ wrapper.addEventListener("click", () => {
 
     wrapper.classList.add("open");
     
-    // Carta pasa al frente al abrirse el sobre
     setTimeout(() => {
         letter.classList.add("front-view");
     }, 1100); 
     
-    // Desvanecer sobre y mostrar invitación completa
     setTimeout(() => {
         wrapper.style.transition = "opacity 1.5s ease";
         wrapper.style.opacity = "0";
@@ -49,10 +42,8 @@ wrapper.addEventListener("click", () => {
     }, 4000); 
 });
 
-// 2. BOTÓN DE PLAY/PAUSA
 function toggleMusic() {
     if (music.paused) {
-        // Si se pausó fuera del rango del bucle, volver al inicio
         if (music.currentTime < tiempoInicio || music.currentTime >= tiempoFin) {
             music.currentTime = tiempoInicio;
         }
@@ -66,7 +57,6 @@ function toggleMusic() {
     }
 }
 
-// 3. CONTADOR
 const targetDate = new Date("Oct 3, 2026 13:00:00").getTime();
 
 function updateCountdown() {
