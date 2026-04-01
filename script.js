@@ -5,7 +5,7 @@ const music = document.getElementById("music");
 const letter = document.querySelector(".letter");
 
 // CONFIGURACIÓN DE TIEMPO (en segundos)
-const tiempoInicio = 80; // 1:20 = 80 segundos
+const tiempoInicio = 90; // 1:30 = 90 segundos
 const tiempoFin = 130;    // 2:10 = 130 segundos
 
 // 1. ABRIR SOBRE Y CONTROL DE MÚSICA
