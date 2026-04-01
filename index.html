@@ -15,23 +15,28 @@
     </audio>
 
     <div class="envelope-wrapper" id="envelope-wrapper">
+        
+        <div class="lilies-container">
+            <img src="https://img.freepik.com/vector-premium/lirio-blanco-aislado-blanco-lirio-blanco-vector_654157-142.jpg" class="lily lily-left" alt="Lirio">
+            <img src="https://img.freepik.com/vector-premium/lirio-blanco-aislado-blanco-lirio-blanco-vector_654157-142.jpg" class="lily lily-right" alt="Lirio">
+        </div>
+
         <div class="envelope">
             <div class="top-flap"></div>
             <div class="wax-seal">D & M</div>
             <div class="letter">
-                <h2>
-                    <svg class="rings-icon" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3.5">
-                        <circle cx="26" cy="32" r="14"/>
-                        <circle cx="38" cy="32" r="14"/>
-                        <g class="diamond" fill="#FFFFFF" stroke="#CCCCCC" stroke-width="2.5">
-                            <path d="M 38,10 l -4,6 l 4,4 l 4,-4 z" />
-                            <path d="M 34,16 L 36,22 M 42,16 L 40,22" fill="none" stroke-linecap="round"/>
-                        </g>
-                    </svg>
-                    Dahiana & Manuel
-                </h2>
-                <p>03.10.2026</p>
-                <small>Toca para abrir</small>
+                <div class="letter-content">
+                    <div class="rings-wrapper">
+                        <svg class="rings-svg" viewBox="0 0 100 60">
+                            <circle cx="35" cy="35" r="20" class="ring-gold" />
+                            <circle cx="60" cy="35" r="20" class="ring-gold" />
+                            <path d="M 60,5 L 53,15 L 60,22 L 67,15 Z" fill="#e0f7fa" stroke="#b2ebf2" />
+                        </svg>
+                    </div>
+                    <h2 class="names-gold">Dahiana & Manuel</h2>
+                    <p>03.10.2026</p>
+                    <small>Toca para abrir</small>
+                </div>
             </div>
             <div class="back"></div>
             <div class="front"></div>
@@ -39,44 +44,31 @@
     </div>
 
     <div id="content">
-        <div class="lily-bg">
-            <svg viewBox="0 0 40 80">
-                <path d="M20,0C10,10,0,25,20,50C40,25,30,10,20,0z" fill="#FFFFFF"/>
-                <path d="M19,50v30h2v-30z" fill="#7A8450"/>
-            </svg>
-        </div>
-
         <div class="header-decor">
-            <h1 class="header-names">
-                <svg class="rings-icon rings-icon-main" viewBox="0 0 70 64" fill="none" stroke="currentColor" stroke-width="3.5">
-                    <circle cx="28" cy="32" r="14" class="wedding-band"/>
-                    <circle cx="42" cy="32" r="14" class="engagement-band"/>
-                    <g class="diamond-setting" fill="#FFFFFF" stroke="#CCCCCC" stroke-width="2.5">
-                        <path d="M 42,6 l -4,6 l 4,4 l 4,-4 z" />
-                        <path d="M 38,12 L 40,18 M 46,12 L 44,18" fill="none" stroke-linecap="round"/>
-                    </g>
+            <div class="rings-wrapper large">
+                <svg class="rings-svg" viewBox="0 0 100 60">
+                    <circle cx="35" cy="35" r="20" class="ring-gold" />
+                    <circle cx="60" cy="35" r="20" class="ring-gold" />
+                    <path d="M 60,5 L 53,15 L 60,22 L 67,15 Z" fill="#e0f7fa" stroke="#b2ebf2" />
                 </svg>
-                Dahiana & Manuel
-            </h1>
+            </div>
+            <h1 class="names-gold">Dahiana & Manuel</h1>
             <p class="subtitle">DALE PLAY PARA ESCUCHAR NUESTRA CANCIÓN</p>
             
-            <button class="btn-music" id="btnControlMusic" onclick="toggleMusic()">
+            <button class="btn-music" onclick="toggleMusic()">
                 <span id="musicIcon">▶️</span> <span id="musicText">Reproducir</span>
             </button>
         </div>
 
         <div class="mensaje">
-            <p>"Nos encontramos, nos elegimos y hoy queremos compartir contigo nuestra felicidad."</p>
+            <p>"Te elegí a ti porque eres la persona que me hace feliz..."</p>
         </div>
 
         <div id="countdown"></div>
 
         <div class="botones">
-            <a href="http://googleusercontent.com/http://googleusercontent.com/maps.google.com/2" class="btn-oliva" target="_blank">📍 Ver Ubicación</a>
-            
-            <a href="https://wa.me/34602732290?text=¡Hola!+Confirmo+mi+asistencia+a+la+boda." class="btn-oliva" target="_blank">📱 Confirmar con Dahiana</a>
-            
-            <a href="https://wa.me/34664593119?text=¡Hola!+Confirmo+mi+asistencia+a+la+boda." class="btn-oliva" target="_blank">📱 Confirmar con Manuel</a>
+            <a href="#" class="btn-oliva">📍 Ver Ubicación</a>
+            <a href="#" class="btn-oliva">📱 Confirmar Asistencia</a>
         </div>
     </div>
 
