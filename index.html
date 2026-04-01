@@ -8,24 +8,33 @@
 </head>
 <body>
 
+    <div id="falling-flowers"></div>
+
     <audio id="music">
         <source src="musica.mp3" type="audio/mpeg">
     </audio>
 
     <div class="envelope-wrapper" id="envelope-wrapper">
+        
+        <div class="lilies-container">
+            <img src="https://www.pngplay.com/wp-content/uploads/12/White-Lily-Transparent-Background.png" class="lily lily-1" alt="Lirio">
+            <img src="https://www.pngplay.com/wp-content/uploads/12/White-Lily-Transparent-Background.png" class="lily lily-2" alt="Lirio">
+        </div>
+
         <div class="envelope">
             <div class="top-flap"></div>
             <div class="wax-seal">D & M</div>
             <div class="letter">
-                <h2>
-                    <svg class="rings-icon" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3.5">
-                        <circle cx="26" cy="32" r="14"/>
-                        <circle cx="38" cy="32" r="14"/>
+                <div class="letter-content">
+                    <svg class="rings-icon" viewBox="0 0 100 60">
+                        <circle cx="35" cy="35" r="20" class="ring-band" />
+                        <circle cx="60" cy="35" r="20" class="ring-band" />
+                        <path d="M 60,5 L 53,15 L 60,25 L 67,15 Z" class="diamond" />
                     </svg>
-                    Dahiana & Manuel
-                </h2>
-                <p>03.10.2026</p>
-                <small>Toca para abrir</small>
+                    <h2 class="gold-text">Dahiana & Manuel</h2>
+                    <p>03.10.2026</p>
+                    <small>Toca para abrir</small>
+                </div>
             </div>
             <div class="back"></div>
             <div class="front"></div>
@@ -34,16 +43,15 @@
 
     <div id="content">
         <div class="header-decor">
-            <h1>
-                <svg class="rings-icon" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3.5">
-                    <circle cx="26" cy="32" r="14"/>
-                    <circle cx="38" cy="32" r="14"/>
-                </svg>
-                Dahiana & Manuel
-            </h1>
+            <svg class="rings-icon main-rings" viewBox="0 0 100 60">
+                <circle cx="35" cy="35" r="20" class="ring-band" />
+                <circle cx="60" cy="35" r="20" class="ring-band" />
+                <path d="M 60,5 L 53,15 L 60,25 L 67,15 Z" class="diamond" />
+            </svg>
+            <h1 class="gold-text">Dahiana & Manuel</h1>
             <p class="subtitle">DALE PLAY PARA ESCUCHAR NUESTRA CANCIÓN</p>
             
-            <button class="btn-music" id="btnControlMusic" onclick="toggleMusic()">
+            <button class="btn-music" onclick="toggleMusic()">
                 <span id="musicIcon">▶️</span> <span id="musicText">Reproducir</span>
             </button>
         </div>
@@ -55,9 +63,9 @@
         <div id="countdown"></div>
 
         <div class="botones">
-            <a href="https://www.google.com/maps/place/Jardines+Cortijo+Triana/@38.0246558,-4.0561009,687m/data=!3m2!1e3!4b1!4m6!3m5!1s0xd6c364a7c61fbdb:0x937df16aa6a94629!8m2!3d38.0246558!4d-4.0561009!16s%2Fg%2F11yf_schx?entry=ttu&g_ep=EgoyMDI2MDMyOS4wIKXMDSoASAFQAw%3D%3D" class="btn-oliva" target="_blank">📍 Ver Ubicación</a>
-            <a href="https://wa.me/34602732290?text=¡Hola!+Confirmo+mi+asistencia+a+la+boda." class="btn-oliva" target="_blank">📱 Confirmar con Dahiana</a>
-            <a href="https://wa.me/34664593119?text=¡Hola!+Confirmo+mi+asistencia+a+la+boda." class="btn-oliva" target="_blank">📱 Confirmar con Manuel</a>
+            <a href="https://maps.google.com" class="btn-oliva" target="_blank">📍 Ver Ubicación</a>
+            <a href="https://wa.me/34602732290" class="btn-oliva" target="_blank">📱 Confirmar con Dahiana</a>
+            <a href="https://wa.me/34664593119" class="btn-oliva" target="_blank">📱 Confirmar con Manuel</a>
         </div>
     </div>
 
