@@ -28,7 +28,35 @@ body {
 }
 
 .letter.front-view { z-index: 7 !important; }
-.letter h2 { font-family: 'Cormorant Garamond', serif; color: var(--verde-oliva); margin: 5px 0; font-size: 1.4rem;}
+
+/* NUEVO: Textos de los nombres en dorado y con icono alineado */
+.letter h2 { 
+    font-family: 'Cormorant Garamond', serif; 
+    color: var(--dorado); 
+    margin: 5px 0; 
+    font-size: 1.4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+}
+
+h1 { 
+    font-family: 'Cormorant Garamond', serif; 
+    color: var(--dorado); 
+    font-size: 2.2rem; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 5px;
+}
+
+/* Tamaño dinámico para los anillos */
+.rings-icon {
+    width: 1.2em;
+    height: 1.2em;
+}
 
 .envelope .front, .envelope .back { position: absolute; width: 0; height: 0; z-index: 5; }
 .envelope .front { border-right: 150px solid var(--verde-oscuro); border-top: 100px solid transparent; border-bottom: 100px solid var(--verde-oscuro); left: 150px; bottom: 0; }
@@ -44,8 +72,6 @@ body {
 /* CONTENIDO INVITACIÓN */
 #content { display: none; max-width: 500px; width: 90%; margin: 40px auto; background: white; padding: 40px 25px; text-align: center; opacity: 0; transition: opacity 2s ease; border: 1px solid #eee; border-radius: 10px; z-index: 2; position: relative; }
 
-h1 { font-family: 'Cormorant Garamond', serif; color: var(--verde-oliva); font-size: 2.2rem; }
-
 .btn-music {
     background-color: var(--verde-oliva);
     color: white; border: none; padding: 10px 20px; border-radius: 25px;
@@ -55,7 +81,7 @@ h1 { font-family: 'Cormorant Garamond', serif; color: var(--verde-oliva); font-s
     margin-bottom: 20px;
 }
 
-/* --- NUEVO CONTADOR ESTILO RELOJ DIGITAL --- */
+/* CONTADOR ESTILO RELOJ DIGITAL */
 .timer { display: flex; justify-content: center; gap: 15px; margin: 30px 0; }
 .timer-col { display: flex; flex-direction: column; align-items: center; gap: 8px; }
 
@@ -83,7 +109,7 @@ h1 { font-family: 'Cormorant Garamond', serif; color: var(--verde-oliva); font-s
 .btn-oliva { display: block; background: var(--verde-oliva); color: white; text-decoration: none; padding: 12px; margin: 10px auto; border-radius: 30px; width: 85%; font-size: 0.85rem; font-weight: 500; transition: background 0.3s; z-index: 2; position: relative;}
 .btn-oliva:hover { background: var(--verde-oscuro); }
 
-/* --- ANIMACIÓN PÉTALOS Y HOJAS --- */
+/* ANIMACIÓN PÉTALOS Y HOJAS */
 .falling-element {
     position: fixed;
     top: -10vh;
