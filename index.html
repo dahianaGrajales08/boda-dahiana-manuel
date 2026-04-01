@@ -8,35 +8,24 @@
 </head>
 <body>
 
-    <div id="falling-flowers"></div>
-
     <audio id="music">
         <source src="musica.mp3" type="audio/mpeg">
     </audio>
 
     <div class="envelope-wrapper" id="envelope-wrapper">
-        
-        <div class="lilies-container">
-            <img src="https://img.freepik.com/vector-premium/lirio-blanco-aislado-blanco-lirio-blanco-vector_654157-142.jpg" class="lily lily-left" alt="Lirio">
-            <img src="https://img.freepik.com/vector-premium/lirio-blanco-aislado-blanco-lirio-blanco-vector_654157-142.jpg" class="lily lily-right" alt="Lirio">
-        </div>
-
         <div class="envelope">
             <div class="top-flap"></div>
             <div class="wax-seal">D & M</div>
             <div class="letter">
-                <div class="letter-content">
-                    <div class="rings-wrapper">
-                        <svg class="rings-svg" viewBox="0 0 100 60">
-                            <circle cx="35" cy="35" r="20" class="ring-gold" />
-                            <circle cx="60" cy="35" r="20" class="ring-gold" />
-                            <path d="M 60,5 L 53,15 L 60,22 L 67,15 Z" fill="#e0f7fa" stroke="#b2ebf2" />
-                        </svg>
-                    </div>
-                    <h2 class="names-gold">Dahiana & Manuel</h2>
-                    <p>03.10.2026</p>
-                    <small>Toca para abrir</small>
-                </div>
+                <h2>
+                    <svg class="rings-icon" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3.5">
+                        <circle cx="26" cy="32" r="14"/>
+                        <circle cx="38" cy="32" r="14"/>
+                    </svg>
+                    Dahiana & Manuel
+                </h2>
+                <p>03.10.2026</p>
+                <small>Toca para abrir</small>
             </div>
             <div class="back"></div>
             <div class="front"></div>
@@ -45,30 +34,30 @@
 
     <div id="content">
         <div class="header-decor">
-            <div class="rings-wrapper large">
-                <svg class="rings-svg" viewBox="0 0 100 60">
-                    <circle cx="35" cy="35" r="20" class="ring-gold" />
-                    <circle cx="60" cy="35" r="20" class="ring-gold" />
-                    <path d="M 60,5 L 53,15 L 60,22 L 67,15 Z" fill="#e0f7fa" stroke="#b2ebf2" />
+            <h1>
+                <svg class="rings-icon" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3.5">
+                    <circle cx="26" cy="32" r="14"/>
+                    <circle cx="38" cy="32" r="14"/>
                 </svg>
-            </div>
-            <h1 class="names-gold">Dahiana & Manuel</h1>
+                Dahiana & Manuel
+            </h1>
             <p class="subtitle">DALE PLAY PARA ESCUCHAR NUESTRA CANCIÓN</p>
             
-            <button class="btn-music" onclick="toggleMusic()">
+            <button class="btn-music" id="btnControlMusic" onclick="toggleMusic()">
                 <span id="musicIcon">▶️</span> <span id="musicText">Reproducir</span>
             </button>
         </div>
 
         <div class="mensaje">
-            <p>"Te elegí a ti porque eres la persona que me hace feliz..."</p>
+            <p>"Nos encontramos, nos elegimos y hoy queremos compartir contigo nuestra felicidad."</p>
         </div>
 
         <div id="countdown"></div>
 
         <div class="botones">
-            <a href="#" class="btn-oliva">📍 Ver Ubicación</a>
-            <a href="#" class="btn-oliva">📱 Confirmar Asistencia</a>
+            <a href="https://www.google.com/maps/place/Jardines+Cortijo+Triana/@38.0246558,-4.0561009,687m/data=!3m2!1e3!4b1!4m6!3m5!1s0xd6c364a7c61fbdb:0x937df16aa6a94629!8m2!3d38.0246558!4d-4.0561009!16s%2Fg%2F11yf_schx?entry=ttu&g_ep=EgoyMDI2MDMyOS4wIKXMDSoASAFQAw%3D%3D" class="btn-oliva" target="_blank">📍 Ver Ubicación</a>
+            <a href="https://wa.me/34602732290?text=¡Hola!+Confirmo+mi+asistencia+a+la+boda." class="btn-oliva" target="_blank">📱 Confirmar con Dahiana</a>
+            <a href="https://wa.me/34664593119?text=¡Hola!+Confirmo+mi+asistencia+a+la+boda." class="btn-oliva" target="_blank">📱 Confirmar con Manuel</a>
         </div>
     </div>
 
