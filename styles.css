@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Montserrat:wght@300;400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Montserrat:wght@300;400&display=swap');
 
 :root {
     --verde-oliva: #7A8450;
@@ -18,7 +18,7 @@ body {
 
 /* SOBRE */
 .envelope-wrapper { position: relative; cursor: pointer; z-index: 10; transition: opacity 1.5s ease; }
-.envelope { position: relative; width: 300px; height: 200px; background-color: var(--verde-oliva); box-shadow: 0 15px 35px rgba(0,0,0,0.2); }
+.envelope { position: relative; width: 300px; height: 200px; background-color: var(--verde-oliva); box-shadow: 0 15px 35px rgba(0,0,0,0.2); z-index: 5; }
 
 .letter {
     position: absolute; bottom: 10px; left: 20px;
@@ -38,7 +38,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 6px;
+    gap: 8px; /* Pequeño gap para icono de anillos */
 }
 
 h1 { 
@@ -48,14 +48,26 @@ h1 {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 10px;
+    gap: 12px; /* Mayor gap en invitación principal */
     margin-bottom: 5px;
 }
 
-/* Tamaño dinámico para los anillos */
+/* Icono dinámico para los anillos */
 .rings-icon {
-    width: 1.2em;
+    width: 1.2em; /* Tamaño relativo al texto */
     height: 1.2em;
+    stroke: var(--dorado); /* Color por defecto dorado para las bandas */
+}
+
+.rings-icon-main {
+    width: 1.1em;
+    height: 1.1em;
+}
+
+/* Colorear diamante y engaste */
+.diamond-setting {
+    fill: #FFFFFF; /* Relleno blanco para la piedra */
+    stroke: #EAEAEA; /* Contorno plateado claro */
 }
 
 .envelope .front, .envelope .back { position: absolute; width: 0; height: 0; z-index: 5; }
@@ -69,6 +81,35 @@ h1 {
 .envelope-wrapper.open .letter { transform: translateY(-145px); }
 .envelope-wrapper.open .wax-seal { opacity: 0; pointer-events: none; }
 
+/* ANIMACIÓN LIRIOS DETRÁS */
+.lilies-behind {
+    position: absolute;
+    bottom: 0; left: 50%;
+    transform: translateX(-50%) translateY(0);
+    width: 350px; height: 300px;
+    z-index: 1; /* Detrás de las componentes del sobre olive (z-index 5) */
+    opacity: 0;
+    transition: all 1.8s ease; /* Transición para fade y rise */
+    display: flex; justify-content: space-around; align-items: flex-end;
+    pointer-events: none; /* No bloquear interacción con sobre */
+    padding-bottom: 20px;
+}
+
+.open .lilies-behind {
+    opacity: 1;
+    transform: translateX(-50%) translateY(-50px); /* Suben 50px */
+}
+
+.lily {
+    width: 50px; height: 100px;
+    filter: drop-shadow(0 2px 3px rgba(0,0,0,0.1));
+}
+
+/* Pequeñas variaciones de tamaño/posición para realismo */
+.lily-1, .lily-4 { height: 90px; transform: translateY(10px); }
+.lily-2, .lily-3 { height: 110px; transform: translateY(0); }
+
+
 /* CONTENIDO INVITACIÓN */
 #content { display: none; max-width: 500px; width: 90%; margin: 40px auto; background: white; padding: 40px 25px; text-align: center; opacity: 0; transition: opacity 2s ease; border: 1px solid #eee; border-radius: 10px; z-index: 2; position: relative; }
 
@@ -81,46 +122,23 @@ h1 {
     margin-bottom: 20px;
 }
 
-/* CONTADOR ESTILO RELOJ DIGITAL */
-.timer { display: flex; justify-content: center; gap: 15px; margin: 30px 0; }
-.timer-col { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.timer { display: flex; justify-content: center; gap: 20px; margin: 30px 0; font-weight: bold; color: var(--verde-oliva); }
+.timer div { font-size: 1.5rem; }
+.timer span { display: block; font-size: 0.6rem; color: #999; text-transform: uppercase; }
 
-.timer-col span { 
-    font-family: 'Montserrat', sans-serif; 
-    font-size: 0.75rem; 
-    color: var(--texto); 
-    font-weight: 600; 
-    letter-spacing: 1px; 
+.btn-oliva {
+    display: block; 
+    background: var(--verde-oliva); 
+    color: white;
+    text-decoration: none; 
+    padding: 12px; 
+    margin: 10px auto;
+    border-radius: 30px; 
+    width: 85%; 
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: background 0.3s;
+    z-index: 2; /* Encima de lírios si hay overlap */
+    position: relative;
 }
-
-.timer-box { 
-    background-color: var(--verde-oscuro); 
-    color: var(--marfil); 
-    font-family: 'Cormorant Garamond', serif; 
-    font-size: 2.8rem; 
-    padding: 12px 18px; 
-    border-radius: 10px; 
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-    min-width: 65px;
-    text-align: center;
-}
-
-/* BOTONES INFERIORES */
-.btn-oliva { display: block; background: var(--verde-oliva); color: white; text-decoration: none; padding: 12px; margin: 10px auto; border-radius: 30px; width: 85%; font-size: 0.85rem; font-weight: 500; transition: background 0.3s; z-index: 2; position: relative;}
 .btn-oliva:hover { background: var(--verde-oscuro); }
-
-/* ANIMACIÓN PÉTALOS Y HOJAS */
-.falling-element {
-    position: fixed;
-    top: -10vh;
-    z-index: 9999;
-    pointer-events: none;
-    animation: fall linear forwards;
-}
-
-@keyframes fall {
-    0% { transform: translate(0, 0) rotate(0deg); opacity: 0; }
-    10% { opacity: 1; }
-    80% { opacity: 1; }
-    100% { transform: translate(var(--drift), 110vh) rotate(var(--rot)); opacity: 0; }
-}
