@@ -6,7 +6,6 @@
     --marfil: #FBF9F6;
     --texto: #444;
     --dorado: #C5A059;
-    --lila-boda: #8E7AB5; /* Color lila de la referencia */
 }
 
 body {
@@ -39,11 +38,14 @@ body {
     opacity: 0;
     transition: all 2.5s ease-in-out;
     pointer-events: none;
+    background: transparent;
 }
 
 .lirios-img-clean {
     width: 100%;
     height: auto;
+    filter: drop-shadow(0 2px 5px rgba(0,0,0,0.05));
+    display: block;
     mix-blend-mode: multiply; 
 }
 
@@ -65,61 +67,27 @@ body {
 .rings-img-main { width: 70px; height: auto; margin-bottom: 10px; }
 .gold-text { font-family: 'Cormorant Garamond', serif; color: var(--dorado); margin: 0; font-weight: 600; }
 .letter h2 { font-size: 1.4rem; }
+.header-decor h1 { font-size: 2.2rem; display: flex; align-items: center; justify-content: center; gap: 10px; }
+.date-text { font-size: 0.9rem; margin: 2px 0; color: var(--texto); }
+.tap-text { font-size: 0.7rem; color: #888; }
 
-/* PARTES DEL SOBRE */
 .envelope .front, .envelope .back { position: absolute; width: 0; height: 0; z-index: 4; }
 .envelope .front { border-right: 150px solid var(--verde-oscuro); border-top: 100px solid transparent; border-bottom: 100px solid var(--verde-oscuro); left: 150px; bottom: 0; }
 .envelope .back { border-left: 150px solid var(--verde-oscuro); border-top: 100px solid transparent; border-bottom: 100px solid var(--verde-oscuro); left: 0; bottom: 0; }
 .envelope .top-flap { position: absolute; top: 0; left: 0; width: 0; height: 0; border-left: 150px solid transparent; border-right: 150px solid transparent; border-top: 115px solid var(--verde-oliva); transform-origin: top; transition: transform 1.2s ease-in-out; z-index: 6; }
-.wax-seal { position: absolute; top: 95px; left: 130px; width: 45px; height: 45px; background: var(--dorado); border-radius: 50%; z-index: 8; display: flex; align-items: center; justify-content: center; color: white; font-size: 11px; font-weight: bold; }
+.wax-seal { position: absolute; top: 95px; left: 130px; width: 45px; height: 45px; background: var(--dorado); border-radius: 50%; z-index: 8; display: flex; align-items: center; justify-content: center; color: white; font-size: 11px; font-weight: bold; transition: opacity 0.5s; }
 
 .open .top-flap { transform: rotateX(180deg); }
 .open .letter { transform: translateY(-135px); }
 .open .wax-seal { opacity: 0; }
 
-/* --- CONTENIDO INVITACIÓN --- */
 #content { display: none; max-width: 500px; width: 90%; margin: 40px auto; background: rgba(255, 255, 255, 0.95); padding: 40px 25px; text-align: center; opacity: 0; transition: opacity 2s ease; border-radius: 10px; z-index: 2; position: relative; backdrop-filter: blur(5px); }
 
-/* --- NUEVO CONTADOR ESTILO REFERENCIA --- */
-.timer-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    margin: 40px 0;
-    color: var(--lila-boda);
-    font-family: 'Cormorant Garamond', serif;
-}
+.timer { display: flex; justify-content: center; gap: 15px; margin: 30px 0; }
+.timer-col { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.timer-col span { font-size: 0.75rem; color: var(--texto); font-weight: 600; }
+.timer-box { background-color: var(--verde-oscuro); color: var(--marfil); font-family: 'Cormorant Garamond', serif; font-size: 2.5rem; padding: 10px 15px; border-radius: 10px; min-width: 60px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
 
-.timer-unit {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    min-width: 70px;
-}
-
-.timer-value {
-    font-size: 3.5rem;
-    font-weight: 400;
-    line-height: 1;
-}
-
-.timer-label {
-    font-size: 0.8rem;
-    font-family: 'Montserrat', sans-serif;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    margin-top: 5px;
-    color: #999;
-}
-
-.timer-separator {
-    font-size: 2.5rem;
-    padding-bottom: 25px;
-    font-weight: 300;
-}
-
-/* REPRODUCTOR */
 .custom-player { display: flex; flex-direction: column; align-items: center; gap: 10px; margin: 20px auto; max-width: 250px; }
 .player-controls { display: flex; align-items: center; gap: 20px; }
 .play-pause-btn { background: #333; color: white; border: none; width: 45px; height: 45px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
@@ -127,11 +95,39 @@ body {
 .progress-bar { position: absolute; height: 100%; width: 40%; background: #333; }
 .progress-dot { position: absolute; width: 8px; height: 8px; background: #333; border-radius: 50%; top: -3px; left: 40%; }
 
-.btn-oliva { background-color: var(--verde-oliva); color: white; border: none; padding: 12px 20px; border-radius: 25px; cursor: pointer; text-decoration: none; display: block; margin: 10px auto; width: 80%; font-weight: 600; }
+.btn-oliva { background-color: var(--verde-oliva); color: white; border: none; padding: 12px 20px; border-radius: 25px; cursor: pointer; text-decoration: none; display: block; margin: 10px auto; width: 80%; transition: 0.3s; font-weight: 600; }
+.btn-oliva:hover { background: var(--verde-oscuro); }
 
 .falling-element { position: fixed; top: -10vh; z-index: 9999; pointer-events: none; animation: fall linear forwards; }
 @keyframes fall {
     0% { transform: translate(0, 0) rotate(0deg); opacity: 0; }
     10% { opacity: 1; }
     100% { transform: translate(var(--drift), 110vh) rotate(var(--rot)); opacity: 0; }
+}
+
+.btn-volver {
+    background: rgba(255, 255, 255, 0.6);
+    border: 2px solid #E0D4F7; 
+    color: #8E7AB5;
+    padding: 12px 40px;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Montserrat', sans-serif;
+    display: inline-block;
+}
+
+.btn-volver:hover {
+    background: #E0D4F7;
+    color: white;
+    transform: scale(1.05);
+}
+
+#content {
+    transition: opacity 1s ease;
+}
+
+.envelope-wrapper {
+    transition: opacity 1s ease;
 }
