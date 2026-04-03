@@ -3,31 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>INVITACIÓN DE BODA DE: DAHIANA & MANUEL</title>
+    <title>Boda Dahiana & Manuel</title>
     <link rel="stylesheet" href="styles.css">
 </head>
-<body class="bg-floral"> <div id="falling-flowers"></div>
+<body>
 
-    <audio id="music" loop>
+    <audio id="music">
         <source src="musica.mp3" type="audio/mpeg">
     </audio>
 
     <div class="envelope-wrapper" id="envelope-wrapper">
-        
-        <div class="opener-image-container">
-            <img src="lirios.png" alt="Ramo de Lirios Calla" class="lirios-img-clean">
-        </div>
-
         <div class="envelope">
             <div class="top-flap"></div>
             <div class="wax-seal">D & M</div>
             <div class="letter">
-                <div class="letter-content">
-                    <img src="anillos.png" alt="Alianzas" class="rings-img-small">
-                    <h2 class="gold-text">Dahiana & Manuel</h2>
-                    <p class="date-text">03.10.2026</p>
-                    <small class="tap-text">Toca para abrir</small>
-                </div>
+                <h2>
+                    <svg class="rings-icon" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3.5">
+                        <circle cx="26" cy="32" r="14"/>
+                        <circle cx="38" cy="32" r="14"/>
+                    </svg>
+                    Dahiana & Manuel
+                </h2>
+                <p>03.10.2026</p>
+                <small>Toca para abrir</small>
             </div>
             <div class="back"></div>
             <div class="front"></div>
@@ -36,11 +34,16 @@
 
     <div id="content">
         <div class="header-decor">
-            <img src="anillos.png" alt="Alianzas" class="rings-img-main">
-            <h1 class="header-names gold-text">Dahiana & Manuel</h1>
+            <h1>
+                <svg class="rings-icon" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3.5">
+                    <circle cx="26" cy="32" r="14"/>
+                    <circle cx="38" cy="32" r="14"/>
+                </svg>
+                Dahiana & Manuel
+            </h1>
             <p class="subtitle">DALE PLAY PARA ESCUCHAR NUESTRA CANCIÓN</p>
             
-            <div class="custom-player">
+              <div class="custom-player">
                 <div class="player-controls">
                     <span class="player-icon small">⏮</span>
                     <button class="play-pause-btn" id="btnControlMusic" onclick="toggleMusic()">
@@ -54,7 +57,6 @@
                 </div>
             </div>
         </div>
-
         <div class="mensaje">
             <p>"Nos encontramos, nos elegimos y hoy queremos compartir contigo nuestra felicidad."</p>
         </div>
@@ -63,8 +65,8 @@
 
         <div class="botones">
             <a href="https://www.google.com/maps/place/Jardines+Cortijo+Triana/@38.0246558,-4.0561009,687m/data=!3m2!1e3!4b1!4m6!3m5!1s0xd6c364a7c61fbdb:0x937df16aa6a94629!8m2!3d38.0246558!4d-4.0561009!16s%2Fg%2F11yf_schx?entry=ttu&g_ep=EgoyMDI2MDMyOS4wIKXMDSoASAFQAw%3D%3D" class="btn-oliva" target="_blank">📍 Ver Ubicación</a>
-            <a href="https://wa.me/34602732290" class="btn-oliva" target="_blank">📱 Confirmar con Dahiana</a>
-            <a href="https://wa.me/34664593119" class="btn-oliva" target="_blank">📱 Confirmar con Manuel</a>
+            <a href="https://wa.me/34602732290?text=¡Hola!+Confirmo+mi+asistencia+a+la+boda." class="btn-oliva" target="_blank">📱 Confirmar con Dahiana</a>
+            <a href="https://wa.me/34664593119?text=¡Hola!+Confirmo+mi+asistencia+a+la+boda." class="btn-oliva" target="_blank">📱 Confirmar con Manuel</a>
         </div>
     </div>
 
