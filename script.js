@@ -74,7 +74,7 @@ function updateCountdown() {
     const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
 
-    // Generar el HTML boxed
+    // Generar el HTMLboxed
     const countdownDiv = document.getElementById("countdown");
     if(countdownDiv) {
         countdownDiv.innerHTML = `
