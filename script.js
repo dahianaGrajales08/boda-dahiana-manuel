@@ -28,6 +28,7 @@ wrapper.addEventListener("click", () => {
     }, 1100); 
     
     setTimeout(() => {
+        wrapper.style.transition = "opacity 1.5s ease";
         wrapper.style.opacity = "0";
         setTimeout(() => {
             wrapper.style.display = "none";
@@ -36,6 +37,17 @@ wrapper.addEventListener("click", () => {
         }, 1500);
     }, 4500); 
 });
+
+function toggleMusic() {
+    const icon = document.getElementById("musicIcon");
+    if (music.paused) {
+        music.play();
+        icon.innerText = "||"; // Icono de pausa
+    } else {
+        music.pause();
+        icon.innerText = "▶"; // Icono de play
+    }
+}
 
 function updateCountdown() {
     const targetDate = new Date("Oct 3, 2026 13:00:00").getTime();
@@ -51,7 +63,7 @@ function updateCountdown() {
     if(countdownDiv) {
         countdownDiv.innerHTML = `
             <div class="timer">
-                <div class="timer-col"><span>DÍAS</span><div class="timer-box">${d < 10 ? '0'+d : d}</div></div>
+                <div class="timer-col"><span>DÍAS💍</span><div class="timer-box">${d < 10 ? '0'+d : d}</div></div>
                 <div class="timer-col"><span>HORAS</span><div class="timer-box">${h < 10 ? '0'+h : h}</div></div>
                 <div class="timer-col"><span>MINS</span><div class="timer-box">${m < 10 ? '0'+m : m}</div></div>
             </div>`;
