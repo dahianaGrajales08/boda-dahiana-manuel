@@ -10,7 +10,7 @@
 
     <div id="falling-flowers"></div>
 
-    <audio id="music">
+    <audio id="music" loop>
         <source src="musica.mp3" type="audio/mpeg">
     </audio>
 
@@ -23,15 +23,21 @@
             <div class="top-flap"></div>
             <div class="wax-seal">D & M</div>
             <div class="letter">
-                <h2>
-                    <svg class="rings-icon" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3.5">
-                        <circle cx="26" cy="32" r="14"/>
-                        <circle cx="38" cy="32" r="14"/>
-                    </svg>
-                    Dahiana & Manuel
-                </h2>
-                <p>03.10.2026</p>
-                <small>Toca para abrir</small>
+                <div class="letter-content">
+                    <h2>
+                        <svg class="rings-icon" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3.5">
+                            <circle cx="26" cy="32" r="14" class="ring-band" />
+                            <circle cx="38" cy="32" r="14" class="ring-band" />
+                            <g class="diamond-setting" fill="#FFFFFF" stroke="#CCCCCC" stroke-width="2.5">
+                                <path d="M 38,10 l -4,6 l 4,4 l 4,-4 z" />
+                                <path d="M 34,16 L 36,22 M 42,16 L 40,22" fill="none" stroke-linecap="round"/>
+                            </g>
+                        </svg>
+                        Dahiana & Manuel
+                    </h2>
+                    <p class="date-text">03.10.2026</p>
+                    <small class="tap-text">Toca para abrir</small>
+                </div>
             </div>
             <div class="back"></div>
             <div class="front"></div>
@@ -40,18 +46,32 @@
 
     <div id="content">
         <div class="header-decor">
-            <h1>
-                <svg class="rings-icon" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3.5">
-                    <circle cx="26" cy="32" r="14"/>
-                    <circle cx="38" cy="32" r="14"/>
+            <h1 class="header-names">
+                <svg class="rings-icon rings-icon-main" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3.5">
+                    <circle cx="26" cy="32" r="14" class="ring-band" />
+                    <circle cx="38" cy="32" r="14" class="ring-band" />
+                    <g class="diamond-setting" fill="#FFFFFF" stroke="#CCCCCC" stroke-width="2.5">
+                        <path d="M 38,10 l -4,6 l 4,4 l 4,-4 z" />
+                        <path d="M 34,16 L 36,22 M 42,16 L 40,22" fill="none" stroke-linecap="round"/>
+                    </g>
                 </svg>
                 Dahiana & Manuel
             </h1>
             <p class="subtitle">DALE PLAY PARA ESCUCHAR NUESTRA CANCIÓN</p>
             
-            <button class="btn-music" id="btnControlMusic" onclick="toggleMusic()">
-                <span id="musicIcon">▶️</span> <span id="musicText">Reproducir</span>
-            </button>
+            <div class="custom-player">
+                <div class="player-controls">
+                    <span class="player-icon small">⏮</span>
+                    <button class="play-pause-btn" id="btnControlMusic" onclick="toggleMusic()">
+                        <span id="musicIcon">▶</span>
+                    </button>
+                    <span class="player-icon small">⏭</span>
+                </div>
+                <div class="player-progress">
+                    <div class="progress-bar"></div>
+                    <div class="progress-dot"></div>
+                </div>
+            </div>
         </div>
 
         <div class="mensaje">
@@ -62,8 +82,8 @@
 
         <div class="botones">
             <a href="https://www.google.com/maps/place/Jardines+Cortijo+Triana/@38.0246558,-4.0561009,687m/data=!3m2!1e3!4b1!4m6!3m5!1s0xd6c364a7c61fbdb:0x937df16aa6a94629!8m2!3d38.0246558!4d-4.0561009!16s%2Fg%2F11yf_schx?entry=ttu&g_ep=EgoyMDI2MDMyOS4wIKXMDSoASAFQAw%3D%3D" class="btn-oliva" target="_blank">📍 Ver Ubicación</a>
-            <a href="https://wa.me/34602732290?text=¡Hola!+Confirmo+mi+asistencia+a+la+boda." class="btn-oliva" target="_blank">📱 Confirmar con Dahiana</a>
-            <a href="https://wa.me/34664593119?text=¡Hola!+Confirmo+mi+asistencia+a+la+boda." class="btn-oliva" target="_blank">📱 Confirmar con Manuel</a>
+            <a href="https://wa.me/34602732290" class="btn-oliva" target="_blank">📱 Confirmar con Dahiana</a>
+            <a href="https://wa.me/34664593119" class="btn-oliva" target="_blank">📱 Confirmar con Manuel</a>
         </div>
     </div>
 
