@@ -7,6 +7,7 @@ const btnVolver = document.getElementById("btnVolver");
 const tiempoInicio = 90; 
 const tiempoFin = 130;   
 
+// ABRIR SOBRE
 wrapper.addEventListener("click", () => {
     if(wrapper.classList.contains("open")) return;
     
@@ -34,6 +35,7 @@ wrapper.addEventListener("click", () => {
     }, 4500);
 });
 
+// BOTÓN VOLVER
 btnVolver.addEventListener("click", () => {
     content.style.opacity = "0";
     setTimeout(() => {
@@ -45,6 +47,7 @@ btnVolver.addEventListener("click", () => {
     }, 1000);
 });
 
+// REPRODUCTOR
 function toggleMusic() {
     const icon = document.getElementById("musicIcon");
     if (music.paused) { 
@@ -56,13 +59,14 @@ function toggleMusic() {
     }
 }
 
+// CONTADOR
 function updateCountdown() {
     const targetDate = new Date("Oct 3, 2026 13:00:00").getTime();
     const now = new Date().getTime();
     const diff = targetDate - now;
 
     if (diff <= 0) {
-        document.getElementById("countdown").innerHTML = "<h2 class='gold-text'>¡HOY ES EL DÍA!</h2>";
+        document.getElementById("countdown").innerHTML = "<h2>¡Llegó el día!</h2>";
         return;
     }
 
@@ -83,6 +87,7 @@ function updateCountdown() {
 setInterval(updateCountdown, 1000);
 updateCountdown();
 
+// LLUVIA DE FLORES
 function iniciarLluviaFlores() {
     setInterval(() => {
         const element = document.createElement("div");
