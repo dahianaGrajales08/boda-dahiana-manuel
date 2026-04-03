@@ -1,5 +1,21 @@
 /* ... (Mantener variables :root y fuentes del archivo anterior) ... */
 
+:root {
+    --verde-oliva: #7A8450;
+    --verde-oscuro: #5d663d;
+    --marfil: #FBF9F6;
+    --texto: #444;
+    --dorado: #C5A059;
+}
+
+body {
+    margin: 0; padding: 0;
+    background-color: var(--marfil);
+    font-family: 'Montserrat', sans-serif;
+    display: flex; justify-content: center; align-items: center;
+    min-height: 100vh; overflow-x: hidden;
+}
+
 .bg-floral {
     background-image: url('fondo.jpg');
     background-size: cover;
@@ -8,42 +24,68 @@
     background-repeat: no-repeat;
 }
 
+/* SOBRE Y ANIMACIÓN */
+.envelope-wrapper { position: relative; cursor: pointer; z-index: 10; transition: opacity 1.5s ease; }
+.envelope { position: relative; width: 300px; height: 200px; background-color: var(--verde-oliva); box-shadow: 0 20px 40px rgba(0,0,0,0.3); z-index: 5; }
+
+/* LIRIOS2: AJUSTE DE TAMAÑO Y POSICIÓN PARA NO TAPAR */
+.opener-image-container {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    /* Centrado y escala reducida inicial para que no abulte */
+    transform: translateX(-50%) translateY(0) scale(0.6); 
+    width: 350px; /* Un poco más ancho para acomodar el ramo completo */
+    z-index: 1; /* Detrás de la carta */
+    opacity: 0;
+    transition: all 2.5s ease-in-out; /* Transición más lenta y elegante */
+    pointer-events: none; /* No interfiere con el clic */
+    background: transparent; /* Asegurar fondo transparente */
+}
+
+.lirios-img {
+    width: 100%;
+    height: auto;
+    filter: drop-shadow(0 2px 5px rgba(0,0,0,0.1));
+    display: block;
+}
+
+/* Movimiento al abrir: Sube y se agranda un poco, pero se mantiene detrás */
+.open .opener-image-container {
+    opacity: 1;
+    /* Sube lo suficiente para asomar, pero no para tapar el texto */
+    transform: translateX(-50%) translateY(-150px) scale(0.8); 
+}
+
+.letter {
+    position: absolute; bottom: 10px; left: 20px;
+    width: 260px; height: 170px; background: white;
+    padding: 15px; box-sizing: border-box; text-align: center;
+    z-index: 2; transition: transform 2.0s ease-in-out;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+}
+.letter.front-view { z-index: 7 !important; }
+
 /* Imágenes de Anillos */
-.rings-img-small {
-    width: 50px;
-    height: auto;
-    margin-bottom: 5px;
-}
+.rings-img-small { width: 40px; height: auto; margin-bottom: 5px; }
+.rings-img-main { width: 70px; height: auto; margin-bottom: 10px; }
 
-.rings-img-main {
-    width: 80px;
-    height: auto;
-    margin-bottom: 10px;
-}
+/* TEXTOS */
+.gold-text, .header-names { font-family: 'Cormorant Garamond', serif; color: var(--dorado); margin: 0; font-weight: 600; }
+.letter h2 { font-size: 1.4rem; }
+.date-text { font-size: 0.9rem; margin: 2px 0; color: var(--texto); }
+.tap-text { font-size: 0.7rem; color: #888; }
 
-/* Ajuste del Sobre para que resalte sobre el fondo */
-.envelope {
-    position: relative;
-    width: 300px;
-    height: 200px;
-    background-color: var(--verde-oliva);
-    box-shadow: 0 20px 40px rgba(0,0,0,0.3); /* Sombra más fuerte */
-    z-index: 5;
-}
+/* PARTES DEL SOBRE */
+.envelope .front, .envelope .back { position: absolute; width: 0; height: 0; z-index: 5; }
+.envelope .front { border-right: 150px solid var(--verde-oscuro); border-top: 100px solid transparent; border-bottom: 100px solid var(--verde-oscuro); left: 150px; bottom: 0; }
+.envelope .back { border-left: 150px solid var(--verde-oscuro); border-top: 100px solid transparent; border-bottom: 100px solid var(--verde-oscuro); left: 0; bottom: 0; }
+.envelope .top-flap { position: absolute; top: 0; left: 0; width: 0; height: 0; border-left: 150px solid transparent; border-right: 150px solid transparent; border-top: 115px solid var(--verde-oliva); transform-origin: top; transition: transform 1.2s ease-in-out; z-index: 6; }
+.wax-seal { position: absolute; top: 95px; left: 130px; width: 45px; height: 45px; background: var(--dorado); border-radius: 50%; z-index: 8; display: flex; align-items: center; justify-content: center; color: white; font-size: 11px; font-weight: bold; transition: opacity 0.5s; }
 
-/* Estilo del texto dorado */
-.gold-text, .header-names {
-    color: var(--dorado);
-    font-family: 'Cormorant Garamond', serif;
-    font-weight: 600;
-}
+/* ANIMACIÓN APERTURA */
+.open .top-flap { transform: rotateX(180deg); }
+.open .letter { transform: translateY(-135px); }
+.open .wax-seal { opacity: 0; }
 
-/* Asegurar que el contenido sea legible sobre el fondo floral */
-#content {
-    background: rgba(255, 255, 255, 0.95); /* Fondo blanco con ligera transparencia */
-    backdrop-filter: blur(5px);
-    border: none;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-}
-
-/* ... (resto del código de animaciones y reproductor igual) ... */
+/* ... (resto del código de invitación, contador y reproductor igual) ... */
