@@ -2,65 +2,96 @@ const wrapper = document.getElementById("envelope-wrapper");
 const content = document.getElementById("content");
 const music = document.getElementById("music");
 const letter = document.querySelector(".letter");
-const btnVolver = document.getElementById("btnVolver");
 
-const tiempoInicio = 90; 
-const tiempoFin = 130;   
+const tiempoInicio = 90; // Segundo donde empieza la canción
+const tiempoFin = 130;   // Segundo donde termina bucle
 
+// --- EVENTO DE APERTURA DEL SOBRE ---
 wrapper.addEventListener("click", () => {
-    if(wrapper.classList.contains("open")) return;
+    if(wrapper.classList.contains("open")) return; // Prevenir clics múltiples
+    
+    // Iniciar Música
     music.currentTime = tiempoInicio;
-    music.play().catch(e => console.log("Interacción requerida"));
+    music.play().catch(e => console.log("Música activada"));
+
+    // Bucle de música personalizado
+    music.addEventListener("timeupdate", () => {
+        if (music.currentTime >= tiempoFin) {
+            music.currentTime = tiempoInicio;
+        }
+    });
+
+    // Abrir sobre (CSS trigger)
     wrapper.classList.add("open");
+    
+    // Iniciar lluvia de hojas y pétalos
     iniciarLluviaFlores();
-    setTimeout(() => { letter.classList.add("front-view"); }, 1100); 
+    
+    // Mover la carta al frente después de que suba
     setTimeout(() => {
+        letter.classList.add("front-view");
+    }, 1100); 
+    
+    // Desvanecer sobre y mostrar invitación completa
+    setTimeout(() => {
+        wrapper.style.transition = "opacity 1.5s ease";
         wrapper.style.opacity = "0";
         setTimeout(() => {
             wrapper.style.display = "none";
             content.style.display = "block";
             setTimeout(() => content.style.opacity = "1", 100);
         }, 1500);
-    }, 4500);
+    }, 4500); 
 });
 
-btnVolver.addEventListener("click", () => {
-    content.style.opacity = "0";
-    setTimeout(() => {
-        content.style.display = "none";
-        wrapper.classList.remove("open");
-        letter.classList.remove("front-view");
-        wrapper.style.display = "block";
-        void wrapper.offsetWidth;
-        wrapper.style.opacity = "1";
-    }, 1000);
-});
+// --- FUNCIÓN CONTROL MÚSICA (PLAY/PAUSE) ---
+function toggleMusic() {
+    const icon = document.getElementById("musicIcon");
+    if (music.paused) {
+        music.play();
+        icon.innerText = "||"; // Icono de pausa
+    } else {
+        music.pause();
+        icon.innerText = "▶"; // Icono de play
+    }
+}
 
+// --- FUNCIÓN CONTADOR (Actualizado a formato ':') ---
 function updateCountdown() {
+    // Fecha objetivo: 3 de Octubre de 2026 a las 13:00
     const targetDate = new Date("Oct 3, 2026 13:00:00").getTime();
     const now = new Date().getTime();
     const diff = targetDate - now;
-    if (diff <= 0) return;
 
+    if (diff <= 0) {
+        document.getElementById("countdown").innerHTML = "<h2 class='gold-text'>¡HOY ES EL GRAN DÍA!</h2>";
+        return;
+    }
+
+    // Cálculos de tiempo
     const d = Math.floor(diff / (1000 * 60 * 60 * 24));
     const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-    const s = Math.floor((diff % (1000 * 60)) / 1000);
 
-    document.getElementById("countdown").innerHTML = `
-        <div class="timer-container">
-            <div class="timer-unit"><span class="timer-value">${d}</span><span class="timer-label">Días</span></div>
-            <div class="timer-separator">:</div>
-            <div class="timer-unit"><span class="timer-value">${h < 10 ? '0'+h : h}</span><span class="timer-label">Horas</span></div>
-            <div class="timer-separator">:</div>
-            <div class="timer-unit"><span class="timer-value">${m < 10 ? '0'+m : m}</span><span class="timer-label">Mins</span></div>
-            <div class="timer-separator">:</div>
-            <div class="timer-unit"><span class="timer-value">${s < 10 ? '0'+s : s}</span><span class="timer-label">Segs</span></div>
-        </div>`;
+    // Generar el HTML con formato morado y separadores ':'
+    const countdownDiv = document.getElementById("countdown");
+    if(countdownDiv) {
+        countdownDiv.innerHTML = `
+            <div class="timer-text">
+                <div class="timer-group"><span class="timer-val">${d < 10 ? '0'+d : d}</span><span class="timer-lab">Días💍</span></div>
+                <span class="timer-sep">:</span>
+                <div class="timer-group"><span class="timer-val">${h < 10 ? '0'+h : h}</span><span class="timer-lab">Horas</span></div>
+                <span class="timer-sep">:</span>
+                <div class="timer-group"><span class="timer-val">${m < 10 ? '0'+m : m}</span><span class="timer-lab">Mins</span></div>
+            </div>`;
+    }
 }
-setInterval(updateCountdown, 1000);
-updateCountdown();
 
+// Actualizar cada segundo
+setInterval(updateCountdown, 1000);
+updateCountdown(); // Ejecutar una vez al inicio
+
+// --- FUNCIÓN LLUVIA DE FLORES Y HOJAS ---
 function iniciarLluviaFlores() {
     setInterval(() => {
         const element = document.createElement("div");
@@ -72,5 +103,5 @@ function iniciarLluviaFlores() {
         element.style.setProperty('--rot', (Math.random() * 360) + 'deg');
         document.body.appendChild(element);
         setTimeout(() => element.remove(), 8000);
-    }, 400);
+    }, 400); 
 }
