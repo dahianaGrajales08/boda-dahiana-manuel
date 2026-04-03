@@ -4,17 +4,23 @@ const music = document.getElementById("music");
 const letter = document.querySelector(".letter");
 const btnVolver = document.getElementById("btnVolver");
 
+// Configuración de música según tus parámetros originales
 const tiempoInicio = 90; 
 const tiempoFin = 130;   
 
-// --- ABRIR ---
+// --- EVENTO DE APERTURA ---
 wrapper.addEventListener("click", () => {
     if(wrapper.classList.contains("open")) return;
+    
+    // Iniciar Música en el segundo 90
     music.currentTime = tiempoInicio;
     music.play();
 
+    // Mantener el bucle personalizado
     music.addEventListener("timeupdate", () => {
-        if (music.currentTime >= tiempoFin) music.currentTime = tiempoInicio;
+        if (music.currentTime >= tiempoFin) {
+            music.currentTime = tiempoInicio;
+        }
     });
 
     wrapper.classList.add("open");
@@ -55,22 +61,17 @@ function updateCountdown() {
     const now = new Date().getTime();
     const diff = targetDate - now;
 
-    if (diff <= 0) {
-        document.getElementById("countdown").innerHTML = "¡Llegó el gran día!";
-        return;
-    }
-
     const d = Math.floor(diff / (1000 * 60 * 60 * 24));
     const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
 
     document.getElementById("countdown").innerHTML = `
-        <div class="timer-container">
-            <div class="timer-unit"><span class="timer-value">${d}</span><span class="timer-label">Días💍</span></div>
+        <div class="timer-text">
+            <div class="timer-group"><span class="timer-val">${d}</span><span class="timer-lab">Días💍</span></div>
             <span class="timer-sep">:</span>
-            <div class="timer-unit"><span class="timer-value">${h < 10 ? '0'+h : h}</span><span class="timer-label">Horas</span></div>
+            <div class="timer-group"><span class="timer-val">${h < 10 ? '0'+h : h}</span><span class="timer-lab">Horas</span></div>
             <span class="timer-sep">:</span>
-            <div class="timer-unit"><span class="timer-value">${m < 10 ? '0'+m : m}</span><span class="timer-label">Mins</span></div>
+            <div class="timer-group"><span class="timer-val">${m < 10 ? '0'+m : m}</span><span class="timer-lab">Mins</span></div>
         </div>`;
 }
 
