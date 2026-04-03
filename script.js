@@ -30,7 +30,7 @@ wrapper.addEventListener("click", () => {
     // Abrir sobre
     wrapper.classList.add("open");
     
-    // Iniciar lluvia de hojas y pétalos
+    // Iniciar lluvia de hojas y pétalos (Mantenido)
     iniciarLluviaFlores();
     
     setTimeout(() => {
@@ -100,7 +100,7 @@ function updateCountdown() {
 setInterval(updateCountdown, 1000);
 updateCountdown();
 
-// SISTEMA DE LLUVIA DE PÉTALOS Y HOJAS DE OLIVO
+// SISTEMA DE LLUVIA DE PÉTALOS Y HOJAS DE OLIVO (Mantenido)
 function iniciarLluviaFlores() {
     // Genera un elemento cada 400 milisegundos
     setInterval(() => {
