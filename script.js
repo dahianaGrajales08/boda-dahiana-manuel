@@ -4,7 +4,6 @@ const music = document.getElementById("music");
 const letter = document.querySelector(".letter");
 const btnVolver = document.getElementById("btnVolver");
 
-// --- CONFIGURACIÓN DE MÚSICA (90s a 130s) ---
 const tiempoInicio = 90; 
 const tiempoFin = 130;   
 
@@ -88,14 +87,12 @@ function iniciarLluviaFlores() {
     setInterval(() => {
         const element = document.createElement("div");
         element.classList.add("falling-element");
-        
         const esHoja = Math.random() > 0.5;
         if (esHoja) {
             element.innerHTML = `<svg width="18" height="35" viewBox="0 0 24 48" fill="#5d663d"><path d="M12 0C4 12 0 24 12 48 24 24 20 12 12 0Z"/></svg>`;
         } else {
             element.innerHTML = `<svg width="20" height="24" viewBox="0 0 24 30" fill="#ffffff"><path d="M12 0C4 6 0 15 12 30 24 15 20 6 12 0Z"/></svg>`;
         }
-
         element.style.left = Math.random() * 100 + "vw";
         element.style.animationDuration = (Math.random() * 4 + 4) + "s";
         document.body.appendChild(element);
