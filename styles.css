@@ -5,7 +5,7 @@
     --verde-oscuro: #5d663d;
     --marfil: #FBF9F6;
     --texto: #444;
-    --dorado: #C5A059; /* Tono dorado premium */
+    --dorado: #C5A059;
 }
 
 body {
@@ -26,123 +26,58 @@ body {
     padding: 15px; box-sizing: border-box; text-align: center;
     z-index: 2; transition: transform 2.0s ease-in-out;
 }
-
 .letter.front-view { z-index: 7 !important; }
 
-/* NUEVO: Textos de los nombres en dorado y con icono alineado */
-.letter h2 { 
-    font-family: 'Cormorant Garamond', serif; 
-    color: var(--dorado); 
-    margin: 5px 0; 
-    font-size: 1.4rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 8px; /* Gap para icono rings */
-}
-
-h1 { 
-    font-family: 'Cormorant Garamond', serif; 
-    color: var(--dorado); 
-    font-size: 2.2rem; 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 12px; /* Mayor gap en invitación principal */
-    margin-bottom: 5px;
-}
-
-/* Icono vectorial para los anillos detallados */
-.rings-icon {
-    width: 1.2em; /* Tamaño relativo al texto */
-    height: 1.2em;
-    stroke: var(--dorado); /* Color por defecto dorado para las bandas */
-}
-
-.rings-icon-main {
-    width: 1.1em;
-    height: 1.1em;
-}
-
-/* Colorear diamante y engaste */
-.diamond-setting {
-    fill: #FFFFFF; /* Relleno blanco para la piedra */
-    stroke: #EAEAEA; /* Contorno plateado claro */
-}
-
-.envelope .front, .envelope .back { position: absolute; width: 0; height: 0; z-index: 5; }
-.envelope .front { border-right: 150px solid var(--verde-oscuro); border-top: 100px solid transparent; border-bottom: 100px solid var(--verde-oscuro); left: 150px; bottom: 0; }
-.envelope .back { border-left: 150px solid var(--verde-oscuro); border-top: 100px solid transparent; border-bottom: 100px solid var(--verde-oscuro); left: 0; bottom: 0; }
-.envelope .top-flap { position: absolute; top: 0; left: 0; width: 0; height: 0; border-left: 150px solid transparent; border-right: 150px solid transparent; border-top: 115px solid var(--verde-oliva); transform-origin: top; transition: transform 1.2s ease-in-out; z-index: 6; }
-
-.wax-seal { position: absolute; top: 95px; left: 130px; width: 45px; height: 45px; background: var(--dorado); border-radius: 50%; z-index: 8; display: flex; align-items: center; justify-content: center; color: white; font-size: 11px; font-weight: bold; transition: opacity 0.5s; }
-
-.envelope-wrapper.open .top-flap { transform: rotateX(180deg); }
-.envelope-wrapper.open .letter { transform: translateY(-145px); }
-.envelope-wrapper.open .wax-seal { opacity: 0; pointer-events: none; }
-
-/* CONTENIDO INVITACIÓN */
-#content { display: none; max-width: 500px; width: 90%; margin: 40px auto; background: white; padding: 40px 25px; text-align: center; opacity: 0; transition: opacity 2s ease; border: 1px solid #eee; border-radius: 10px; z-index: 2; position: relative; }
-
-/* NUEVO: LIRIO SURGIENDO AL ABRIR */
+/* LIRIOS ADAPTADOS AL SOBRE */
 .opener-image-container {
     position: absolute;
-    bottom: -15px; left: 50%;
+    bottom: 0; left: 50%;
     transform: translateX(-50%) translateY(0);
-    width: 320px; height: 280px;
-    z-index: 1; /* Detrás de las componentes del sobre olive (z-index 5) */
+    width: 300px; /* Ancho exacto del sobre */
+    z-index: 1;
     opacity: 0;
-    transition: all 1.8s ease; /* Transición suave para fade y rise */
-    display: flex; justify-content: center; align-items: flex-end;
-    pointer-events: none; /* No bloquear interacción */
+    transition: all 1.8s ease-in-out;
+    pointer-events: none;
+    display: flex; justify-content: center;
 }
-
-.opener-image-container img {
-    width: auto; height: 100%; /* Ajustar altura al contenedor */
-    filter: drop-shadow(0 2px 3px rgba(0,0,0,0.1));
-}
+.lirios-img { width: 100%; height: auto; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1)); }
 
 .open .opener-image-container {
     opacity: 1;
-    transform: translateX(-50%) translateY(-60px); /* Suben 60px */
+    transform: translateX(-50%) translateY(-120px);
 }
 
-.btn-music {
-    background-color: var(--verde-oliva);
-    color: white; border: none; padding: 10px 20px; border-radius: 25px;
-    font-family: 'Montserrat', sans-serif; font-size: 0.8rem;
-    cursor: pointer; display: inline-flex; align-items: center; gap: 8px;
-    transition: background 0.3s; min-width: 130px; justify-content: center;
-    margin-bottom: 20px;
-}
+/* NOMBRES DORADOS Y ANILLOS */
+.gold-text, h1, h2 { font-family: 'Cormorant Garamond', serif; color: var(--dorado); }
+.rings-icon { width: 1.2em; height: 1.2em; stroke: var(--dorado); vertical-align: middle; }
+.diamond-setting { fill: #FFFFFF; stroke: #EAEAEA; }
 
-/* CONTADOR ESTILO RELOJ DIGITAL (Mantenido) */
-.timer { display: flex; justify-content: center; gap: 15px; margin: 30px 0; font-weight: bold; color: var(--verde-oliva); }
-.timer div { font-size: 1.5rem; }
-.timer span { display: block; font-size: 0.6rem; color: #999; text-transform: uppercase; }
+/* APERTURA SOBRE */
+.envelope .front { border-right: 150px solid var(--verde-oscuro); border-top: 100px solid transparent; border-bottom: 100px solid var(--verde-oscuro); left: 150px; bottom: 0; position: absolute; }
+.envelope .back { border-left: 150px solid var(--verde-oscuro); border-top: 100px solid transparent; border-bottom: 100px solid var(--verde-oscuro); left: 0; bottom: 0; position: absolute; }
+.envelope .top-flap { position: absolute; top: 0; border-left: 150px solid transparent; border-right: 150px solid transparent; border-top: 115px solid var(--verde-oliva); transform-origin: top; transition: transform 1.2s ease-in-out; z-index: 6; }
+.wax-seal { position: absolute; top: 95px; left: 130px; width: 45px; height: 45px; background: var(--dorado); border-radius: 50%; z-index: 8; display: flex; align-items: center; justify-content: center; color: white; font-size: 11px; transition: 0.5s; }
 
-.btn-oliva {
-    display: block; 
-    background: var(--verde-oliva); 
-    color: white;
-    text-decoration: none; 
-    padding: 12px; 
-    margin: 10px auto;
-    border-radius: 30px; 
-    width: 85%; 
-    font-size: 0.85rem;
-    font-weight: 500;
-    transition: background 0.3s;
-    z-index: 2; /* Encima de lírios si hay overlap */
-    position: relative;
-}
+.open .top-flap { transform: rotateX(180deg); }
+.open .letter { transform: translateY(-145px); }
+.open .wax-seal { opacity: 0; }
+
+/* INVITACIÓN */
+#content { display: none; max-width: 500px; width: 90%; margin: 20px auto; background: white; padding: 30px; text-align: center; opacity: 0; transition: 2s; border-radius: 10px; }
+
+/* CONTADOR CON RECUADROS */
+.timer { display: flex; justify-content: center; gap: 10px; margin: 20px 0; }
+.timer-col { display: flex; flex-direction: column; align-items: center; }
+.timer-box { background: var(--verde-oscuro); color: white; padding: 10px; border-radius: 8px; font-size: 2rem; min-width: 60px; font-family: 'Cormorant Garamond', serif; }
+.timer-col span { font-size: 0.6rem; margin-bottom: 5px; color: var(--texto); font-weight: bold; }
+
+.btn-oliva, .btn-music { background: var(--verde-oliva); color: white; border: none; padding: 12px; border-radius: 25px; cursor: pointer; text-decoration: none; display: block; margin: 10px auto; width: 80%; transition: 0.3s; }
 .btn-oliva:hover { background: var(--verde-oscuro); }
 
-/* ANIMACIÓN LLUVIA (Mantenida) */
+/* LLUVIA */
 .falling-element { position: fixed; top: -10vh; z-index: 9999; pointer-events: none; animation: fall linear forwards; }
 @keyframes fall {
-    0% { transform: translate(0, 0) rotate(0deg); opacity: 0; }
+    0% { transform: translateY(0) rotate(0); opacity: 0; }
     10% { opacity: 1; }
-    80% { opacity: 1; }
-    100% { transform: translate(var(--drift), 110vh) rotate(var(--rot)); opacity: 0; }
+    100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
 }
