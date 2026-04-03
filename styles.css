@@ -16,28 +16,9 @@ body {
     min-height: 100vh; overflow-x: hidden;
 }
 
-/* SOBRE Y ENVOLTORIO */
+/* SOBRE Y ANIMACIÓN */
 .envelope-wrapper { position: relative; cursor: pointer; z-index: 10; transition: opacity 1.5s ease; }
 .envelope { position: relative; width: 300px; height: 200px; background-color: var(--verde-oliva); box-shadow: 0 15px 35px rgba(0,0,0,0.2); z-index: 5; }
-
-/* LIRIOS: AJUSTADOS PARA SALIR DETRÁS DE LA CARTA */
-.opener-image-container {
-    position: absolute;
-    bottom: 20px; left: 50%;
-    transform: translateX(-50%) translateY(0);
-    width: 280px;
-    z-index: 1; /* Por debajo de la carta y los frentes del sobre */
-    opacity: 0;
-    transition: all 2.2s ease-in-out;
-    pointer-events: none;
-}
-.lirios-img { width: 100%; height: auto; filter: drop-shadow(0 2px 5px rgba(0,0,0,0.1)); }
-
-/* Movimiento de lirios al abrir */
-.open .opener-image-container {
-    opacity: 1;
-    transform: translateX(-50%) translateY(-170px); /* Suben un poco más que la carta para asomar por detrás */
-}
 
 .letter {
     position: absolute; bottom: 10px; left: 20px;
@@ -47,9 +28,28 @@ body {
 }
 .letter.front-view { z-index: 7 !important; }
 
-/* TEXTOS DORADOS */
-.letter h2, h1 { font-family: 'Cormorant Garamond', serif; color: var(--dorado); display: flex; justify-content: center; align-items: center; gap: 8px; }
-.rings-icon { width: 1.2em; height: 1.2em; stroke: var(--dorado); }
+/* LIRIOS: SALIENDO DETRÁS DE LA CARTA */
+.opener-image-container {
+    position: absolute;
+    bottom: 20px; left: 50%;
+    transform: translateX(-50%) translateY(0);
+    width: 280px;
+    z-index: 1; /* Detrás de la carta blanca */
+    opacity: 0;
+    transition: all 2.2s ease-in-out;
+}
+.lirios-img { width: 100%; height: auto; filter: drop-shadow(0 2px 5px rgba(0,0,0,0.1)); }
+
+.open .opener-image-container {
+    opacity: 1;
+    transform: translateX(-50%) translateY(-170px); /* Sube un poco más que la carta para asomar por detrás */
+}
+
+/* NOMBRES DORADOS Y ANILLOS DETALLADOS */
+.gold-text, h1, h2 { font-family: 'Cormorant Garamond', serif; color: var(--dorado); margin: 0; display: flex; justify-content: center; align-items: center; gap: 8px; }
+.rings-icon { width: 1.2em; height: 1.2em; stroke: var(--dorado); vertical-align: middle; }
+.ring-band { stroke: var(--dorado); }
+.diamond-setting { fill: #FFFFFF; stroke: #EAEAEA; }
 
 /* PARTES DEL SOBRE */
 .envelope .front, .envelope .back { position: absolute; width: 0; height: 0; z-index: 5; }
@@ -64,7 +64,7 @@ body {
 .open .letter { transform: translateY(-145px); }
 .open .wax-seal { opacity: 0; }
 
-/* CONTENIDO E INVITACIÓN */
+/* INVITACIÓN FINAL */
 #content { display: none; max-width: 500px; width: 90%; margin: 40px auto; background: white; padding: 40px 25px; text-align: center; opacity: 0; transition: opacity 2s ease; border-radius: 10px; z-index: 2; position: relative; }
 
 /* CONTADOR ESTILO RELOJ DIGITAL (BOXED) */
@@ -73,7 +73,69 @@ body {
 .timer-col span { font-size: 0.75rem; color: var(--texto); font-weight: 600; }
 .timer-box { background-color: var(--verde-oscuro); color: var(--marfil); font-family: 'Cormorant Garamond', serif; font-size: 2.5rem; padding: 10px 15px; border-radius: 10px; min-width: 60px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
 
-/* BOTONES */
+/* NUEVO REPRODUCTOR ESTILO SEGUNDA IMAGEN (MINIMALISTA) */
+.custom-player {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin: 20px auto;
+    max-width: 250px;
+}
+
+.player-controls {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.play-pause-btn {
+    background: #333;
+    color: white;
+    border: none;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    transition: transform 0.2s;
+}
+
+.player-icon.small {
+    color: #888;
+    font-size: 0.9rem;
+    cursor: default;
+}
+
+.player-progress {
+    position: relative;
+    width: 100%;
+    height: 2px;
+    background: #ddd;
+    margin-top: 5px;
+}
+
+.progress-bar {
+    position: absolute;
+    height: 100%;
+    width: 40%; /* Simulando progreso */
+    background: #333;
+}
+
+.progress-dot {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: #333;
+    border-radius: 50%;
+    top: -3px;
+    left: 40%;
+}
+
+/* BOTONES INFERIORES */
 .btn-music, .btn-oliva { background-color: var(--verde-oliva); color: white; border: none; padding: 12px 20px; border-radius: 25px; cursor: pointer; text-decoration: none; display: block; margin: 10px auto; width: 80%; transition: 0.3s; }
 .btn-oliva:hover { background: var(--verde-oscuro); }
 
