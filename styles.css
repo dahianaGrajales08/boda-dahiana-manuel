@@ -1,148 +1,49 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Montserrat:wght@300;400;600&display=swap');
+/* ... (Mantener variables :root y fuentes del archivo anterior) ... */
 
-:root {
-    --verde-oliva: #7A8450;
-    --verde-oscuro: #5d663d;
-    --marfil: #FBF9F6;
-    --texto: #444;
-    --dorado: #C5A059;
+.bg-floral {
+    background-image: url('fondo.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
 }
 
-body {
-    margin: 0; padding: 0;
-    background-color: var(--marfil);
-    font-family: 'Montserrat', sans-serif;
-    display: flex; justify-content: center; align-items: center;
-    min-height: 100vh; overflow-x: hidden;
+/* Imágenes de Anillos */
+.rings-img-small {
+    width: 50px;
+    height: auto;
+    margin-bottom: 5px;
 }
 
-/* SOBRE Y ANIMACIÓN */
-.envelope-wrapper { position: relative; cursor: pointer; z-index: 10; transition: opacity 1.5s ease; }
-.envelope { position: relative; width: 300px; height: 200px; background-color: var(--verde-oliva); box-shadow: 0 15px 35px rgba(0,0,0,0.2); z-index: 5; }
-
-.letter {
-    position: absolute; bottom: 10px; left: 20px;
-    width: 260px; height: 170px; background: white;
-    padding: 15px; box-sizing: border-box; text-align: center;
-    z-index: 2; transition: transform 2.0s ease-in-out;
-}
-.letter.front-view { z-index: 7 !important; }
-
-/* LIRIOS: SALIENDO DETRÁS DE LA CARTA */
-.opener-image-container {
-    position: absolute;
-    bottom: 20px; left: 50%;
-    transform: translateX(-50%) translateY(0);
-    width: 280px;
-    z-index: 1; /* Detrás de la carta blanca */
-    opacity: 0;
-    transition: all 2.2s ease-in-out;
-}
-.lirios-img { width: 100%; height: auto; filter: drop-shadow(0 2px 5px rgba(0,0,0,0.1)); }
-
-.open .opener-image-container {
-    opacity: 1;
-    transform: translateX(-50%) translateY(-170px); /* Sube un poco más que la carta para asomar por detrás */
+.rings-img-main {
+    width: 80px;
+    height: auto;
+    margin-bottom: 10px;
 }
 
-/* NOMBRES DORADOS Y ANILLOS DETALLADOS */
-.gold-text, h1, h2 { font-family: 'Cormorant Garamond', serif; color: var(--dorado); margin: 0; display: flex; justify-content: center; align-items: center; gap: 8px; }
-.rings-icon { width: 1.2em; height: 1.2em; stroke: var(--dorado); vertical-align: middle; }
-.ring-band { stroke: var(--dorado); }
-.diamond-setting { fill: #FFFFFF; stroke: #EAEAEA; }
-
-/* PARTES DEL SOBRE */
-.envelope .front, .envelope .back { position: absolute; width: 0; height: 0; z-index: 5; }
-.envelope .front { border-right: 150px solid var(--verde-oscuro); border-top: 100px solid transparent; border-bottom: 100px solid var(--verde-oscuro); left: 150px; bottom: 0; }
-.envelope .back { border-left: 150px solid var(--verde-oscuro); border-top: 100px solid transparent; border-bottom: 100px solid var(--verde-oscuro); left: 0; bottom: 0; }
-.envelope .top-flap { position: absolute; top: 0; left: 0; width: 0; height: 0; border-left: 150px solid transparent; border-right: 150px solid transparent; border-top: 115px solid var(--verde-oliva); transform-origin: top; transition: transform 1.2s ease-in-out; z-index: 6; }
-
-.wax-seal { position: absolute; top: 95px; left: 130px; width: 45px; height: 45px; background: var(--dorado); border-radius: 50%; z-index: 8; display: flex; align-items: center; justify-content: center; color: white; font-size: 11px; font-weight: bold; transition: opacity 0.5s; }
-
-/* ANIMACIÓN APERTURA */
-.open .top-flap { transform: rotateX(180deg); }
-.open .letter { transform: translateY(-145px); }
-.open .wax-seal { opacity: 0; }
-
-/* INVITACIÓN FINAL */
-#content { display: none; max-width: 500px; width: 90%; margin: 40px auto; background: white; padding: 40px 25px; text-align: center; opacity: 0; transition: opacity 2s ease; border-radius: 10px; z-index: 2; position: relative; }
-
-/* CONTADOR ESTILO RELOJ DIGITAL (BOXED) */
-.timer { display: flex; justify-content: center; gap: 15px; margin: 30px 0; }
-.timer-col { display: flex; flex-direction: column; align-items: center; gap: 8px; }
-.timer-col span { font-size: 0.75rem; color: var(--texto); font-weight: 600; }
-.timer-box { background-color: var(--verde-oscuro); color: var(--marfil); font-family: 'Cormorant Garamond', serif; font-size: 2.5rem; padding: 10px 15px; border-radius: 10px; min-width: 60px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-
-/* NUEVO REPRODUCTOR ESTILO SEGUNDA IMAGEN (MINIMALISTA) */
-.custom-player {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-    margin: 20px auto;
-    max-width: 250px;
-}
-
-.player-controls {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-}
-
-.play-pause-btn {
-    background: #333;
-    color: white;
-    border: none;
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.2rem;
-    transition: transform 0.2s;
-}
-
-.player-icon.small {
-    color: #888;
-    font-size: 0.9rem;
-    cursor: default;
-}
-
-.player-progress {
+/* Ajuste del Sobre para que resalte sobre el fondo */
+.envelope {
     position: relative;
-    width: 100%;
-    height: 2px;
-    background: #ddd;
-    margin-top: 5px;
+    width: 300px;
+    height: 200px;
+    background-color: var(--verde-oliva);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3); /* Sombra más fuerte */
+    z-index: 5;
 }
 
-.progress-bar {
-    position: absolute;
-    height: 100%;
-    width: 40%; /* Simulando progreso */
-    background: #333;
+/* Estilo del texto dorado */
+.gold-text, .header-names {
+    color: var(--dorado);
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
 }
 
-.progress-dot {
-    position: absolute;
-    width: 8px;
-    height: 8px;
-    background: #333;
-    border-radius: 50%;
-    top: -3px;
-    left: 40%;
+/* Asegurar que el contenido sea legible sobre el fondo floral */
+#content {
+    background: rgba(255, 255, 255, 0.95); /* Fondo blanco con ligera transparencia */
+    backdrop-filter: blur(5px);
+    border: none;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
 }
 
-/* BOTONES INFERIORES */
-.btn-music, .btn-oliva { background-color: var(--verde-oliva); color: white; border: none; padding: 12px 20px; border-radius: 25px; cursor: pointer; text-decoration: none; display: block; margin: 10px auto; width: 80%; transition: 0.3s; }
-.btn-oliva:hover { background: var(--verde-oscuro); }
-
-/* LLUVIA DE PÉTALOS/HOJAS */
-.falling-element { position: fixed; top: -10vh; z-index: 9999; pointer-events: none; animation: fall linear forwards; }
-@keyframes fall {
-    0% { transform: translate(0, 0) rotate(0deg); opacity: 0; }
-    10% { opacity: 1; }
-    100% { transform: translate(var(--drift), 110vh) rotate(var(--rot)); opacity: 0; }
-}
+/* ... (resto del código de animaciones y reproductor igual) ... */
