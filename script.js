@@ -8,15 +8,12 @@ const btnVolver = document.getElementById("btnVolver");
 const tiempoInicio = 90; 
 const tiempoFin = 130;   
 
-// --- APERTURA DEL SOBRE ---
 wrapper.addEventListener("click", () => {
     if(wrapper.classList.contains("open")) return;
     
-    // Iniciar Música en el segundo 90
     music.currentTime = tiempoInicio;
     music.play().catch(e => console.log("Interacción necesaria"));
 
-    // Bucle de música personalizado (de 90 a 130)
     music.addEventListener("timeupdate", () => {
         if (music.currentTime >= tiempoFin) {
             music.currentTime = tiempoInicio;
@@ -26,10 +23,8 @@ wrapper.addEventListener("click", () => {
     wrapper.classList.add("open");
     iniciarLluviaFlores();
     
-    // Animación de la carta subiendo
     setTimeout(() => { letter.classList.add("front-view"); }, 1100); 
     
-    // Cambio de vista al contenido principal
     setTimeout(() => {
         wrapper.style.opacity = "0";
         setTimeout(() => {
@@ -40,7 +35,6 @@ wrapper.addEventListener("click", () => {
     }, 4500);
 });
 
-// --- BOTÓN VOLVER ---
 btnVolver.addEventListener("click", () => {
     content.style.opacity = "0";
     setTimeout(() => {
@@ -52,7 +46,6 @@ btnVolver.addEventListener("click", () => {
     }, 1000);
 });
 
-// --- REPRODUCTOR PLAY/PAUSE ---
 function toggleMusic() {
     const icon = document.getElementById("musicIcon");
     if (music.paused) { 
@@ -64,7 +57,6 @@ function toggleMusic() {
     }
 }
 
-// --- CONTADOR (Formato de la imagen) ---
 function updateCountdown() {
     const targetDate = new Date("Oct 3, 2026 13:00:00").getTime();
     const now = new Date().getTime();
@@ -92,7 +84,6 @@ function updateCountdown() {
 setInterval(updateCountdown, 1000);
 updateCountdown();
 
-// --- LLUVIA DE FLORES Y HOJAS ---
 function iniciarLluviaFlores() {
     setInterval(() => {
         const element = document.createElement("div");
