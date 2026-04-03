@@ -8,10 +8,10 @@ const tiempoFin = 130;
 
 // --- EVENTO DE APERTURA DEL SOBRE ---
 wrapper.addEventListener("click", () => {
-    if(wrapper.classList.contains("open")) return; 
+    if(wrapper.classList.contains("open")) return;
     
     music.currentTime = tiempoInicio;
-    music.play().catch(e => console.log("Esperando interacción"));
+    music.play().catch(e => console.log("Error al reproducir música"));
 
     music.addEventListener("timeupdate", () => {
         if (music.currentTime >= tiempoFin) {
@@ -41,34 +41,52 @@ function toggleMusic() {
     const icon = document.getElementById("musicIcon");
     if (music.paused) {
         music.play();
-        icon.innerText = "||"; 
+        icon.innerText = "||";
     } else {
         music.pause();
-        icon.innerText = "▶"; 
+        icon.innerText = "▶";
     }
 }
 
+// --- CONTADOR ACTUALIZADO ESTILO KEVIN & ADRIANA ---
 function updateCountdown() {
     const targetDate = new Date("Oct 3, 2026 13:00:00").getTime();
     const now = new Date().getTime();
     const diff = targetDate - now;
 
     if (diff <= 0) {
-        document.getElementById("countdown").innerHTML = "¡Llegó el gran día!";
+        document.getElementById("countdown").innerHTML = "<h2 class='gold-text'>¡HOY ES EL GRAN DÍA!</h2>";
         return;
     }
 
     const d = Math.floor(diff / (1000 * 60 * 60 * 24));
     const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    const s = Math.floor((diff % (1000 * 60)) / 1000);
 
     const countdownDiv = document.getElementById("countdown");
     if(countdownDiv) {
         countdownDiv.innerHTML = `
-            <div class="timer">
-                <div class="timer-col"><span>DÍAS💍</span><div class="timer-box">${d < 10 ? '0'+d : d}</div></div>
-                <div class="timer-col"><span>HORAS</span><div class="timer-box">${h < 10 ? '0'+h : h}</div></div>
-                <div class="timer-col"><span>MINS</span><div class="timer-box">${m < 10 ? '0'+m : m}</div></div>
+            <div class="timer-container">
+                <div class="timer-unit">
+                    <span class="timer-value">${d}</span>
+                    <span class="timer-label">Días</span>
+                </div>
+                <div class="timer-separator">:</div>
+                <div class="timer-unit">
+                    <span class="timer-value">${h < 10 ? '0'+h : h}</span>
+                    <span class="timer-label">Horas</span>
+                </div>
+                <div class="timer-separator">:</div>
+                <div class="timer-unit">
+                    <span class="timer-value">${m < 10 ? '0'+m : m}</span>
+                    <span class="timer-label">Minutos</span>
+                </div>
+                <div class="timer-separator">:</div>
+                <div class="timer-unit">
+                    <span class="timer-value">${s < 10 ? '0'+s : s}</span>
+                    <span class="timer-label">Segundos</span>
+                </div>
             </div>`;
     }
 }
@@ -94,7 +112,6 @@ function iniciarLluviaFlores() {
         element.style.setProperty('--rot', (Math.random() * 360 + 180) + 'deg');
 
         document.body.appendChild(element);
-
         setTimeout(() => { element.remove(); }, 8000);
     }, 400);
 }
