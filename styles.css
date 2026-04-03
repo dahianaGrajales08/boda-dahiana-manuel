@@ -6,6 +6,8 @@
     --marfil: #FBF9F6;
     --texto: #444;
     --dorado: #C5A059;
+    --lila-suave: #E0D4F7;
+    --lila-texto: #8E7AB5;
 }
 
 body {
@@ -21,36 +23,35 @@ body {
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
+    background-repeat: no-repeat;
 }
 
-/* MAGIA PARA QUITAR LOS CUADROS DE LOS LIRIOS */
-.lirios-img-magic {
-    width: 100%;
-    height: auto;
-    display: block;
-    mix-blend-mode: multiply; 
-    filter: contrast(110%);
-}
+/* --- SOBRE Y ANIMACIÓN --- */
+.envelope-wrapper { position: relative; cursor: pointer; z-index: 10; transition: opacity 1.5s ease; }
+.envelope { position: relative; width: 300px; height: 200px; background-color: var(--verde-oliva); box-shadow: 0 20px 40px rgba(0,0,0,0.3); z-index: 5; }
 
 .opener-image-container {
     position: absolute;
     bottom: 20px;
     left: 50%;
-    transform: translateX(-50%) translateY(0) scale(0.7);
+    transform: translateX(-50%) translateY(0) scale(0.6); 
     width: 320px;
     z-index: 1;
     opacity: 0;
     transition: all 2.5s ease-in-out;
+    pointer-events: none;
+}
+
+.lirios-img-clean {
+    width: 100%;
+    height: auto;
+    mix-blend-mode: multiply; 
 }
 
 .open .opener-image-container {
     opacity: 1;
-    transform: translateX(-50%) translateY(-180px) scale(0.9);
+    transform: translateX(-50%) translateY(-180px) scale(0.85); 
 }
-
-/* SOBRE */
-.envelope-wrapper { position: relative; cursor: pointer; z-index: 10; transition: opacity 1.5s ease; }
-.envelope { position: relative; width: 300px; height: 200px; background-color: var(--verde-oliva); box-shadow: 0 15px 35px rgba(0,0,0,0.2); z-index: 5; }
 
 .letter {
     position: absolute; bottom: 10px; left: 20px;
@@ -61,52 +62,53 @@ body {
 }
 .letter.front-view { z-index: 7 !important; }
 
-/* Imágenes Alianzas */
 .rings-img-small { width: 40px; height: auto; margin-bottom: 5px; }
-.rings-img-main { width: 75px; height: auto; margin-bottom: 15px; }
-
-/* Textos Dorados */
-.gold-text, .header-names { color: var(--dorado); font-family: 'Cormorant Garamond', serif; margin: 0; font-weight: 600; }
-.letter h2 { font-size: 1.4rem; }
+.rings-img-main { width: 70px; height: auto; margin-bottom: 10px; }
+.gold-text { font-family: 'Cormorant Garamond', serif; color: var(--dorado); margin: 0; font-weight: 600; }
 .header-decor h1 { font-size: 2.2rem; display: flex; align-items: center; justify-content: center; gap: 10px; }
-.subtitle { font-size: 0.8rem; letter-spacing: 1px; color: #666; margin: 10px 0; font-weight: 400; }
-.date-text { font-size: 0.9rem; margin: 2px 0; color: var(--texto); }
-.tap-text { font-size: 0.7rem; color: #888; }
-.mensaje { color: var(--texto); font-size: 0.95rem; line-height: 1.4; margin: 25px auto; max-width: 90%; font-weight: 400; }
+.subtitle { font-size: 0.75rem; color: #666; letter-spacing: 1px; margin-bottom: 15px; }
 
-/* PARTES SOBRE */
+/* --- CONTENIDO --- */
+#content { display: none; max-width: 500px; width: 90%; margin: 40px auto; background: rgba(255, 255, 255, 0.95); padding: 40px 25px; text-align: center; opacity: 0; transition: opacity 2s ease; border-radius: 10px; z-index: 2; position: relative; backdrop-filter: blur(5px); }
+
+/* --- CONTADOR --- */
+.timer-container { display: flex; justify-content: center; align-items: baseline; gap: 10px; margin: 30px 0; color: var(--lila-texto); font-family: 'Cormorant Garamond', serif; }
+.timer-unit { display: flex; flex-direction: column; align-items: center; min-width: 60px; }
+.timer-value { font-size: 3rem; line-height: 1; }
+.timer-label { font-size: 0.7rem; font-family: 'Montserrat', sans-serif; text-transform: uppercase; color: #999; margin-top: 5px; }
+.timer-sep { font-size: 2rem; opacity: 0.5; }
+
+/* REPRODUCTOR */
+.custom-player { display: flex; flex-direction: column; align-items: center; gap: 10px; margin: 20px auto; max-width: 250px; }
+.player-controls { display: flex; align-items: center; gap: 20px; }
+.play-pause-btn { background: #333; color: white; border: none; width: 45px; height: 45px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+.player-progress { position: relative; width: 100%; height: 2px; background: #ddd; }
+.progress-bar { position: absolute; height: 100%; width: 40%; background: #333; }
+
+/* BOTONES */
+.btn-oliva { background-color: var(--verde-oliva); color: white; border: none; padding: 12px 20px; border-radius: 25px; cursor: pointer; text-decoration: none; display: block; margin: 10px auto; width: 85%; font-weight: 600; }
+
+/* BOTÓN VOLVER (ESTILO IMAGEN) */
+.btn-volver {
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid var(--lila-suave);
+    color: var(--lila-texto);
+    padding: 8px 30px;
+    border-radius: 50px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.btn-volver:hover { background: var(--lila-suave); color: white; }
+
+/* SOBRE PARTES */
 .envelope .front { border-right: 150px solid var(--verde-oscuro); border-top: 100px solid transparent; border-bottom: 100px solid var(--verde-oscuro); position: absolute; right: 0; bottom: 0; z-index: 4; }
 .envelope .back { border-left: 150px solid var(--verde-oscuro); border-top: 100px solid transparent; border-bottom: 100px solid var(--verde-oscuro); position: absolute; left: 0; bottom: 0; z-index: 4; }
 .envelope .top-flap { position: absolute; top: 0; left: 0; border-left: 150px solid transparent; border-right: 150px solid transparent; border-top: 115px solid var(--verde-oliva); transform-origin: top; transition: transform 1.2s; z-index: 6; }
-.wax-seal { position: absolute; top: 95px; left: 130px; width: 45px; height: 45px; background: var(--dorado); border-radius: 50%; z-index: 8; display: flex; align-items: center; justify-content: center; color: white; font-size: 11px; }
-
 .open .top-flap { transform: rotateX(180deg); }
 .open .letter { transform: translateY(-135px); }
-.open .wax-seal { opacity: 0; }
+.wax-seal { position: absolute; top: 95px; left: 130px; width: 45px; height: 45px; background: var(--dorado); border-radius: 50%; z-index: 8; display: flex; align-items: center; justify-content: center; color: white; font-size: 11px; }
 
-/* --- CONTENIDO INVITACIÓN (Apertura) --- */
-#content { display: none; max-width: 500px; width: 90%; background: rgba(255, 255, 255, 0.95); padding: 40px; text-align: center; opacity: 0; transition: opacity 2s ease; border-radius: 15px; backdrop-filter: blur(5px); z-index: 2; position: relative; }
-
-/* REPRODUCTOR PERSONALIZADO (Estilo imagen 2) */
-.custom-player { display: flex; flex-direction: column; align-items: center; gap: 10px; margin: 20px auto; max-width: 250px; }
-.player-controls { display: flex; align-items: center; gap: 20px; }
-.play-pause-btn { background: #333; color: white; border: none; width: 45px; height: 45px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
-.player-icon.small { color: #888; font-size: 0.9rem; }
-.player-progress { position: relative; width: 100%; height: 2px; background: #ddd; margin-top: 5px; }
-.progress-bar { position: absolute; height: 100%; width: 40%; background: #333; }
-.progress-dot { position: absolute; width: 8px; height: 8px; background: #333; border-radius: 50%; top: -3px; left: 40%; }
-
-/* CONTADOR (Estilo morado con separadores ':') */
-.timer-text { display: flex; justify-content: center; align-items: baseline; gap: 8px; margin: 30px 0; color: #8E7AB5; /* Tono morado de la imagen */ font-family: 'Cormorant Garamond', serif; }
-.timer-group { display: flex; flex-direction: column; align-items: center; }
-.timer-val { font-size: 2.5rem; font-weight: 400; line-height: 1; }
-.timer-sep { font-size: 2.2rem; margin: 0 5px; font-weight: 300; }
-.timer-lab { font-size: 0.75rem; font-family: 'Montserrat', sans-serif; text-transform: uppercase; color: #888; letter-spacing: 1px; margin-top: 5px; }
-
-/* BOTONES OLIVA */
-.btn-oliva { background-color: var(--verde-oliva); color: white; border: none; padding: 12px 20px; border-radius: 25px; cursor: pointer; text-decoration: none; display: block; margin: 12px auto; width: 85%; transition: 0.3s; font-weight: 600; text-align: center; }
-.btn-oliva:hover { background-color: var(--verde-oscuro); }
-
-/* LLUVIA DE FLORES */
-.falling-element { position: fixed; top: -10vh; z-index: 99; pointer-events: none; animation: fall linear forwards; }
+.falling-element { position: fixed; top: -10vh; z-index: 999; pointer-events: none; animation: fall linear forwards; }
 @keyframes fall { to { transform: translateY(110vh) rotate(360deg); } }
