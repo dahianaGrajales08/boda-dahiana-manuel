@@ -1,32 +1,28 @@
-/* ... (Mantener todo el CSS anterior igual) ... */
+/* ... (Todo tu CSS anterior se mantiene igual) ... */
 
-/* ESTILO BOTÓN VOLVER (Basado en tu imagen) */
 .btn-volver {
-    margin-top: 40px;
-    background: rgba(255, 255, 255, 0.4);
-    border: 1px solid #E0D4F7; /* Tono lila suave del borde */
-    color: #8E7AB5; /* Color del texto */
-    padding: 10px 35px;
+    background: rgba(255, 255, 255, 0.6);
+    border: 2px solid #E0D4F7; 
+    color: #8E7AB5;
+    padding: 12px 40px;
     border-radius: 50px;
     font-size: 1.1rem;
     cursor: pointer;
     transition: all 0.3s ease;
-    display: inline-block;
     font-family: 'Montserrat', sans-serif;
+    display: inline-block;
 }
 
 .btn-volver:hover {
-    background: rgba(255, 255, 255, 0.8);
+    background: #E0D4F7;
+    color: white;
     transform: scale(1.05);
-    box-shadow: 0 5px 15px rgba(142, 122, 181, 0.2);
 }
 
-/* Ajuste necesario para la transición de regreso */
-.envelope-wrapper { 
-    position: relative; 
-    cursor: pointer; 
-    z-index: 10; 
-    transition: opacity 1s ease, transform 1s ease; 
+#content {
+    transition: opacity 1s ease;
 }
 
-/* ... (resto del CSS se mantiene igual) ... */
+.envelope-wrapper {
+    transition: opacity 1s ease;
+}
