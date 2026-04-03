@@ -82,7 +82,7 @@ function updateCountdown() {
         countdownDiv.innerHTML = `
             <div class="timer">
                 <div class="timer-col">
-                    <span>DÍAS</span>
+                    <span>DÍAS💍</span>
                     <div class="timer-box">${d < 10 ? '0'+d : d}</div>
                 </div>
                 <div class="timer-col">
