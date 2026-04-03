@@ -16,105 +16,111 @@ body {
     min-height: 100vh; overflow-x: hidden;
 }
 
-.bg-floral {
-    background-image: url('fondo.jpg');
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    background-repeat: no-repeat;
-}
-
-/* --- SOBRE Y ANIMACIÓN --- */
+/* SOBRE */
 .envelope-wrapper { position: relative; cursor: pointer; z-index: 10; transition: opacity 1.5s ease; }
-.envelope { position: relative; width: 300px; height: 200px; background-color: var(--verde-oliva); box-shadow: 0 20px 40px rgba(0,0,0,0.3); z-index: 5; }
-
-/* CONTENEDOR DE LIRIOS: AJUSTE DE POSICIÓN PARA QUE ASOME PERFECTO */
-.opener-image-container {
-    position: absolute;
-    bottom: 0px; /* Alineado con la base del sobre */
-    left: 50%;
-    /* Escala reducida inicial para que no abulte, centrado */
-    transform: translateX(-50%) translateY(0) scale(0.6); 
-    width: 320px; /* Ancho ajustado para que asome por los lados */
-    z-index: 1; /* Detrás de la tarjeta */
-    opacity: 0;
-    transition: all 2.5s ease-in-out;
-    pointer-events: none;
-    background: transparent;
-}
-
-/* CLASE ESPECÍFICA PARA LIRIOS SIN FONDO DE CUADROS */
-.lirios-img-clean {
-    width: 100%;
-    height: auto;
-    filter: drop-shadow(0 2px 5px rgba(0,0,0,0.05)); /* Sombra muy suave */
-    display: block;
-    mix-blend-mode: multiply; /* Elimina fondos claros/cuadros de fondo */
-}
-
-/* Movimiento al abrir: Sube más para mostrar los tallos, y se agranda un poco */
-.open .opener-image-container {
-    opacity: 1;
-    /* Sube hasta que asomen las flores por encima, manteniéndose centrado */
-    transform: translateX(-50%) translateY(-170px) scale(0.85); 
-}
+.envelope { position: relative; width: 300px; height: 200px; background-color: var(--verde-oliva); box-shadow: 0 15px 35px rgba(0,0,0,0.2); }
 
 .letter {
     position: absolute; bottom: 10px; left: 20px;
     width: 260px; height: 170px; background: white;
     padding: 15px; box-sizing: border-box; text-align: center;
     z-index: 2; transition: transform 2.0s ease-in-out;
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
 }
+
 .letter.front-view { z-index: 7 !important; }
 
-/* Imágenes de Anillos y Textos Dorados */
-.rings-img-small { width: 40px; height: auto; margin-bottom: 5px; }
-.rings-img-main { width: 70px; height: auto; margin-bottom: 10px; }
-.gold-text { font-family: 'Cormorant Garamond', serif; color: var(--dorado); margin: 0; font-weight: 600; }
-.letter h2 { font-size: 1.4rem; }
-.header-decor h1 { font-size: 2.2rem; display: flex; align-items: center; justify-content: center; gap: 10px; }
-.date-text { font-size: 0.9rem; margin: 2px 0; color: var(--texto); }
-.tap-text { font-size: 0.7rem; color: #888; }
+/* NUEVO: Textos de los nombres en dorado y con icono alineado */
+.letter h2 { 
+    font-family: 'Cormorant Garamond', serif; 
+    color: var(--dorado); 
+    margin: 5px 0; 
+    font-size: 1.4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+}
 
-/* PARTES DEL SOBRE */
-.envelope .front, .envelope .back { position: absolute; width: 0; height: 0; z-index: 4; }
+h1 { 
+    font-family: 'Cormorant Garamond', serif; 
+    color: var(--dorado); 
+    font-size: 2.2rem; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 5px;
+}
+
+/* Tamaño dinámico para los anillos */
+.rings-icon {
+    width: 1.2em;
+    height: 1.2em;
+}
+
+.envelope .front, .envelope .back { position: absolute; width: 0; height: 0; z-index: 5; }
 .envelope .front { border-right: 150px solid var(--verde-oscuro); border-top: 100px solid transparent; border-bottom: 100px solid var(--verde-oscuro); left: 150px; bottom: 0; }
 .envelope .back { border-left: 150px solid var(--verde-oscuro); border-top: 100px solid transparent; border-bottom: 100px solid var(--verde-oscuro); left: 0; bottom: 0; }
 .envelope .top-flap { position: absolute; top: 0; left: 0; width: 0; height: 0; border-left: 150px solid transparent; border-right: 150px solid transparent; border-top: 115px solid var(--verde-oliva); transform-origin: top; transition: transform 1.2s ease-in-out; z-index: 6; }
+
 .wax-seal { position: absolute; top: 95px; left: 130px; width: 45px; height: 45px; background: var(--dorado); border-radius: 50%; z-index: 8; display: flex; align-items: center; justify-content: center; color: white; font-size: 11px; font-weight: bold; transition: opacity 0.5s; }
 
-/* ANIMACIÓN APERTURA */
-.open .top-flap { transform: rotateX(180deg); }
-.open .letter { transform: translateY(-135px); }
-.open .wax-seal { opacity: 0; }
+.envelope-wrapper.open .top-flap { transform: rotateX(180deg); }
+.envelope-wrapper.open .letter { transform: translateY(-145px); }
+.envelope-wrapper.open .wax-seal { opacity: 0; pointer-events: none; }
 
-/* --- CONTENIDO INVITACIÓN --- */
-#content { display: none; max-width: 500px; width: 90%; margin: 40px auto; background: rgba(255, 255, 255, 0.95); padding: 40px 25px; text-align: center; opacity: 0; transition: opacity 2s ease; border-radius: 10px; z-index: 2; position: relative; backdrop-filter: blur(5px); }
+/* CONTENIDO INVITACIÓN */
+#content { display: none; max-width: 500px; width: 90%; margin: 40px auto; background: white; padding: 40px 25px; text-align: center; opacity: 0; transition: opacity 2s ease; border: 1px solid #eee; border-radius: 10px; z-index: 2; position: relative; }
 
-/* CONTADOR ESTILO RELOJ DIGITAL (BOXED) */
+.btn-music {
+    background-color: var(--verde-oliva);
+    color: white; border: none; padding: 10px 20px; border-radius: 25px;
+    font-family: 'Montserrat', sans-serif; font-size: 0.8rem;
+    cursor: pointer; display: inline-flex; align-items: center; gap: 8px;
+    transition: background 0.3s; min-width: 130px; justify-content: center;
+    margin-bottom: 20px;
+}
+
+/* CONTADOR ESTILO RELOJ DIGITAL */
 .timer { display: flex; justify-content: center; gap: 15px; margin: 30px 0; }
 .timer-col { display: flex; flex-direction: column; align-items: center; gap: 8px; }
-.timer-col span { font-size: 0.75rem; color: var(--texto); font-weight: 600; }
-.timer-box { background-color: var(--verde-oscuro); color: var(--marfil); font-family: 'Cormorant Garamond', serif; font-size: 2.5rem; padding: 10px 15px; border-radius: 10px; min-width: 60px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
 
-/* REPRODUCTOR PERSONALIZADO */
-.custom-player { display: flex; flex-direction: column; align-items: center; gap: 10px; margin: 20px auto; max-width: 250px; }
-.player-controls { display: flex; align-items: center; gap: 20px; }
-.play-pause-btn { background: #333; color: white; border: none; width: 45px; height: 45px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
-.player-icon.small { color: #888; font-size: 0.9rem; }
-.player-progress { position: relative; width: 100%; height: 2px; background: #ddd; margin-top: 5px; }
-.progress-bar { position: absolute; height: 100%; width: 40%; background: #333; }
-.progress-dot { position: absolute; width: 8px; height: 8px; background: #333; border-radius: 50%; top: -3px; left: 40%; }
+.timer-col span { 
+    font-family: 'Montserrat', sans-serif; 
+    font-size: 0.75rem; 
+    color: var(--texto); 
+    font-weight: 600; 
+    letter-spacing: 1px; 
+}
 
-/* BOTONES */
-.btn-oliva { background-color: var(--verde-oliva); color: white; border: none; padding: 12px 20px; border-radius: 25px; cursor: pointer; text-decoration: none; display: block; margin: 10px auto; width: 80%; transition: 0.3s; font-weight: 600; }
+.timer-box { 
+    background-color: var(--verde-oscuro); 
+    color: var(--marfil); 
+    font-family: 'Cormorant Garamond', serif; 
+    font-size: 2.8rem; 
+    padding: 12px 18px; 
+    border-radius: 10px; 
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    min-width: 65px;
+    text-align: center;
+}
+
+/* BOTONES INFERIORES */
+.btn-oliva { display: block; background: var(--verde-oliva); color: white; text-decoration: none; padding: 12px; margin: 10px auto; border-radius: 30px; width: 85%; font-size: 0.85rem; font-weight: 500; transition: background 0.3s; z-index: 2; position: relative;}
 .btn-oliva:hover { background: var(--verde-oscuro); }
 
-/* LLUVIA DE PÉTALOS/HOJAS */
-.falling-element { position: fixed; top: -10vh; z-index: 9999; pointer-events: none; animation: fall linear forwards; }
+/* ANIMACIÓN PÉTALOS Y HOJAS */
+.falling-element {
+    position: fixed;
+    top: -10vh;
+    z-index: 9999;
+    pointer-events: none;
+    animation: fall linear forwards;
+}
+
 @keyframes fall {
     0% { transform: translate(0, 0) rotate(0deg); opacity: 0; }
     10% { opacity: 1; }
+    80% { opacity: 1; }
     100% { transform: translate(var(--drift), 110vh) rotate(var(--rot)); opacity: 0; }
 }
