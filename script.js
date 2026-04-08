@@ -7,7 +7,6 @@ const btnVolver = document.getElementById("btnVolver");
 const tiempoInicio = 90; 
 const tiempoFin = 130;   
 
-// ABRIR SOBRE
 wrapper.addEventListener("click", () => {
     if(wrapper.classList.contains("open")) return;
     
@@ -15,9 +14,7 @@ wrapper.addEventListener("click", () => {
     music.play().catch(e => console.log("Interacción necesaria"));
 
     music.addEventListener("timeupdate", () => {
-        if (music.currentTime >= tiempoFin) {
-            music.currentTime = tiempoInicio;
-        }
+        if (music.currentTime >= tiempoFin) music.currentTime = tiempoInicio;
     });
 
     wrapper.classList.add("open");
@@ -35,7 +32,6 @@ wrapper.addEventListener("click", () => {
     }, 4500);
 });
 
-// BOTÓN VOLVER
 btnVolver.addEventListener("click", () => {
     content.style.opacity = "0";
     setTimeout(() => {
@@ -47,26 +43,19 @@ btnVolver.addEventListener("click", () => {
     }, 1000);
 });
 
-// REPRODUCTOR
 function toggleMusic() {
     const icon = document.getElementById("musicIcon");
-    if (music.paused) { 
-        music.play(); 
-        icon.innerText = "||"; 
-    } else { 
-        music.pause(); 
-        icon.innerText = "▶"; 
-    }
+    if (music.paused) { music.play(); icon.innerText = "||"; } 
+    else { music.pause(); icon.innerText = "▶"; }
 }
 
-// CONTADOR
 function updateCountdown() {
     const targetDate = new Date("Oct 3, 2026 13:00:00").getTime();
     const now = new Date().getTime();
     const diff = targetDate - now;
 
     if (diff <= 0) {
-        document.getElementById("countdown").innerHTML = "<h2>¡Llegó el día!</h2>";
+        document.getElementById("countdown").innerHTML = "<h2>¡LLEGÓ EL DÍA!</h2>";
         return;
     }
 
@@ -87,17 +76,14 @@ function updateCountdown() {
 setInterval(updateCountdown, 1000);
 updateCountdown();
 
-// LLUVIA DE FLORES
 function iniciarLluviaFlores() {
     setInterval(() => {
         const element = document.createElement("div");
         element.classList.add("falling-element");
         const esHoja = Math.random() > 0.5;
-        if (esHoja) {
-            element.innerHTML = `<svg width="18" height="35" viewBox="0 0 24 48" fill="#5d663d"><path d="M12 0C4 12 0 24 12 48 24 24 20 12 12 0Z"/></svg>`;
-        } else {
-            element.innerHTML = `<svg width="20" height="24" viewBox="0 0 24 30" fill="#ffffff"><path d="M12 0C4 6 0 15 12 30 24 15 20 6 12 0Z"/></svg>`;
-        }
+        element.innerHTML = esHoja ? 
+            `<svg width="18" height="35" viewBox="0 0 24 48" fill="#5d663d"><path d="M12 0C4 12 0 24 12 48 24 24 20 12 12 0Z"/></svg>` : 
+            `<svg width="20" height="24" viewBox="0 0 24 30" fill="#ffffff"><path d="M12 0C4 6 0 15 12 30 24 15 20 6 12 0Z"/></svg>`;
         element.style.left = Math.random() * 100 + "vw";
         element.style.animationDuration = (Math.random() * 4 + 4) + "s";
         document.body.appendChild(element);
