@@ -11,7 +11,7 @@ wrapper.addEventListener("click", () => {
     if(wrapper.classList.contains("open")) return;
     
     music.currentTime = tiempoInicio;
-    music.play().catch(e => console.log("Interacción necesaria"));
+    music.play().catch(e => console.log("Clic necesario para música"));
 
     music.addEventListener("timeupdate", () => {
         if (music.currentTime >= tiempoFin) music.currentTime = tiempoInicio;
