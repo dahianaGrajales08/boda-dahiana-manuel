@@ -1,162 +1,91 @@
-/* ================================================
-   DAHIANA & MANUEL · script.js
-   ================================================ */
+const wrapper = document.getElementById("envelope-wrapper");
+const content = document.getElementById("content");
+const music = document.getElementById("music");
+const letter = document.querySelector(".letter");
+const btnVolver = document.getElementById("btnVolver");
 
-// ── Referencias DOM ──────────────────────────────
-const sobre       = document.getElementById('sobre');
-const invitacion  = document.getElementById('invitacion');
-const music       = document.getElementById('music');
-const playBtn     = document.getElementById('playBtn');
-const progFill    = document.getElementById('progFill');
-const btnVolver   = document.getElementById('btnVolver');
+// Configuración de música según tus parámetros originales
+const tiempoInicio = 90; 
+const tiempoFin = 130;   
 
-const MUSIC_START = 90;   // segundo de inicio
-const MUSIC_END   = 130;  // segundo de fin
+// --- EVENTO DE APERTURA ---
+wrapper.addEventListener("click", () => {
+    if(wrapper.classList.contains("open")) return;
+    
+    // Iniciar Música en el segundo 90
+    music.currentTime = tiempoInicio;
+    music.play().catch(() => {}); // evita error si el navegador bloquea autoplay
 
-let petalTimer = null;
-
-// ── APERTURA DEL SOBRE ──────────────────────────
-sobre.addEventListener('click', abrirSobre);
-
-function abrirSobre() {
-  if (sobre.classList.contains('abierto')) return;
-
-  // 1. Animación CSS del sobre
-  sobre.classList.add('abierto');
-
-  // 2. Intentar reproducir música (no bloquea el flujo)
-  try {
-    music.currentTime = MUSIC_START;
-    music.play().then(() => {
-      playBtn.textContent = '❚❚';
-    }).catch(() => {
-      // Autoplay bloqueado por el navegador — OK, el botón manual funciona
+    // Mantener el bucle personalizado
+    music.addEventListener("timeupdate", () => {
+        if (music.currentTime >= tiempoFin) {
+            music.currentTime = tiempoInicio;
+        }
     });
-  } catch(e) {}
 
-  // 3. Lluvia de pétalos
-  startPetals();
-
-  // 4. Mostrar invitación tras la animación
-  setTimeout(() => {
-    sobre.style.transition = 'opacity 0.8s ease';
-    sobre.style.opacity = '0';
-  }, 3500);
-
-  setTimeout(() => {
-    sobre.style.display = 'none';
-    invitacion.style.display = 'block';
-    // Doble rAF garantiza que display:block se pinte antes de aplicar opacity
-    requestAnimationFrame(() => requestAnimationFrame(() => {
-      invitacion.style.opacity = '1';
-    }));
-  }, 4400);
-}
-
-// ── VOLVER ──────────────────────────────────────
-btnVolver.addEventListener('click', () => {
-  invitacion.style.opacity = '0';
-
-  setTimeout(() => {
-    invitacion.style.display = 'none';
-    stopPetals();
-    music.pause();
-    playBtn.textContent = '▶';
-
-    sobre.classList.remove('abierto');
-    sobre.style.transition = '';
-    sobre.style.opacity = '0';
-    sobre.style.display = 'flex';
-
-    requestAnimationFrame(() => requestAnimationFrame(() => {
-      sobre.style.transition = 'opacity 0.8s ease';
-      sobre.style.opacity = '1';
-    }));
-  }, 1000);
+    wrapper.classList.add("open");
+    iniciarLluviaFlores();
+    
+    setTimeout(() => { letter.classList.add("front-view"); }, 1100); 
+    
+    setTimeout(() => {
+        wrapper.style.opacity = "0";
+        setTimeout(() => {
+            wrapper.style.display = "none";
+            content.style.display = "block";
+            setTimeout(() => content.style.opacity = "1", 100);
+        }, 1500);
+    }, 4500);
 });
 
-// ── REPRODUCTOR ─────────────────────────────────
-playBtn.addEventListener('click', () => {
-  if (music.paused) {
-    if (music.currentTime < MUSIC_START || music.currentTime >= MUSIC_END) {
-      music.currentTime = MUSIC_START;
-    }
-    music.play().then(() => {
-      playBtn.textContent = '❚❚';
-    }).catch(() => {});
-  } else {
-    music.pause();
-    playBtn.textContent = '▶';
-  }
+// --- BOTÓN VOLVER ---
+btnVolver.addEventListener("click", () => {
+    content.style.opacity = "0";
+    setTimeout(() => {
+        content.style.display = "none";
+        wrapper.classList.remove("open");
+        letter.classList.remove("front-view");
+        wrapper.style.display = "block";
+        setTimeout(() => wrapper.style.opacity = "1", 50);
+    }, 1000);
 });
 
-music.addEventListener('timeupdate', () => {
-  if (music.currentTime >= MUSIC_END) {
-    music.currentTime = MUSIC_START;
-  }
-  const pct = ((music.currentTime - MUSIC_START) / (MUSIC_END - MUSIC_START)) * 100;
-  progFill.style.width = Math.min(100, Math.max(0, pct)) + '%';
-});
-
-// ── CUENTA REGRESIVA ─────────────────────────────
-function pad(n) { return String(n).padStart(2, '0'); }
-
-function tick() {
-  const target = new Date('2026-10-03T13:00:00+01:00').getTime();
-  const diff   = target - Date.now();
-
-  if (diff <= 0) {
-    document.getElementById('cdDays').textContent  = '0';
-    document.getElementById('cdHours').textContent = '00';
-    document.getElementById('cdMins').textContent  = '00';
-    document.getElementById('cdSecs').textContent  = '00';
-    return;
-  }
-
-  document.getElementById('cdDays').textContent  = Math.floor(diff / 86400000);
-  document.getElementById('cdHours').textContent = pad(Math.floor((diff % 86400000) / 3600000));
-  document.getElementById('cdMins').textContent  = pad(Math.floor((diff % 3600000)  / 60000));
-  document.getElementById('cdSecs').textContent  = pad(Math.floor((diff % 60000)    / 1000));
+function toggleMusic() {
+    const icon = document.getElementById("musicIcon");
+    if (music.paused) { music.play(); icon.innerText = "||"; }
+    else { music.pause(); icon.innerText = "▶"; }
 }
 
-tick();
-setInterval(tick, 1000);
+function updateCountdown() {
+    const targetDate = new Date("Oct 3, 2026 13:00:00").getTime();
+    const now = new Date().getTime();
+    const diff = targetDate - now;
 
-// ── PÉTALOS ──────────────────────────────────────
-const COLORES = [
-  'rgba(197,160,89,0.6)',
-  'rgba(226,194,122,0.5)',
-  'rgba(122,132,80,0.45)',
-  'rgba(93,102,61,0.4)',
-  'rgba(240,220,160,0.55)',
-];
+    const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
 
-function crearPetalo() {
-  const el  = document.createElement('div');
-  el.className = 'petal';
-  const size = 7 + Math.random() * 9;
-  const dur  = 5 + Math.random() * 7;
-  el.style.cssText = `
-    left: ${Math.random() * 100}vw;
-    width: ${size}px;
-    height: ${size * 1.5}px;
-    background: ${COLORES[Math.floor(Math.random() * COLORES.length)]};
-    animation-duration: ${dur}s;
-    animation-delay: ${Math.random() * 1.5}s;
-    opacity: ${0.5 + Math.random() * 0.5};
-    transform: rotate(${Math.random() * 360}deg);
-  `;
-  document.getElementById('petals').appendChild(el);
-  setTimeout(() => el.remove(), (dur + 2) * 1000);
+    document.getElementById("countdown").innerHTML = `
+        <div class="timer-text">
+            <div class="timer-group"><span class="timer-val">${d}</span><span class="timer-lab">Días💍</span></div>
+            <span class="timer-sep">:</span>
+            <div class="timer-group"><span class="timer-val">${h < 10 ? '0'+h : h}</span><span class="timer-lab">Horas</span></div>
+            <span class="timer-sep">:</span>
+            <div class="timer-group"><span class="timer-val">${m < 10 ? '0'+m : m}</span><span class="timer-lab">Mins</span></div>
+        </div>`;
 }
 
-function startPetals() {
-  crearPetalo();
-  petalTimer = setInterval(crearPetalo, 380);
-}
+setInterval(updateCountdown, 1000);
+updateCountdown();
 
-function stopPetals() {
-  clearInterval(petalTimer);
-  petalTimer = null;
-  document.getElementById('petals').innerHTML = '';
+function iniciarLluviaFlores() {
+    setInterval(() => {
+        const element = document.createElement("div");
+        element.classList.add("falling-element");
+        element.innerHTML = `<svg width="20" height="24" viewBox="0 0 24 30" fill="#ffffff"><path d="M12 0C4 6 0 15 12 30 24 15 20 6 12 0Z"/></svg>`;
+        element.style.left = Math.random() * 100 + "vw";
+        element.style.animationDuration = (Math.random() * 4 + 4) + "s";
+        document.body.appendChild(element);
+        setTimeout(() => element.remove(), 8000);
+    }, 400);
 }
