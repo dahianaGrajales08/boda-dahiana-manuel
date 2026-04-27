@@ -1,26 +1,18 @@
-/* ================================================
-   DAHIANA & MANUEL · styles.css
-   Paleta: Verde oliva · Marfil · Dorado
-   ================================================ */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Cinzel:wght@400;600&display=swap');
 
-/* ── Variables ── */
 :root {
-  --olive:      #7A8450;
-  --olive-dk:   #5D663D;
-  --olive-lt:   #9AA86A;
-  --gold:       #C5A059;
-  --gold-lt:    #E2C27A;
-  --ivory:      #FBF9F4;
-  --ivory-dk:   #F0EBD8;
-  --text:       #3A3A2E;
-  --text-mid:   #6A6650;
-  --text-light: #9A9278;
-  --white:      #FFFFFF;
+  --olive:    #7A8450;
+  --olive-dk: #5D663D;
+  --gold:     #C5A059;
+  --gold-lt:  #E2C27A;
+  --ivory:    #FBF9F4;
+  --ivory-dk: #EDE6D0;
+  --text:     #3A3A2E;
+  --text-mid: #6A6650;
+  --text-lt:  #9A9278;
 }
 
-/* ── Reset ── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
 
 body {
   font-family: 'Cormorant Garamond', Georgia, serif;
@@ -33,66 +25,58 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow-x: hidden;
-  color: var(--text);
 }
 
 /* ── Pétalos ── */
-#falling-flowers {
+#petals {
   position: fixed;
   inset: 0;
   pointer-events: none;
-  z-index: 999;
+  z-index: 9999;
   overflow: hidden;
 }
 
 .petal {
   position: absolute;
-  top: -30px;
-  opacity: 0;
-  animation: petalDrop linear forwards;
+  top: -20px;
+  border-radius: 40% 10% 40% 10%;
+  animation: fall linear forwards;
   pointer-events: none;
 }
 
-@keyframes petalDrop {
-  0%   { transform: translateY(0) rotate(0deg) translateX(0);   opacity: 0; }
-  5%   { opacity: 1; }
-  95%  { opacity: 0.6; }
-  100% { transform: translateY(110vh) rotate(540deg) translateX(50px); opacity: 0; }
+@keyframes fall {
+  to { transform: translateY(110vh) rotate(540deg) translateX(60px); opacity: 0; }
 }
 
-/* ══════════════════════════════════════
+/* ══════════════════
    SOBRE
-══════════════════════════════════════ */
-.envelope-wrapper {
-  position: relative;
+══════════════════ */
+#sobre {
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative;
   cursor: pointer;
-  z-index: 10;
-  transition: opacity 1.2s ease;
   user-select: none;
 }
 
-/* Lirios encima del sobre */
-.lirios-container {
+/* Lirios flotantes sobre el sobre */
+.lirios-deco {
   position: absolute;
-  bottom: 130px;
+  bottom: 80px;
   left: 50%;
-  transform: translateX(-50%) translateY(0) scale(0.55);
-  width: 320px;
-  z-index: 20;
+  width: 280px;
+  transform: translateX(-50%) translateY(0) scale(0.5);
   opacity: 0;
-  transition: all 2.2s cubic-bezier(0.34, 1.56, 0.64, 1);
   pointer-events: none;
+  mix-blend-mode: multiply;
+  z-index: 20;
+  transition: opacity 2s ease, transform 2s cubic-bezier(0.34,1.4,0.64,1);
 }
 
-.lirios-img { width: 100%; height: auto; mix-blend-mode: multiply; }
-
-.envelope-wrapper.open .lirios-container {
+#sobre.abierto .lirios-deco {
   opacity: 1;
-  transform: translateX(-50%) translateY(-200px) scale(0.9);
+  transform: translateX(-50%) translateY(-190px) scale(0.9);
 }
 
 /* Caja del sobre */
@@ -100,118 +84,113 @@ body {
   position: relative;
   width: 300px;
   height: 200px;
-  z-index: 5;
 }
 
-/* ── Solapas (triángulos CSS) ── */
-.flap { position: absolute; }
-
-/* Solapa inferior (fondo del sobre) */
-.flap-bottom {
-  bottom: 0; left: 0;
-  border-left:  150px solid var(--olive-dk);
-  border-right: 150px solid var(--olive-dk);
-  border-top:   100px solid transparent;
-  border-bottom:100px solid var(--olive-dk);
-  z-index: 2;
-}
-
-/* Laterales */
-.flap-left {
-  left: 0; bottom: 0;
-  border-left:  150px solid var(--olive);
-  border-top:   100px solid transparent;
-  border-bottom:100px solid var(--olive);
-  z-index: 3;
-}
-
-.flap-right {
-  right: 0; bottom: 0;
-  border-right: 150px solid var(--olive);
-  border-top:   100px solid transparent;
-  border-bottom:100px solid var(--olive);
-  z-index: 3;
-}
-
-/* Solapa superior (se abre) */
-.flap-top {
+/* Solapa superior — triángulo que se voltea */
+.env-flap-top {
+  position: absolute;
   top: 0; left: 0;
   border-left:  150px solid transparent;
   border-right: 150px solid transparent;
-  border-top:   115px solid var(--olive-lt);
+  border-top:   115px solid #8A9455;
   transform-origin: top center;
-  transition: transform 1.0s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 1s ease-in-out;
   z-index: 6;
 }
 
-.envelope-wrapper.open .flap-top {
+#sobre.abierto .env-flap-top {
   transform: rotateX(180deg);
 }
 
-/* ── Carta ── */
-.letter {
+/* Fondo del sobre (cuerpo verde) */
+.env-body {
+  position: absolute;
+  inset: 0;
+  background: var(--olive);
+  z-index: 1;
+  /* triángulos laterales con clip-path */
+  clip-path: polygon(0 100%, 50% 55%, 100% 100%);
+}
+
+/* Triángulos laterales */
+.envelope::before,
+.envelope::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  z-index: 3;
+}
+.envelope::before {
+  left: 0;
+  border-left:  150px solid var(--olive-dk);
+  border-top:   100px solid transparent;
+  border-bottom:100px solid var(--olive-dk);
+}
+.envelope::after {
+  right: 0;
+  border-right: 150px solid var(--olive-dk);
+  border-top:   100px solid transparent;
+  border-bottom:100px solid var(--olive-dk);
+}
+
+/* Carta dentro del sobre */
+.env-letter {
   position: absolute;
   bottom: 10px;
-  left: 20px;
-  width: 260px;
-  height: 170px;
-  background: linear-gradient(160deg, #fff 60%, var(--ivory-dk));
-  border: 1px solid rgba(197,160,89,0.25);
+  left: 18px;
+  width: 264px;
+  height: 165px;
+  background: linear-gradient(150deg, #fff 50%, var(--ivory-dk));
+  border: 1px solid rgba(197,160,89,0.3);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 4px;
+  gap: 5px;
   text-align: center;
   padding: 1rem;
   z-index: 4;
-  transition: transform 1.8s cubic-bezier(0.34, 1.2, 0.64, 1);
-  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  transition: transform 1.8s cubic-bezier(0.34,1.1,0.64,1);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
 }
 
-.envelope-wrapper.open .letter {
-  transform: translateY(-145px);
+#sobre.abierto .env-letter {
+  transform: translateY(-140px);
   z-index: 7;
 }
 
-.rings-sm {
-  width: 38px;
-  height: auto;
-  opacity: 0.85;
-  margin-bottom: 4px;
-}
+.letter-rings { width: 34px; opacity: 0.85; margin-bottom: 2px; }
 
 .letter-names {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.15rem;
-  font-weight: 600;
+  font-family: 'Cinzel', serif;
+  font-size: 1rem;
   color: var(--gold);
-  line-height: 1.2;
+  letter-spacing: 0.06em;
 }
 
 .letter-date {
   font-family: 'Cinzel', serif;
-  font-size: 0.72rem;
+  font-size: 0.65rem;
   letter-spacing: 0.2em;
   color: var(--text-mid);
   margin-top: 2px;
 }
 
-.letter-tap {
-  font-size: 0.68rem;
-  letter-spacing: 0.15em;
-  color: var(--text-light);
-  margin-top: 6px;
-  animation: pulse 2s ease-in-out infinite;
+.letter-hint {
+  font-size: 0.65rem;
+  color: var(--text-lt);
+  letter-spacing: 0.1em;
+  margin-top: 4px;
+  animation: blink 2.2s ease-in-out infinite;
 }
 
-@keyframes pulse {
-  0%, 100% { opacity: 0.5; }
+@keyframes blink {
+  0%,100% { opacity: 0.4; }
   50% { opacity: 1; }
 }
 
-/* ── Lacre ── */
-.wax-seal {
+/* Lacre */
+.env-seal {
   position: absolute;
   top: 50%; left: 50%;
   transform: translate(-50%, -50%);
@@ -225,100 +204,77 @@ body {
   color: #fff;
   font-family: 'Cinzel', serif;
   font-size: 9px;
-  letter-spacing: 0.05em;
   font-weight: 600;
-  box-shadow: 0 3px 12px rgba(197,160,89,0.5);
-  transition: opacity 0.4s ease, transform 0.4s ease;
+  letter-spacing: 0.04em;
+  box-shadow: 0 3px 14px rgba(197,160,89,0.55);
+  transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
-.envelope-wrapper.open .wax-seal {
+#sobre.abierto .env-seal {
   opacity: 0;
-  transform: translate(-50%, -50%) scale(0.5);
+  transform: translate(-50%, -50%) scale(0.4);
 }
 
-/* ── Hint ── */
-.envelope-hint {
-  margin-top: 2rem;
-  font-family: 'Cormorant Garamond', serif;
+.sobre-hint {
+  margin-top: 1.5rem;
   font-style: italic;
-  font-size: 0.95rem;
-  color: rgba(255,255,255,0.8);
-  text-shadow: 0 1px 4px rgba(0,0,0,0.4);
-  letter-spacing: 0.05em;
-  animation: pulse 2.5s ease-in-out infinite;
+  font-size: 0.9rem;
+  color: rgba(255,255,255,0.85);
+  text-shadow: 0 1px 5px rgba(0,0,0,0.4);
+  animation: blink 2.5s ease-in-out infinite;
 }
 
-/* ══════════════════════════════════════
+/* ══════════════════
    INVITACIÓN
-══════════════════════════════════════ */
-#content {
+══════════════════ */
+#invitacion {
   display: none;
   opacity: 0;
-  transition: opacity 1.5s ease;
-  max-width: 480px;
+  transition: opacity 1.2s ease;
+  max-width: 460px;
   width: 92%;
   background: rgba(251,249,244,0.96);
   backdrop-filter: blur(8px);
-  border: 1px solid rgba(197,160,89,0.2);
-  border-radius: 4px;
-  padding: 2.5rem 2rem;
+  border: 1px solid rgba(197,160,89,0.25);
+  border-radius: 3px;
+  padding: 2.2rem 1.8rem;
   text-align: center;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.2);
   position: relative;
-  z-index: 2;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.18);
 }
 
-/* Esquinas decorativas */
-#content::before,
-#content::after {
-  content: '';
-  position: absolute;
-  width: 24px; height: 24px;
-  border-color: var(--gold);
-  border-style: solid;
-  opacity: 0.4;
-}
-#content::before { top: 10px; left: 10px; border-width: 1px 0 0 1px; }
-#content::after  { bottom: 10px; right: 10px; border-width: 0 1px 1px 0; }
+#invitacion::before { content: ''; position: absolute; top:10px; left:10px; width:20px; height:20px; border-top:1px solid var(--gold); border-left:1px solid var(--gold); opacity:0.4; }
+#invitacion::after  { content: ''; position: absolute; bottom:10px; right:10px; width:20px; height:20px; border-bottom:1px solid var(--gold); border-right:1px solid var(--gold); opacity:0.4; }
 
-/* ── Cabecera ── */
-.inv-header { margin-bottom: 1.5rem; }
-
-.rings-main {
-  width: 55px;
-  height: auto;
-  opacity: 0.85;
-  margin-bottom: 0.8rem;
-}
+.inv-header { margin-bottom: 1.4rem; }
+.inv-rings { width: 50px; opacity: 0.85; margin-bottom: 0.7rem; }
 
 .inv-pre {
   font-style: italic;
   font-size: 0.9rem;
-  color: var(--text-mid);
-  margin-bottom: 0.6rem;
-  letter-spacing: 0.03em;
+  color: var(--text-lt);
+  margin-bottom: 0.5rem;
 }
 
 .inv-names {
   font-family: 'Cinzel', serif;
-  font-size: clamp(1.8rem, 7vw, 2.6rem);
+  font-size: clamp(1.7rem, 6vw, 2.4rem);
   font-weight: 400;
   color: var(--olive-dk);
   letter-spacing: 0.08em;
-  line-height: 1.1;
 }
 
-.gold-rule {
-  width: 120px;
+.gold-line {
+  width: 100px;
   height: 1px;
   background: linear-gradient(90deg, transparent, var(--gold), transparent);
-  margin: 0.9rem auto;
+  margin: 0.8rem auto;
 }
 
-.inv-date-line {
+.inv-date {
   font-family: 'Cinzel', serif;
-  font-size: 0.78rem;
-  letter-spacing: 0.18em;
+  font-size: 0.72rem;
+  letter-spacing: 0.15em;
   color: var(--text-mid);
   text-transform: uppercase;
 }
@@ -327,199 +283,146 @@ body {
   font-style: italic;
   font-size: 1rem;
   color: var(--olive);
-  margin-top: 0.3rem;
+  margin-top: 0.25rem;
 }
 
-/* ── Mensaje ── */
-.inv-message {
+.inv-quote {
   border-left: 2px solid var(--gold);
-  margin: 1.5rem 0;
-  padding: 0.8rem 1rem;
+  padding: 0.7rem 1rem;
+  margin: 1.2rem 0;
   text-align: left;
 }
-
-.inv-message p {
+.inv-quote p {
   font-style: italic;
-  font-size: 1.05rem;
+  font-size: 1rem;
   color: var(--text-mid);
   line-height: 1.7;
 }
 
 /* ── Reproductor ── */
-.inv-player { margin: 1.5rem 0; }
-
+.player { margin: 1.2rem 0; }
 .player-label {
-  font-size: 0.78rem;
-  letter-spacing: 0.12em;
-  color: var(--text-light);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  color: var(--text-lt);
   text-transform: uppercase;
-  margin-bottom: 0.8rem;
+  margin-bottom: 0.6rem;
 }
-
-.player-box {
+.player-wrap {
   display: flex;
   align-items: center;
   gap: 1rem;
   background: var(--ivory-dk);
   border: 1px solid rgba(197,160,89,0.2);
-  border-radius: 50px;
-  padding: 0.5rem 1.2rem 0.5rem 0.5rem;
+  border-radius: 40px;
+  padding: 0.4rem 1rem 0.4rem 0.4rem;
 }
-
 .play-btn {
-  width: 42px; height: 42px;
+  width: 40px; height: 40px;
   border-radius: 50%;
   border: none;
   background: var(--olive-dk);
   color: #fff;
-  font-size: 1rem;
+  font-size: 0.9rem;
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   flex-shrink: 0;
-  transition: background 0.2s ease, transform 0.15s ease;
+  transition: background 0.2s, transform 0.15s;
 }
-
 .play-btn:hover { background: var(--olive); transform: scale(1.08); }
-
-.progress-track {
-  flex: 1;
-  height: 3px;
+.prog-track {
+  flex: 1; height: 3px;
   background: rgba(197,160,89,0.2);
   border-radius: 2px;
-  position: relative;
   overflow: hidden;
 }
-
-.progress-fill {
+.prog-fill {
   height: 100%;
   width: 0%;
   background: linear-gradient(90deg, var(--olive), var(--gold));
-  border-radius: 2px;
   transition: width 1s linear;
 }
 
 /* ── Cuenta regresiva ── */
-.inv-countdown {
-  margin: 1.5rem 0;
-  padding: 1.2rem;
-  background: linear-gradient(135deg, rgba(93,102,61,0.06), rgba(197,160,89,0.06));
+.countdown-wrap {
+  padding: 1rem;
+  margin: 1.2rem 0;
+  background: linear-gradient(135deg, rgba(93,102,61,0.05), rgba(197,160,89,0.07));
   border: 1px solid rgba(197,160,89,0.15);
 }
-
-.countdown-label {
+.cd-label {
   font-family: 'Cinzel', serif;
-  font-size: 0.7rem;
+  font-size: 0.65rem;
   letter-spacing: 0.25em;
   text-transform: uppercase;
   color: var(--gold);
-  margin-bottom: 0.8rem;
+  margin-bottom: 0.6rem;
 }
-
-.countdown-grid {
+.cd-row {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
-  flex-wrap: nowrap;
+  gap: 0.4rem;
 }
-
-.cd-block {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  min-width: 52px;
-}
-
-.cd-val {
+.cd-block { display: flex; flex-direction: column; align-items: center; min-width: 48px; }
+.cd-num {
   font-family: 'Cinzel', serif;
-  font-size: clamp(1.6rem, 5vw, 2.2rem);
+  font-size: clamp(1.5rem, 4.5vw, 2rem);
   font-weight: 600;
   color: var(--olive-dk);
   line-height: 1;
 }
-
-.cd-lab {
-  font-size: 0.62rem;
-  letter-spacing: 0.12em;
+.cd-unit {
+  font-size: 0.58rem;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--text-light);
-  margin-top: 0.2rem;
+  color: var(--text-lt);
+  margin-top: 0.15rem;
 }
+.cd-sep { font-size: 1.2rem; color: var(--gold); opacity: 0.6; margin-bottom: 1rem; }
 
-.cd-sep {
-  font-size: 1.4rem;
-  color: var(--gold);
-  margin-bottom: 1rem;
-  opacity: 0.7;
-}
-
-/* ── Botones acción ── */
-.inv-actions {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-  margin: 1.5rem 0;
-}
-
+/* ── Botones ── */
+.inv-btns { display: flex; flex-direction: column; gap: 0.7rem; margin: 1.2rem 0; }
 .btn {
   display: block;
-  padding: 0.85rem 1.5rem;
-  border-radius: 3px;
+  padding: 0.8rem 1.2rem;
+  border-radius: 2px;
   text-decoration: none;
   font-family: 'Cinzel', serif;
-  font-size: 0.78rem;
-  letter-spacing: 0.18em;
+  font-size: 0.72rem;
+  letter-spacing: 0.15em;
   text-transform: uppercase;
-  transition: all 0.25s ease;
+  transition: all 0.22s ease;
   text-align: center;
 }
+.btn-outline { background: transparent; border: 1px solid var(--olive); color: var(--olive-dk); }
+.btn-outline:hover { background: var(--olive-dk); color: #fff; }
+.btn-solid { background: var(--olive-dk); border: 1px solid var(--olive-dk); color: #fff; }
+.btn-solid:hover { background: var(--olive); }
 
-.btn-map {
-  background: transparent;
-  border: 1px solid var(--olive);
-  color: var(--olive-dk);
-}
-.btn-map:hover { background: var(--olive-dk); color: #fff; }
-
-.btn-wa {
-  background: var(--olive-dk);
-  border: 1px solid var(--olive-dk);
-  color: #fff;
-}
-.btn-wa:hover { background: var(--olive); }
-
-/* ── Botón volver ── */
 .btn-back {
   background: transparent;
-  border: 1px solid rgba(197,160,89,0.35);
-  color: var(--text-light);
-  padding: 0.6rem 1.8rem;
-  border-radius: 50px;
+  border: 1px solid rgba(197,160,89,0.3);
+  color: var(--text-lt);
+  padding: 0.5rem 1.5rem;
+  border-radius: 40px;
   font-family: 'Cormorant Garamond', serif;
-  font-size: 1rem;
+  font-size: 0.95rem;
   cursor: pointer;
-  margin-top: 0.5rem;
-  transition: all 0.2s ease;
+  transition: all 0.2s;
+  margin-top: 0.3rem;
 }
 .btn-back:hover { border-color: var(--gold); color: var(--gold); }
 
-/* ── Footer ── */
 .inv-footer {
-  margin-top: 1.5rem;
-  padding-top: 1rem;
+  margin-top: 1.2rem;
+  padding-top: 0.8rem;
   border-top: 1px solid rgba(197,160,89,0.2);
-}
-.inv-footer p {
   font-family: 'Cinzel', serif;
-  font-size: 0.68rem;
+  font-size: 0.65rem;
   letter-spacing: 0.2em;
-  color: var(--text-light);
+  color: var(--text-lt);
 }
 
-/* ── Scrollbar ── */
 ::-webkit-scrollbar { width: 5px; }
-::-webkit-scrollbar-track { background: var(--ivory); }
 ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 3px; }
 ::selection { background: rgba(197,160,89,0.25); color: var(--olive-dk); }
