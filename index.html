@@ -6,274 +6,123 @@
   <title>Dahiana & Manuel · 03.10.2026</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600&family=Cormorant:ital@1&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Cinzel:wght@400;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
 
-  <!-- Partículas flotantes -->
-  <div class="petals-container" id="petals"></div>
+  <!-- Lluvia de pétalos -->
+  <div id="falling-flowers"></div>
 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero-bg"></div>
+  <!-- Audio -->
+  <audio id="music" loop>
+    <source src="musica.mp3" type="audio/mpeg" />
+  </audio>
 
-    <!-- Lirios decorativos esquinas -->
-    <div class="lily-corner lily-tl">
-      <svg viewBox="0 0 220 340" xmlns="http://www.w3.org/2000/svg" class="lily-svg">
-        <g class="lily-group">
-          <!-- Tallos -->
-          <path d="M110 340 Q108 280 110 240" stroke="#6B7B3A" stroke-width="2" fill="none" stroke-linecap="round"/>
-          <path d="M110 300 Q90 270 75 240" stroke="#6B7B3A" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-          <path d="M110 300 Q130 270 145 240" stroke="#6B7B3A" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-          <!-- Hojas -->
-          <path d="M110 310 Q85 295 70 285 Q90 288 110 298" fill="#6B7B3A" opacity="0.7"/>
-          <path d="M110 295 Q135 280 150 270 Q132 275 110 290" fill="#6B7B3A" opacity="0.6"/>
-          <!-- Flor central -->
-          <path d="M110 240 Q85 200 75 155 Q100 185 108 225" fill="#C9A84C" opacity="0.85"/>
-          <path d="M110 240 Q135 200 145 155 Q120 185 112 225" fill="#C9A84C" opacity="0.85"/>
-          <path d="M110 240 Q65 220 40 195 Q75 210 105 232" fill="#E8C97A" opacity="0.75"/>
-          <path d="M110 240 Q155 220 180 195 Q145 210 115 232" fill="#E8C97A" opacity="0.75"/>
-          <path d="M110 240 Q90 195 85 150 Q105 178 110 228" fill="#D4B45A" opacity="0.8"/>
-          <path d="M110 240 Q130 195 135 150 Q115 178 110 228" fill="#D4B45A" opacity="0.8"/>
-          <!-- Pistilo -->
-          <circle cx="110" cy="230" r="6" fill="#8B6914" opacity="0.9"/>
-          <line x1="110" y1="224" x2="105" y2="200" stroke="#8B6914" stroke-width="1.2" opacity="0.7"/>
-          <line x1="110" y1="224" x2="110" y2="196" stroke="#8B6914" stroke-width="1.2" opacity="0.7"/>
-          <line x1="110" y1="224" x2="115" y2="200" stroke="#8B6914" stroke-width="1.2" opacity="0.7"/>
-          <circle cx="105" cy="198" r="2.5" fill="#6B7B3A" opacity="0.9"/>
-          <circle cx="110" cy="194" r="2.5" fill="#6B7B3A" opacity="0.9"/>
-          <circle cx="115" cy="198" r="2.5" fill="#6B7B3A" opacity="0.9"/>
-          <!-- Segunda flor (lateral izq) -->
-          <path d="M75 240 Q52 205 44 165 Q66 193 73 228" fill="#C9A84C" opacity="0.7"/>
-          <path d="M75 240 Q98 205 106 165 Q84 193 77 228" fill="#E8C97A" opacity="0.65"/>
-          <path d="M75 240 Q38 228 18 212 Q50 220 72 234" fill="#D4B45A" opacity="0.65"/>
-          <circle cx="75" cy="232" r="4.5" fill="#8B6914" opacity="0.8"/>
-          <!-- Tercera flor (lateral der) -->
-          <path d="M145 240 Q122 205 114 165 Q136 193 143 228" fill="#C9A84C" opacity="0.7"/>
-          <path d="M145 240 Q168 205 176 165 Q154 193 147 228" fill="#E8C97A" opacity="0.65"/>
-          <path d="M145 240 Q182 228 202 212 Q170 220 148 234" fill="#D4B45A" opacity="0.65"/>
-          <circle cx="145" cy="232" r="4.5" fill="#8B6914" opacity="0.8"/>
-        </g>
-      </svg>
+  <!-- ══════════════════════════════
+       SOBRE (pantalla inicial)
+  ══════════════════════════════ -->
+  <div class="envelope-wrapper" id="envelopeWrapper">
+
+    <!-- Imagen lirios sobre el sobre -->
+    <div class="lirios-container">
+      <img src="lirios.png" alt="Lirios" class="lirios-img" />
     </div>
 
-    <div class="lily-corner lily-br">
-      <svg viewBox="0 0 220 340" xmlns="http://www.w3.org/2000/svg" class="lily-svg lily-mirror">
-        <g class="lily-group">
-          <path d="M110 340 Q108 280 110 240" stroke="#6B7B3A" stroke-width="2" fill="none" stroke-linecap="round"/>
-          <path d="M110 300 Q90 270 75 240" stroke="#6B7B3A" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-          <path d="M110 300 Q130 270 145 240" stroke="#6B7B3A" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-          <path d="M110 310 Q85 295 70 285 Q90 288 110 298" fill="#6B7B3A" opacity="0.7"/>
-          <path d="M110 295 Q135 280 150 270 Q132 275 110 290" fill="#6B7B3A" opacity="0.6"/>
-          <path d="M110 240 Q85 200 75 155 Q100 185 108 225" fill="#C9A84C" opacity="0.85"/>
-          <path d="M110 240 Q135 200 145 155 Q120 185 112 225" fill="#C9A84C" opacity="0.85"/>
-          <path d="M110 240 Q65 220 40 195 Q75 210 105 232" fill="#E8C97A" opacity="0.75"/>
-          <path d="M110 240 Q155 220 180 195 Q145 210 115 232" fill="#E8C97A" opacity="0.75"/>
-          <path d="M110 240 Q90 195 85 150 Q105 178 110 228" fill="#D4B45A" opacity="0.8"/>
-          <path d="M110 240 Q130 195 135 150 Q115 178 110 228" fill="#D4B45A" opacity="0.8"/>
-          <circle cx="110" cy="230" r="6" fill="#8B6914" opacity="0.9"/>
-          <line x1="110" y1="224" x2="105" y2="200" stroke="#8B6914" stroke-width="1.2" opacity="0.7"/>
-          <line x1="110" y1="224" x2="110" y2="196" stroke="#8B6914" stroke-width="1.2" opacity="0.7"/>
-          <line x1="110" y1="224" x2="115" y2="200" stroke="#8B6914" stroke-width="1.2" opacity="0.7"/>
-          <circle cx="105" cy="198" r="2.5" fill="#6B7B3A" opacity="0.9"/>
-          <circle cx="110" cy="194" r="2.5" fill="#6B7B3A" opacity="0.9"/>
-          <circle cx="115" cy="198" r="2.5" fill="#6B7B3A" opacity="0.9"/>
-          <path d="M75 240 Q52 205 44 165 Q66 193 73 228" fill="#C9A84C" opacity="0.7"/>
-          <path d="M75 240 Q98 205 106 165 Q84 193 77 228" fill="#E8C97A" opacity="0.65"/>
-          <path d="M75 240 Q38 228 18 212 Q50 220 72 234" fill="#D4B45A" opacity="0.65"/>
-          <circle cx="75" cy="232" r="4.5" fill="#8B6914" opacity="0.8"/>
-          <path d="M145 240 Q122 205 114 165 Q136 193 143 228" fill="#C9A84C" opacity="0.7"/>
-          <path d="M145 240 Q168 205 176 165 Q154 193 147 228" fill="#E8C97A" opacity="0.65"/>
-          <path d="M145 240 Q182 228 202 212 Q170 220 148 234" fill="#D4B45A" opacity="0.65"/>
-          <circle cx="145" cy="232" r="4.5" fill="#8B6914" opacity="0.8"/>
-        </g>
-      </svg>
-    </div>
+    <!-- Sobre animado -->
+    <div class="envelope" id="envelope">
+      <div class="flap flap-top"></div>
+      <div class="flap flap-left"></div>
+      <div class="flap flap-right"></div>
+      <div class="flap flap-bottom"></div>
 
-    <div class="hero-content">
-      <p class="hero-pre fade-in-1">Con todo nuestro amor, os invitamos a celebrar</p>
-      <div class="ampersand-wrap fade-in-2">
-        <h1 class="names">Dahiana</h1>
-        <span class="ampersand">&amp;</span>
-        <h1 class="names">Manuel</h1>
+      <!-- Carta dentro -->
+      <div class="letter" id="letter">
+        <img src="anillos.png" alt="Alianzas" class="rings-sm" />
+        <h2 class="letter-names">Dahiana &amp; Manuel</h2>
+        <p class="letter-date">03 · 10 · 2026</p>
+        <p class="letter-tap">✦ Toca para abrir ✦</p>
       </div>
-      <div class="divider fade-in-3">
-        <span class="divider-line"></span>
-        <svg class="divider-icon" viewBox="0 0 40 20" xmlns="http://www.w3.org/2000/svg">
-          <path d="M20 2 Q14 8 8 6 Q14 12 20 18 Q26 12 32 6 Q26 8 20 2Z" fill="#C9A84C" opacity="0.9"/>
-        </svg>
-        <span class="divider-line"></span>
-      </div>
-      <p class="hero-date fade-in-4">Sábado · 03 de octubre de 2026 · 13:00 h</p>
-      <p class="hero-venue fade-in-4">Cortijo Triana · Jaén</p>
-    </div>
-  </section>
 
-  <!-- SEPARADOR BOTÁNICO -->
-  <div class="botanical-divider">
-    <svg viewBox="0 0 900 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-      <path d="M0 30 Q225 0 450 30 Q675 60 900 30" stroke="#C9A84C" stroke-width="1" fill="none" opacity="0.5"/>
-      <path d="M0 30 Q225 55 450 30 Q675 5 900 30" stroke="#6B7B3A" stroke-width="0.8" fill="none" opacity="0.4"/>
-      <circle cx="450" cy="30" r="4" fill="#C9A84C" opacity="0.8"/>
-      <circle cx="225" cy="15" r="2.5" fill="#6B7B3A" opacity="0.6"/>
-      <circle cx="675" cy="45" r="2.5" fill="#6B7B3A" opacity="0.6"/>
-    </svg>
+      <!-- Lacre -->
+      <div class="wax-seal">D&M</div>
+    </div>
+
+    <p class="envelope-hint">Toca el sobre para ver tu invitación</p>
   </div>
 
-  <!-- COUNTDOWN -->
-  <section class="countdown-section reveal">
-    <p class="section-label">Faltan</p>
-    <div class="countdown" id="countdown">
-      <div class="count-block">
-        <span class="count-num" id="days">--</span>
-        <span class="count-label">días</span>
-      </div>
-      <span class="count-sep">·</span>
-      <div class="count-block">
-        <span class="count-num" id="hours">--</span>
-        <span class="count-label">horas</span>
-      </div>
-      <span class="count-sep">·</span>
-      <div class="count-block">
-        <span class="count-num" id="minutes">--</span>
-        <span class="count-label">minutos</span>
-      </div>
-      <span class="count-sep">·</span>
-      <div class="count-block">
-        <span class="count-num" id="seconds">--</span>
-        <span class="count-label">segundos</span>
-      </div>
-    </div>
-    <p class="section-label">para el gran día</p>
-  </section>
+  <!-- ══════════════════════════════
+       INVITACIÓN (oculta al inicio)
+  ══════════════════════════════ -->
+  <div id="content">
 
-  <!-- DETALLES -->
-  <section class="details-section reveal">
-    <div class="details-grid">
+    <!-- Cabecera -->
+    <header class="inv-header">
+      <img src="anillos.png" alt="Alianzas" class="rings-main" />
+      <p class="inv-pre">Con toda nuestra alegría os invitamos a nuestra boda</p>
+      <h1 class="inv-names">Dahiana &amp; Manuel</h1>
+      <div class="gold-rule"></div>
+      <p class="inv-date-line">Sábado · 3 de octubre de 2026 · 13:00 h</p>
+      <p class="inv-venue">Cortijo Triana · Jaén</p>
+    </header>
 
-      <div class="detail-card">
-        <div class="detail-icon">
-          <svg viewBox="0 0 40 46" xmlns="http://www.w3.org/2000/svg">
-            <rect x="2" y="6" width="36" height="38" rx="3" stroke="#C9A84C" stroke-width="1.5" fill="none"/>
-            <line x1="2" y1="16" x2="38" y2="16" stroke="#C9A84C" stroke-width="1.2"/>
-            <line x1="13" y1="2" x2="13" y2="10" stroke="#C9A84C" stroke-width="2" stroke-linecap="round"/>
-            <line x1="27" y1="2" x2="27" y2="10" stroke="#C9A84C" stroke-width="2" stroke-linecap="round"/>
-            <text x="20" y="34" text-anchor="middle" font-family="Cinzel" font-size="11" fill="#C9A84C">03</text>
-          </svg>
+    <!-- Mensaje -->
+    <section class="inv-message">
+      <p>"Nos encontramos, nos elegimos y hoy queremos compartir contigo nuestra felicidad."</p>
+    </section>
+
+    <!-- Reproductor -->
+    <section class="inv-player">
+      <p class="player-label">♪ Dale play para escuchar nuestra canción</p>
+      <div class="player-box">
+        <button class="play-btn" id="playBtn" onclick="toggleMusic()">
+          <span id="musicIcon">▶</span>
+        </button>
+        <div class="progress-track">
+          <div class="progress-fill" id="progressFill"></div>
         </div>
-        <h3 class="detail-title">Fecha &amp; Hora</h3>
-        <p class="detail-text">Sábado, 3 de octubre de 2026</p>
-        <p class="detail-text detail-accent">13:00 horas</p>
       </div>
+    </section>
 
-      <div class="detail-card detail-card--main">
-        <div class="detail-icon">
-          <svg viewBox="0 0 40 46" xmlns="http://www.w3.org/2000/svg">
-            <path d="M20 4 C10 4 4 12 4 20 C4 32 20 44 20 44 C20 44 36 32 36 20 C36 12 30 4 20 4Z" stroke="#C9A84C" stroke-width="1.5" fill="none"/>
-            <circle cx="20" cy="20" r="5" fill="#C9A84C" opacity="0.6"/>
-          </svg>
-        </div>
-        <h3 class="detail-title">Lugar</h3>
-        <p class="detail-text">Cortijo Triana</p>
-        <p class="detail-text">Jaén, España</p>
-        <a href="https://www.google.com/maps/place/Jardines+Cortijo+Triana/@38.02466,-4.0586758,890m/data=!3m2!1e3!4b1!4m6!3m5!1s0xd6c364a7c61fbdb:0x937df16aa6a94629!8m2!3d38.0246558!4d-4.0561009!16s%2Fg%2F11yf_schx?entry=ttu&g_ep=EgoyMDI2MDQyMi4wIKXMDSoASAFQAw%3D%3D"
-           target="_blank" rel="noopener noreferrer" class="map-btn">
-          Ver en Google Maps
-          <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" class="map-arrow">
-            <path d="M3 8 L13 8 M9 4 L13 8 L9 12" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </a>
+    <!-- Cuenta regresiva -->
+    <section class="inv-countdown">
+      <p class="countdown-label">Faltan</p>
+      <div id="countdown" class="countdown-grid">
+        <div class="cd-block"><span class="cd-val" id="cd-days">--</span><span class="cd-lab">días</span></div>
+        <span class="cd-sep">:</span>
+        <div class="cd-block"><span class="cd-val" id="cd-hours">--</span><span class="cd-lab">horas</span></div>
+        <span class="cd-sep">:</span>
+        <div class="cd-block"><span class="cd-val" id="cd-mins">--</span><span class="cd-lab">min</span></div>
+        <span class="cd-sep">:</span>
+        <div class="cd-block"><span class="cd-val" id="cd-secs">--</span><span class="cd-lab">seg</span></div>
       </div>
+    </section>
 
-      <div class="detail-card">
-        <div class="detail-icon">
-          <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
-            <path d="M8 8 Q8 4 20 4 Q32 4 32 8 L32 28 Q28 36 20 38 Q12 36 8 28 Z" stroke="#C9A84C" stroke-width="1.5" fill="none"/>
-            <path d="M14 18 L18 22 L26 14" stroke="#C9A84C" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </div>
-        <h3 class="detail-title">Dresscode</h3>
-        <p class="detail-text">Elegante</p>
-        <p class="detail-text detail-accent">Tonos tierra, oliva &amp; dorado</p>
-      </div>
+    <!-- Botones -->
+    <section class="inv-actions">
+      <a href="https://www.google.com/maps/place/Jardines+Cortijo+Triana/@38.02466,-4.0586758,890m/data=!3m2!1e3!4b1!4m6!3m5!1s0xd6c364a7c61fbdb:0x937df16aa6a94629!8m2!3d38.0246558!4d-4.0561009!16s%2Fg%2F11yf_schx?entry=ttu&g_ep=EgoyMDI2MDQyMi4wIKXMDSoASAFQAw%3D%3D"
+         target="_blank" rel="noopener noreferrer" class="btn btn-map">
+        📍 Ver ubicación
+      </a>
+      <a href="https://wa.me/34602732290?text=¡Hola%20Dahiana!%20Confirmo%20mi%20asistencia%20a%20vuestra%20boda%20el%2003%20de%20octubre%20🌿"
+         target="_blank" rel="noopener noreferrer" class="btn btn-wa">
+        💬 Confirmar con Dahiana
+      </a>
+      <a href="https://wa.me/34644593119?text=¡Hola%20Manuel!%20Confirmo%20mi%20asistencia%20a%20vuestra%20boda%20el%2003%20de%20octubre%20🌿"
+         target="_blank" rel="noopener noreferrer" class="btn btn-wa">
+        💬 Confirmar con Manuel
+      </a>
+    </section>
 
-    </div>
-  </section>
+    <!-- Volver -->
+    <button class="btn-back" id="btnVolver">← Volver al sobre</button>
 
-  <!-- MENSAJE PERSONAL -->
-  <section class="message-section reveal">
-    <div class="message-inner">
-      <div class="message-lily-left">
-        <svg viewBox="0 0 80 130" xmlns="http://www.w3.org/2000/svg">
-          <path d="M40 130 Q39 100 40 85" stroke="#6B7B3A" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-          <path d="M40 85 Q22 58 16 30 Q34 55 39 80" fill="#C9A84C" opacity="0.8"/>
-          <path d="M40 85 Q58 58 64 30 Q46 55 41 80" fill="#C9A84C" opacity="0.8"/>
-          <path d="M40 85 Q12 74 2 58 Q28 68 38 80" fill="#E8C97A" opacity="0.7"/>
-          <path d="M40 85 Q68 74 78 58 Q52 68 42 80" fill="#E8C97A" opacity="0.7"/>
-          <circle cx="40" cy="78" r="4" fill="#8B6914" opacity="0.85"/>
-        </svg>
-      </div>
-      <blockquote class="message-quote">
-        <p>Dos almas que encontraron su camino el una en la otra. Queremos compartir este momento tan especial con las personas que más amamos.</p>
-        <p>Vuestra presencia será el regalo más grande.</p>
-        <cite>— Dahiana &amp; Manuel</cite>
-      </blockquote>
-      <div class="message-lily-right">
-        <svg viewBox="0 0 80 130" xmlns="http://www.w3.org/2000/svg" style="transform:scaleX(-1)">
-          <path d="M40 130 Q39 100 40 85" stroke="#6B7B3A" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-          <path d="M40 85 Q22 58 16 30 Q34 55 39 80" fill="#C9A84C" opacity="0.8"/>
-          <path d="M40 85 Q58 58 64 30 Q46 55 41 80" fill="#C9A84C" opacity="0.8"/>
-          <path d="M40 85 Q12 74 2 58 Q28 68 38 80" fill="#E8C97A" opacity="0.7"/>
-          <path d="M40 85 Q68 74 78 58 Q52 68 42 80" fill="#E8C97A" opacity="0.7"/>
-          <circle cx="40" cy="78" r="4" fill="#8B6914" opacity="0.85"/>
-        </svg>
-      </div>
-    </div>
-  </section>
+    <!-- Footer -->
+    <footer class="inv-footer">
+      <p>03 · 10 · 2026 &nbsp;✦&nbsp; Dahiana &amp; Manuel</p>
+    </footer>
 
-  <!-- RSVP -->
-  <section class="rsvp-section reveal">
-    <div class="rsvp-inner">
-      <p class="section-label">Confirmación de asistencia</p>
-      <h2 class="rsvp-title">¿Nos acompañas?</h2>
-      <p class="rsvp-subtitle">Por favor, confírmanos tu asistencia antes del <strong>1 de septiembre de 2026</strong> escribiendo a cualquiera de los novios.</p>
-
-      <div class="rsvp-buttons">
-        <a href="https://wa.me/34602732290?text=¡Hola%20Dahiana!%20Confirmo%20mi%20asistencia%20a%20vuestra%20boda%20el%2003%20de%20octubre%20🌿"
-           target="_blank" rel="noopener noreferrer" class="rsvp-btn rsvp-btn--dahiana">
-          <svg class="whatsapp-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" fill="currentColor"/>
-          </svg>
-          Confirmar con Dahiana
-        </a>
-
-        <a href="https://wa.me/34644593119?text=¡Hola%20Manuel!%20Confirmo%20mi%20asistencia%20a%20vuestra%20boda%20el%2003%20de%20octubre%20🌿"
-           target="_blank" rel="noopener noreferrer" class="rsvp-btn rsvp-btn--manuel">
-          <svg class="whatsapp-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" fill="currentColor"/>
-          </svg>
-          Confirmar con Manuel
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer class="footer">
-    <div class="footer-lily">
-      <svg viewBox="0 0 60 30" xmlns="http://www.w3.org/2000/svg">
-        <path d="M30 30 Q20 18 14 6 Q26 16 29 26" fill="#C9A84C" opacity="0.5"/>
-        <path d="M30 30 Q40 18 46 6 Q34 16 31 26" fill="#C9A84C" opacity="0.5"/>
-        <path d="M30 30 Q16 24 8 16 Q22 22 29 28" fill="#E8C97A" opacity="0.4"/>
-        <path d="M30 30 Q44 24 52 16 Q38 22 31 28" fill="#E8C97A" opacity="0.4"/>
-        <circle cx="30" cy="24" r="3" fill="#8B6914" opacity="0.6"/>
-      </svg>
-    </div>
-    <p class="footer-text">03 · 10 · 2026</p>
-    <p class="footer-names">Dahiana &amp; Manuel</p>
-    <p class="footer-made">Con amor ✦</p>
-  </footer>
+  </div><!-- /content -->
 
   <script src="script.js"></script>
 </body>
