@@ -13,7 +13,7 @@
 body { margin: 0; padding: 0; background-color: var(--marfil); font-family: 'Montserrat', sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; overflow-x: hidden; }
 
 /* ✅ fondo.png (era fondo.jpg, no existía en el repo) */
-.bg-floral { background-image: url('fondo.png'); background-size: cover; background-position: center; background-attachment: fixed; }
+.bg-floral { background-color: var(--marfil); }
 
 /* SOBRE */
 .envelope-wrapper { position: relative; cursor: pointer; z-index: 10; transition: opacity 1.5s ease; }
