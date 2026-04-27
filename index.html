@@ -3,75 +3,583 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Boda Dahiana & Manuel</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Dahiana & Manuel - Nos Casamos</title>
+    <link href="[fonts.googleapis.com](https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Montserrat:wght@300;400;500&family=Great+Vibes&display=swap)" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --olive: #6B7B3C;
+            --olive-light: #8A9A5B;
+            --olive-dark: #4A5528;
+            --gold: #C9A227;
+            --gold-light: #E8D5A3;
+            --white: #FFFEF9;
+            --cream: #FAF8F0;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, var(--cream) 0%, var(--white) 50%, var(--gold-light) 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        .invitation {
+            background: linear-gradient(180deg, var(--white) 0%, var(--cream) 100%);
+            border-radius: 30px;
+            padding: 50px 40px;
+            max-width: 500px;
+            width: 100%;
+            box-shadow: 
+                0 25px 80px rgba(107, 123, 60, 0.15),
+                0 0 0 1px rgba(201, 162, 39, 0.2),
+                inset 0 0 100px rgba(255, 255, 255, 0.9);
+            position: relative;
+            overflow: hidden;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Decoraciones de lirios */
+        .lily {
+            position: absolute;
+            font-size: 40px;
+            opacity: 0.6;
+            animation: sway 4s ease-in-out infinite;
+        }
+
+        .lily-1 { top: 20px; left: 20px; animation-delay: 0s; }
+        .lily-2 { top: 20px; right: 20px; animation-delay: 0.5s; transform: scaleX(-1); }
+        .lily-3 { bottom: 20px; left: 20px; animation-delay: 1s; }
+        .lily-4 { bottom: 20px; right: 20px; animation-delay: 1.5s; transform: scaleX(-1); }
+
+        @keyframes sway {
+            0%, 100% { transform: rotate(-5deg); }
+            50% { transform: rotate(5deg); }
+        }
+
+        .lily-2, .lily-4 {
+            animation: sway-reverse 4s ease-in-out infinite;
+        }
+
+        @keyframes sway-reverse {
+            0%, 100% { transform: scaleX(-1) rotate(-5deg); }
+            50% { transform: scaleX(-1) rotate(5deg); }
+        }
+
+        /* Partículas doradas */
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: var(--gold);
+            border-radius: 50%;
+            opacity: 0;
+            animation: sparkle 3s ease-in-out infinite;
+        }
+
+        @keyframes sparkle {
+            0%, 100% { opacity: 0; transform: scale(0) translateY(0); }
+            50% { opacity: 0.8; transform: scale(1) translateY(-20px); }
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .pre-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 12px;
+            letter-spacing: 6px;
+            color: var(--olive);
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .names {
+            font-family: 'Great Vibes', cursive;
+            font-size: 52px;
+            color: var(--olive-dark);
+            line-height: 1.2;
+            animation: fadeInUp 1s ease-out 0.3s backwards;
+            text-shadow: 2px 2px 4px rgba(107, 123, 60, 0.1);
+        }
+
+        .ampersand {
+            display: block;
+            font-size: 36px;
+            color: var(--gold);
+            margin: 5px 0;
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 25px 0;
+            animation: fadeIn 1s ease-out 0.6s backwards;
+        }
+
+        .divider-line {
+            height: 1px;
+            width: 80px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+        }
+
+        .divider-icon {
+            margin: 0 15px;
+            color: var(--gold);
+            font-size: 20px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .announcement {
+            text-align: center;
+            margin-bottom: 30px;
+            animation: fadeIn 1s ease-out 0.8s backwards;
+        }
+
+        .we-marry {
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            color: var(--olive);
+            letter-spacing: 4px;
+            text-transform: uppercase;
+        }
+
+        .date-section {
+            text-align: center;
+            background: linear-gradient(135deg, var(--olive) 0%, var(--olive-dark) 100%);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 25px 0;
+            position: relative;
+            animation: scaleIn 0.8s ease-out 1s backwards;
+            overflow: hidden;
+        }
+
+        .date-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            animation: shine 3s ease-in-out infinite;
+        }
+
+        @keyframes shine {
+            0% { left: -100%; }
+            50%, 100% { left: 100%; }
+        }
+
+        @keyframes scaleIn {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .date {
+            font-family: 'Playfair Display', serif;
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--white);
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.2);
+        }
+
+        .date-text {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+            color: var(--gold-light);
+            letter-spacing: 3px;
+            margin-top: 10px;
+            text-transform: uppercase;
+        }
+
+        .venue {
+            text-align: center;
+            margin: 25px 0;
+            animation: fadeIn 1s ease-out 1.2s backwards;
+        }
+
+        .venue-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            color: var(--olive-dark);
+            margin-bottom: 8px;
+        }
+
+        .venue-location {
+            font-size: 14px;
+            color: var(--olive);
+            letter-spacing: 2px;
+        }
+
+        .map-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 15px;
+            padding: 12px 25px;
+            background: linear-gradient(135deg, var(--gold) 0%, #D4AF37 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(201, 162, 39, 0.3);
+        }
+
+        .map-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(201, 162, 39, 0.4);
+        }
+
+        .confirm-section {
+            background: linear-gradient(135deg, var(--cream) 0%, var(--white) 100%);
+            border: 2px solid var(--gold-light);
+            border-radius: 20px;
+            padding: 25px;
+            margin-top: 30px;
+            text-align: center;
+            animation: fadeIn 1s ease-out 1.4s backwards;
+        }
+
+        .confirm-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            color: var(--olive-dark);
+            margin-bottom: 20px;
+        }
+
+        .whatsapp-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .whatsapp-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 15px 25px;
+            background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 15px;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+        }
+
+        .whatsapp-btn:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
+        }
+
+        .whatsapp-btn svg {
+            width: 22px;
+            height: 22px;
+            fill: white;
+        }
+
+        .countdown {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin: 25px 0;
+            animation: fadeIn 1s ease-out 1.6s backwards;
+        }
+
+        .countdown-item {
+            background: var(--white);
+            border: 1px solid var(--gold-light);
+            border-radius: 12px;
+            padding: 15px 10px;
+            text-align: center;
+        }
+
+        .countdown-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--olive-dark);
+            display: block;
+        }
+
+        .countdown-label {
+            font-size: 10px;
+            color: var(--olive);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 5px;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            animation: fadeIn 1s ease-out 1.8s backwards;
+        }
+
+        .hashtag {
+            font-family: 'Great Vibes', cursive;
+            font-size: 28px;
+            color: var(--gold);
+        }
+
+        .olive-branch {
+            margin-top: 15px;
+            font-size: 30px;
+            animation: sway 3s ease-in-out infinite;
+        }
+
+        /* Animación de entrada de corazones */
+        .hearts {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 20px;
+            animation: floatUp 4s ease-in infinite;
+            opacity: 0;
+        }
+
+        @keyframes floatUp {
+            0% {
+                opacity: 0;
+                transform: translateY(100%) scale(0);
+            }
+            10% {
+                opacity: 0.8;
+            }
+            90% {
+                opacity: 0.8;
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-100vh) scale(1);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 500px) {
+            .invitation {
+                padding: 40px 25px;
+            }
+            .names {
+                font-size: 42px;
+            }
+            .date {
+                font-size: 36px;
+            }
+            .countdown-number {
+                font-size: 22px;
+            }
+        }
+    </style>
 </head>
-<body class="bg-floral"> 
-    <div id="falling-flowers"></div>
+<body>
+    <div class="invitation">
+        <!-- Partículas decorativas -->
+        <div class="particles" id="particles"></div>
+        
+        <!-- Corazones flotantes -->
+        <div class="hearts" id="hearts"></div>
+        
+        <!-- Lirios decorativos -->
+        <div class="lily lily-1">🌸</div>
+        <div class="lily lily-2">🌸</div>
+        <div class="lily lily-3">🌸</div>
+        <div class="lily lily-4">🌸</div>
 
-    <audio id="music" loop>
-        <source src="musica.mp3" type="audio/mpeg">
-    </audio>
-
-    <div class="envelope-wrapper" id="envelope-wrapper">
-        <div class="opener-image-container">
-            <img src="lirios.png" alt="Lirios" class="lirios-img-clean">
+        <div class="header">
+            <p class="pre-title">Estás invitado a nuestra boda</p>
+            <h1 class="names">
+                Dahiana
+                <span class="ampersand">&</span>
+                Manuel
+            </h1>
         </div>
 
-        <div class="envelope">
-            <div class="top-flap"></div>
-            <div class="wax-seal">D & M</div>
-            <div class="letter">
-                <div class="letter-content">
-                    <img src="anillos.png" alt="Alianzas" class="rings-img-small">
-                    <h2 class="gold-text">Dahiana & Manuel</h2>
-                    <p class="date-text">03.10.2026</p>
-                    <small class="tap-text">Toca para abrir</small>
-                </div>
+        <div class="divider">
+            <span class="divider-line"></span>
+            <span class="divider-icon">💍</span>
+            <span class="divider-line"></span>
+        </div>
+
+        <div class="announcement">
+            <p class="we-marry">¡Nos Casamos!</p>
+        </div>
+
+        <div class="date-section">
+            <p class="date">03 · 10 · 2026</p>
+            <p class="date-text">Sábado — Jaén, España</p>
+        </div>
+
+        <div class="venue">
+            <h2 class="venue-name">Cortijo Triana</h2>
+            <p class="venue-location">Jardines Cortijo Triana</p>
+            <a href="[google.com](https://www.google.com/maps/place/Jardines+Cortijo+Triana/@38.02466,-4.0586758,890m)" 
+               target="_blank" 
+               class="map-btn">
+                📍 Ver ubicación
+            </a>
+        </div>
+
+        <div class="countdown">
+            <div class="countdown-item">
+                <span class="countdown-number" id="days">000</span>
+                <span class="countdown-label">Días</span>
             </div>
-            <div class="back"></div>
-            <div class="front"></div>
+            <div class="countdown-item">
+                <span class="countdown-number" id="hours">00</span>
+                <span class="countdown-label">Horas</span>
+            </div>
+            <div class="countdown-item">
+                <span class="countdown-number" id="minutes">00</span>
+                <span class="countdown-label">Min</span>
+            </div>
+            <div class="countdown-item">
+                <span class="countdown-number" id="seconds">00</span>
+                <span class="countdown-label">Seg</span>
+            </div>
+        </div>
+
+        <div class="confirm-section">
+            <h3 class="confirm-title">Confirma tu asistencia 💌</h3>
+            <div class="whatsapp-buttons">
+                <a href="[wa.me](https://wa.me/34602732290?text=¡Hola%20Dahiana!%20Confirmo%20mi%20asistencia%20a%20vuestra%20boda%20🎉💒)" 
+                   target="_blank" 
+                   class="whatsapp-btn">
+                    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                    WhatsApp Dahiana
+                </a>
+                <a href="[wa.me](https://wa.me/34664593119?text=¡Hola%20Manuel!%20Confirmo%20mi%20asistencia%20a%20vuestra%20boda%20🎉💒)" 
+                   target="_blank" 
+                   class="whatsapp-btn">
+                    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                    WhatsApp Manuel
+                </a>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p class="hashtag">#DahianaYManuel2026</p>
+            <div class="olive-branch">🫒</div>
         </div>
     </div>
 
-    <div id="content">
-        <div class="header-decor">
-            <img src="anillos.png" alt="Alianzas" class="rings-img-main">
-            <h1 class="header-names gold-text">Dahiana & Manuel</h1>
-            <p class="subtitle">DALE PLAY PARA ESCUCHAR NUESTRA CANCIÓN</p>
+    <script>
+        // Cuenta regresiva
+        function updateCountdown() {
+            const weddingDate = new Date('October 3, 2026 12:00:00').getTime();
+            const now = new Date().getTime();
+            const distance = weddingDate - now;
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById('days').textContent = days.toString().padStart(3, '0');
+            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+        }
+
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        // Crear partículas doradas
+        function createParticles() {
+            const container = document.getElementById('particles');
+            for (let i = 0; i < 20; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 3 + 's';
+                particle.style.width = (Math.random() * 6 + 4) + 'px';
+                particle.style.height = particle.style.width;
+                container.appendChild(particle);
+            }
+        }
+
+        // Crear corazones flotantes
+        function createHearts() {
+            const container = document.getElementById('hearts');
+            const hearts = ['💚', '🤍', '💛'];
             
-            <div class="custom-player">
-                <div class="player-controls">
-                    <span class="player-icon small">⏮</span>
-                    <button class="play-pause-btn" id="btnControlMusic" onclick="toggleMusic()">
-                        <span id="musicIcon">▶</span>
-                    </button>
-                    <span class="player-icon small">⏭</span>
-                </div>
-                <div class="player-progress">
-                    <div class="progress-bar"></div>
-                    <div class="progress-dot"></div>
-                </div>
-            </div>
-        </div>
+            setInterval(() => {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.animationDuration = (Math.random() * 2 + 3) + 's';
+                container.appendChild(heart);
+                
+                setTimeout(() => heart.remove(), 5000);
+            }, 800);
+        }
 
-        <div class="mensaje">
-            <p>"Nos encontramos, nos elegimos y hoy queremos compartir contigo nuestra felicidad."</p>
-        </div>
-
-        <div id="countdown"></div>
-
-        <div class="botones">
-            <a href="https://maps.google.com" class="btn-oliva" target="_blank">📍 Ver Ubicación</a>
-            <a href="https://wa.me/34602732290" class="btn-oliva" target="_blank">📱 Confirmar con Dahiana</a>
-            <a href="https://wa.me/34664593119" class="btn-oliva" target="_blank">📱 Confirmar con Manuel</a>
-        </div>
-
-        <div style="margin-top: 30px;">
-            <button class="btn-volver" id="btnVolver">← Volver</button>
-        </div>
-    </div>
-
-    <script src="script.js"></script>
+        createParticles();
+        createHearts();
+    </script>
 </body>
 </html>
