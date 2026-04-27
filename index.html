@@ -1,99 +1,82 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dahiana & Manuel · 03.10.2026</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Cinzel:wght@400;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boda Dahiana & Manuel</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body class="bg-floral"> 
+    <div id="falling-flowers"></div>
 
-  <div id="petals"></div>
+    <audio id="music" loop>
+        <source src="musica.mp3" type="audio/mpeg">
+    </audio>
 
-  <audio id="music" loop>
-    <source src="musica.mp3" type="audio/mpeg" />
-  </audio>
+    <div class="envelope-wrapper" id="envelope-wrapper">
+        <div class="opener-image-container">
+            <img src="lirios.png" alt="Lirios" class="lirios-img-clean">
+        </div>
 
-  <!-- ═══════ SOBRE ═══════ -->
-  <section id="sobre">
-    <img src="lirios.png" alt="" class="lirios-deco" id="liriosDeco" />
-
-    <div class="envelope" id="envelope">
-      <!-- Solapa superior -->
-      <div class="env-flap-top"></div>
-      <!-- Laterales y fondo (solo color) -->
-      <div class="env-body"></div>
-      <!-- Carta interior -->
-      <div class="env-letter" id="envLetter">
-        <img src="anillos.png" alt="Alianzas" class="letter-rings" />
-        <p class="letter-names">Dahiana &amp; Manuel</p>
-        <p class="letter-date">03 · 10 · 2026</p>
-        <p class="letter-hint">✦ Toca para abrir ✦</p>
-      </div>
-      <!-- Lacre -->
-      <div class="env-seal" id="envSeal">D&amp;M</div>
+        <div class="envelope">
+            <div class="top-flap"></div>
+            <div class="wax-seal">D & M</div>
+            <div class="letter">
+                <div class="letter-content">
+                    <img src="anillos.png" alt="Alianzas" class="rings-img-small">
+                    <h2 class="gold-text">Dahiana & Manuel</h2>
+                    <p class="date-text">03.10.2026</p>
+                    <small class="tap-text">Toca para abrir</small>
+                </div>
+            </div>
+            <div class="back"></div>
+            <div class="front"></div>
+        </div>
     </div>
 
-    <p class="sobre-hint">Toca el sobre para ver tu invitación</p>
-  </section>
+    <div id="content">
+        <div class="header-decor">
+            <img src="anillos.png" alt="Alianzas" class="rings-img-main">
+            <h1 class="header-names gold-text">Dahiana & Manuel</h1>
+            <p class="subtitle">DALE PLAY PARA ESCUCHAR NUESTRA CANCIÓN</p>
+            
+            <div class="custom-player">
+                <div class="player-controls">
+                    <span class="player-icon small">⏮</span>
+                    <button class="play-pause-btn" id="btnControlMusic" onclick="toggleMusic()">
+                        <span id="musicIcon">▶</span>
+                    </button>
+                    <span class="player-icon small">⏭</span>
+                </div>
+                <div class="player-progress">
+                    <div class="progress-bar"></div>
+                    <div class="progress-dot"></div>
+                </div>
+            </div>
+        </div>
 
-  <!-- ═══════ INVITACIÓN ═══════ -->
-  <section id="invitacion">
+        <div class="mensaje">
+            <p>"Nos encontramos, nos elegimos y hoy queremos compartir contigo nuestra felicidad."</p>
+        </div>
 
-    <header class="inv-header">
-      <img src="anillos.png" alt="Alianzas" class="inv-rings" />
-      <p class="inv-pre">Con toda nuestra alegría os invitamos a nuestra boda</p>
-      <h1 class="inv-names">Dahiana &amp; Manuel</h1>
-      <div class="gold-line"></div>
-      <p class="inv-date">Sábado · 3 de octubre de 2026 · 13:00 h</p>
-      <p class="inv-venue">Cortijo Triana · Jaén</p>
-    </header>
+        <div id="countdown"></div>
 
-    <div class="inv-quote">
-      <p>"Nos encontramos, nos elegimos y hoy queremos compartir contigo nuestra felicidad."</p>
+        <div class="botones">
+            <!-- ✅ MAPS: link directo al Cortijo Triana -->
+            <a href="https://www.google.com/maps/place/Jardines+Cortijo+Triana/@38.02466,-4.0586758,890m/data=!3m2!1e3!4b1!4m6!3m5!1s0xd6c364a7c61fbdb:0x937df16aa6a94629!8m2!3d38.0246558!4d-4.0561009!16s%2Fg%2F11yf_schx" class="btn-oliva" target="_blank">📍 Ver Ubicación</a>
+
+            <!-- ✅ WHATSAPP DAHIANA: número correcto + mensaje de confirmación -->
+            <a href="https://wa.me/34602732290?text=¡Hola%20Dahiana!%20Confirmo%20mi%20asistencia%20a%20vuestra%20boda%20el%2003%20de%20octubre%20de%202026.%20¡Qué%20emoción!%20🌿💍" class="btn-oliva" target="_blank">📱 Confirmar con Dahiana</a>
+
+            <!-- ✅ WHATSAPP MANUEL: número corregido (644, no 664) + mensaje -->
+            <a href="https://wa.me/34644593119?text=¡Hola%20Manuel!%20Confirmo%20mi%20asistencia%20a%20vuestra%20boda%20el%2003%20de%20octubre%20de%202026.%20¡Qué%20emoción!%20🌿💍" class="btn-oliva" target="_blank">📱 Confirmar con Manuel</a>
+        </div>
+
+        <div style="margin-top: 30px;">
+            <button class="btn-volver" id="btnVolver">← Volver</button>
+        </div>
     </div>
 
-    <!-- Reproductor -->
-    <div class="player">
-      <p class="player-label">♪ Dale play a nuestra canción</p>
-      <div class="player-wrap">
-        <button class="play-btn" id="playBtn">▶</button>
-        <div class="prog-track"><div class="prog-fill" id="progFill"></div></div>
-      </div>
-    </div>
-
-    <!-- Cuenta regresiva -->
-    <div class="countdown-wrap">
-      <p class="cd-label">Faltan</p>
-      <div class="cd-row">
-        <div class="cd-block"><span class="cd-num" id="cdDays">--</span><span class="cd-unit">días</span></div>
-        <span class="cd-sep">:</span>
-        <div class="cd-block"><span class="cd-num" id="cdHours">--</span><span class="cd-unit">h</span></div>
-        <span class="cd-sep">:</span>
-        <div class="cd-block"><span class="cd-num" id="cdMins">--</span><span class="cd-unit">min</span></div>
-        <span class="cd-sep">:</span>
-        <div class="cd-block"><span class="cd-num" id="cdSecs">--</span><span class="cd-unit">seg</span></div>
-      </div>
-    </div>
-
-    <!-- Botones -->
-    <div class="inv-btns">
-      <a href="https://www.google.com/maps/place/Jardines+Cortijo+Triana/@38.02466,-4.0586758,890m/data=!3m2!1e3!4b1!4m6!3m5!1s0xd6c364a7c61fbdb:0x937df16aa6a94629!8m2!3d38.0246558!4d-4.0561009!16s%2Fg%2F11yf_schx"
-         target="_blank" class="btn btn-outline">📍 Ver ubicación</a>
-      <a href="https://wa.me/34602732290?text=¡Hola%20Dahiana!%20Confirmo%20mi%20asistencia%20el%2003%20de%20octubre%20🌿"
-         target="_blank" class="btn btn-solid">💬 Confirmar con Dahiana</a>
-      <a href="https://wa.me/34644593119?text=¡Hola%20Manuel!%20Confirmo%20mi%20asistencia%20el%2003%20de%20octubre%20🌿"
-         target="_blank" class="btn btn-solid">💬 Confirmar con Manuel</a>
-    </div>
-
-    <button class="btn-back" id="btnVolver">← Volver al sobre</button>
-
-    <footer class="inv-footer">03 · 10 · 2026 &nbsp;✦&nbsp; Dahiana &amp; Manuel</footer>
-
-  </section>
-
-  <script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
