@@ -1,160 +1,176 @@
-/* ============================================
+/* ================================================
    DAHIANA & MANUEL · script.js
-   - Cuenta regresiva
-   - Pétalos flotantes
-   - Scroll reveal
-   ============================================ */
+   ================================================ */
 
-// --- CUENTA REGRESIVA ---
-(function initCountdown() {
-  // 03 oct 2026, 13:00 hora España (UTC+2 en verano → UTC+1 en octubre → CET = UTC+1)
-  const weddingDate = new Date('2026-10-03T13:00:00+01:00');
+const envelopeWrapper = document.getElementById('envelopeWrapper');
+const content         = document.getElementById('content');
+const music           = document.getElementById('music');
+const letter          = document.getElementById('letter');
+const btnVolver       = document.getElementById('btnVolver');
+const playBtn         = document.getElementById('playBtn');
+const musicIcon       = document.getElementById('musicIcon');
+const progressFill    = document.getElementById('progressFill');
 
-  const daysEl    = document.getElementById('days');
-  const hoursEl   = document.getElementById('hours');
-  const minutesEl = document.getElementById('minutes');
-  const secondsEl = document.getElementById('seconds');
+// Fragmento de la canción (segundos)
+const MUSIC_START = 90;
+const MUSIC_END   = 130;
 
-  function pad(n) { return String(n).padStart(2, '0'); }
+let petalInterval = null;
+let progressInterval = null;
+let musicStarted = false;
 
-  function updateCountdown() {
-    const now  = new Date();
-    const diff = weddingDate - now;
+// ── APERTURA DEL SOBRE ──────────────────────────
+envelopeWrapper.addEventListener('click', () => {
+  if (envelopeWrapper.classList.contains('open')) return;
 
-    if (diff <= 0) {
-      daysEl.textContent    = '¡';
-      hoursEl.textContent   = 'H';
-      minutesEl.textContent = 'O';
-      secondsEl.textContent = 'Y';
-      return;
+  envelopeWrapper.classList.add('open');
+  startPetals();
+
+  // Música arranca con la apertura
+  startMusic();
+
+  // Tras la animación del sobre → mostrar invitación
+  setTimeout(() => {
+    envelopeWrapper.style.opacity = '0';
+    envelopeWrapper.style.pointerEvents = 'none';
+  }, 3800);
+
+  setTimeout(() => {
+    envelopeWrapper.style.display = 'none';
+    content.style.display = 'block';
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        content.style.opacity = '1';
+      });
+    });
+  }, 5000);
+});
+
+// ── BOTÓN VOLVER ────────────────────────────────
+btnVolver.addEventListener('click', () => {
+  content.style.opacity = '0';
+  setTimeout(() => {
+    content.style.display = 'none';
+    envelopeWrapper.classList.remove('open');
+    envelopeWrapper.style.display = 'flex';
+    envelopeWrapper.style.pointerEvents = 'auto';
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        envelopeWrapper.style.opacity = '1';
+      });
+    });
+    stopPetals();
+  }, 1000);
+});
+
+// ── MÚSICA ──────────────────────────────────────
+function startMusic() {
+  if (musicStarted) return;
+  musicStarted = true;
+  music.currentTime = MUSIC_START;
+  music.play().catch(() => {}); // silencia el error si el navegador bloquea autoplay
+
+  music.addEventListener('timeupdate', () => {
+    if (music.currentTime >= MUSIC_END) {
+      music.currentTime = MUSIC_START;
     }
-
-    const days    = Math.floor(diff / (1000 * 60 * 60 * 24));
-    const hours   = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-
-    daysEl.textContent    = pad(days);
-    hoursEl.textContent   = pad(hours);
-    minutesEl.textContent = pad(minutes);
-    secondsEl.textContent = pad(seconds);
-  }
-
-  updateCountdown();
-  setInterval(updateCountdown, 1000);
-})();
-
-// --- PÉTALOS FLOTANTES ---
-(function initPetals() {
-  const container = document.getElementById('petals');
-  if (!container) return;
-
-  const PETAL_COUNT = 18;
-  const COLORS = [
-    'rgba(201,168,76,0.35)',
-    'rgba(232,201,122,0.30)',
-    'rgba(107,123,58,0.25)',
-    'rgba(201,168,76,0.20)',
-    'rgba(74,87,40,0.20)'
-  ];
-
-  for (let i = 0; i < PETAL_COUNT; i++) {
-    const petal = document.createElement('div');
-    petal.className = 'petal';
-
-    const size     = 6 + Math.random() * 8;
-    const left     = Math.random() * 100;
-    const delay    = Math.random() * 20;
-    const duration = 12 + Math.random() * 16;
-    const color    = COLORS[Math.floor(Math.random() * COLORS.length)];
-    const rotation = Math.random() * 360;
-
-    petal.style.cssText = `
-      left: ${left}%;
-      width: ${size}px;
-      height: ${size * 1.5}px;
-      background: ${color};
-      animation-duration: ${duration}s;
-      animation-delay: ${delay}s;
-      transform: rotate(${rotation}deg);
-      border-radius: ${40 + Math.random() * 20}% ${10 + Math.random() * 10}% ${40 + Math.random() * 20}% ${10 + Math.random() * 10}%;
-    `;
-
-    container.appendChild(petal);
-  }
-})();
-
-// --- SCROLL REVEAL ---
-(function initScrollReveal() {
-  const targets = document.querySelectorAll('.reveal');
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
-      }
-    });
-  }, {
-    threshold: 0.12,
-    rootMargin: '0px 0px -40px 0px'
+    // Actualizar barra de progreso
+    const pct = ((music.currentTime - MUSIC_START) / (MUSIC_END - MUSIC_START)) * 100;
+    if (progressFill) progressFill.style.width = Math.min(100, Math.max(0, pct)) + '%';
   });
 
-  targets.forEach(el => observer.observe(el));
-})();
+  musicIcon.textContent = '❚❚';
+}
 
-// --- MICRO-INTERACCIÓN: botones RSVP ---
-(function initRSVPButtons() {
-  const btns = document.querySelectorAll('.rsvp-btn');
-  btns.forEach(btn => {
-    btn.addEventListener('mouseenter', () => {
-      btn.style.transform = 'translateY(-2px)';
-    });
-    btn.addEventListener('mouseleave', () => {
-      btn.style.transform = 'translateY(0)';
-    });
-    btn.addEventListener('mousedown', () => {
-      btn.style.transform = 'translateY(0) scale(0.98)';
-    });
-    btn.addEventListener('mouseup', () => {
-      btn.style.transform = 'translateY(-2px) scale(1)';
-    });
-  });
-})();
+function toggleMusic() {
+  if (!musicStarted) {
+    startMusic();
+    return;
+  }
+  if (music.paused) {
+    music.play();
+    musicIcon.textContent = '❚❚';
+  } else {
+    music.pause();
+    musicIcon.textContent = '▶';
+  }
+}
 
-// --- CURSOR personalizado sutil (solo desktop) ---
-(function initCustomCursor() {
-  if (window.matchMedia('(hover: none)').matches) return;
+// ── CUENTA REGRESIVA ─────────────────────────────
+function pad(n) { return String(n).padStart(2, '0'); }
 
-  const cursor = document.createElement('div');
-  cursor.style.cssText = `
-    position: fixed;
-    width: 8px; height: 8px;
-    background: rgba(201,168,76,0.7);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 9999;
-    transform: translate(-50%, -50%);
-    transition: transform 0.1s ease, opacity 0.2s ease;
-    mix-blend-mode: multiply;
+function updateCountdown() {
+  // 03 oct 2026 13:00 CET (UTC+1)
+  const target = new Date('2026-10-03T13:00:00+01:00').getTime();
+  const now    = Date.now();
+  const diff   = target - now;
+
+  if (diff <= 0) {
+    document.getElementById('cd-days').textContent  = '¡';
+    document.getElementById('cd-hours').textContent = 'H';
+    document.getElementById('cd-mins').textContent  = 'O';
+    document.getElementById('cd-secs').textContent  = 'Y';
+    return;
+  }
+
+  const days  = Math.floor(diff / 86400000);
+  const hours = Math.floor((diff % 86400000) / 3600000);
+  const mins  = Math.floor((diff % 3600000)  / 60000);
+  const secs  = Math.floor((diff % 60000)    / 1000);
+
+  document.getElementById('cd-days').textContent  = days;
+  document.getElementById('cd-hours').textContent = pad(hours);
+  document.getElementById('cd-mins').textContent  = pad(mins);
+  document.getElementById('cd-secs').textContent  = pad(secs);
+}
+
+updateCountdown();
+setInterval(updateCountdown, 1000);
+
+// ── LLUVIA DE PÉTALOS ────────────────────────────
+const PETAL_COLORS = [
+  'rgba(197,160,89,0.55)',
+  'rgba(226,194,122,0.45)',
+  'rgba(122,132,80,0.40)',
+  'rgba(197,160,89,0.35)',
+  'rgba(93,102,61,0.35)',
+  'rgba(240,220,160,0.50)',
+];
+
+function createPetal() {
+  const container = document.getElementById('falling-flowers');
+  const el = document.createElement('div');
+  el.className = 'petal';
+
+  const size     = 8 + Math.random() * 10;
+  const left     = Math.random() * 98;
+  const duration = 5 + Math.random() * 7;
+  const delay    = Math.random() * 2;
+  const color    = PETAL_COLORS[Math.floor(Math.random() * PETAL_COLORS.length)];
+  const rX       = 30 + Math.random() * 40;
+  const rY       = 10 + Math.random() * 20;
+
+  el.style.cssText = `
+    left: ${left}vw;
+    width: ${size}px;
+    height: ${size * 1.4}px;
+    background: ${color};
+    animation: petalDrop ${duration}s ${delay}s linear forwards;
+    border-radius: ${rX}% ${rY}% ${rX}% ${rY}%;
+    transform: rotate(${Math.random()*360}deg);
   `;
-  document.body.appendChild(cursor);
 
-  let mx = 0, my = 0;
-  document.addEventListener('mousemove', e => {
-    mx = e.clientX; my = e.clientY;
-    cursor.style.left = mx + 'px';
-    cursor.style.top  = my + 'px';
-  });
+  container.appendChild(el);
+  setTimeout(() => el.remove(), (duration + delay + 0.5) * 1000);
+}
 
-  document.querySelectorAll('a, button').forEach(el => {
-    el.addEventListener('mouseenter', () => {
-      cursor.style.transform = 'translate(-50%, -50%) scale(3)';
-      cursor.style.opacity   = '0.4';
-    });
-    el.addEventListener('mouseleave', () => {
-      cursor.style.transform = 'translate(-50%, -50%) scale(1)';
-      cursor.style.opacity   = '1';
-    });
-  });
-})();
+function startPetals() {
+  createPetal(); // primera inmediata
+  petalInterval = setInterval(createPetal, 350);
+}
+
+function stopPetals() {
+  clearInterval(petalInterval);
+  petalInterval = null;
+  document.getElementById('falling-flowers').innerHTML = '';
+}
