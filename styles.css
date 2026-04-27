@@ -62,9 +62,18 @@ body { margin: 0; padding: 0; background-color: var(--marfil); font-family: 'Mon
 @keyframes fall { to { transform: translateY(110vh) rotate(360deg); } }
 
 .fecha-evento { margin: 20px auto 5px; text-align: center; }
-.fecha-titulo { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; color: var(--dorado); font-weight: 600; margin: 0; letter-spacing: 3px; }
+
+.fecha-titulo { 
+    font-family: 'Cormorant Garamond', serif; 
+    font-size: 2rem; 
+    color: var(--dorado); 
+    font-weight: 600; 
+    margin: 0; 
+    letter-spacing: 4px;
+    text-shadow: 0 2px 8px rgba(197,160,89,0.25);
+}
+
 .fecha-hora { font-family: 'Montserrat', sans-serif; font-size: 0.8rem; letter-spacing: 2px; color: #888; margin: 5px 0 0; text-transform: uppercase; }
-.fecha-sub { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1rem; color: #aaa; margin: 6px 0 0; }
 
 .fecha-sub { 
     font-family: 'Cormorant Garamond', serif; 
@@ -74,13 +83,4 @@ body { margin: 0; padding: 0; background-color: var(--marfil); font-family: 'Mon
     margin: 8px 0 0; 
     letter-spacing: 1px;
     opacity: 0.85;
-}
-.fecha-titulo { 
-    font-family: 'Cormorant Garamond', serif; 
-    font-size: 2rem; 
-    color: var(--dorado); 
-    font-weight: 600; 
-    margin: 0; 
-    letter-spacing: 4px;
-    text-shadow: 0 2px 8px rgba(197,160,89,0.25);
 }
