@@ -21,7 +21,7 @@ body {
     overflow-x: hidden; 
 }
 
-/* Fondo floral */
+/* ✅ Fondo floral real - imagen image_1.png */
 .bg-floral { 
     background-image: url('image_1.png');
     background-size: cover;
@@ -31,6 +31,7 @@ body {
     position: relative;
 }
 
+/* Sombra semitransparente sobre el fondo para mejorar legibilidad del texto (opcional) */
 .bg-floral::before {
     content: "";
     position: fixed;
@@ -43,18 +44,17 @@ body {
     z-index: 0;
 }
 
-/* SOBRE (Tamaño para Ordenador) */
+/* SOBRE */
 .envelope-wrapper { 
     position: relative; 
     cursor: pointer; 
     z-index: 10; 
     transition: opacity 1.5s ease; 
 }
-
 .envelope { 
     position: relative; 
-    width: 450px; /* Grande en PC */
-    height: 300px; /* Grande en PC */
+    width: 300px; 
+    height: 200px; 
     background-color: var(--verde-oliva); 
     box-shadow: 0 15px 35px rgba(0,0,0,0.2); 
     z-index: 5; 
@@ -64,8 +64,8 @@ body {
     position: absolute; 
     bottom: 10px; 
     left: 20px; 
-    width: 410px; /* Ajustado al sobre grande */
-    height: 260px; /* Ajustado al sobre grande */
+    width: 260px; 
+    height: 170px; 
     background: white; 
     padding: 15px; 
     box-sizing: border-box; 
@@ -77,12 +77,11 @@ body {
     align-items: center; 
     justify-content: center; 
 }
-
 .letter.front-view { 
     z-index: 7 !important; 
 }
 
-/* Anillos */
+/* ✅ Estilo para los anillos DENTRO de la carta (pequeños y discretos) */
 .rings-img-small {
     max-width: 55px;
     max-height: 45px;
@@ -93,6 +92,7 @@ body {
     object-fit: contain;
 }
 
+/* ✅ Estilo para los anillos en el CONTENIDO PRINCIPAL (tamaño justo y elegante) */
 .rings-img-main {
     max-width: 130px;
     width: auto;
@@ -110,19 +110,249 @@ body {
     margin: 0; 
     text-shadow: 0 1px 2px rgba(0,0,0,0.05);
 }
-
 .header-names { 
     font-size: 2.2rem; 
 }
-
 .subtitle { 
     font-size: 0.8rem; 
     letter-spacing: 1px; 
     color: #666; 
     margin: 10px 0; 
 }
-
-/* ESTILO DEL MENSAJE "CON AMOR" */
 .mensaje { 
     color: var(--texto); 
-    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.95rem; 
+    line-height: 1.4; 
+    margin: 25px auto; 
+    max-width: 90%; 
+    background: rgba(255,255,240,0.6);
+    padding: 12px;
+    border-radius: 30px;
+}
+
+/* REPRODUCTOR */
+.custom-player { 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    gap: 10px; 
+    margin: 20px auto; 
+    max-width: 250px; 
+}
+.player-controls { 
+    display: flex; 
+    align-items: center; 
+    gap: 20px; 
+}
+.play-pause-btn { 
+    background: #333; 
+    color: white; 
+    border: none; 
+    width: 45px; 
+    height: 45px; 
+    border-radius: 50%; 
+    cursor: pointer; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+}
+.player-progress { 
+    position: relative; 
+    width: 100%; 
+    height: 2px; 
+    background: #ddd; 
+}
+.progress-bar { 
+    position: absolute; 
+    height: 100%; 
+    width: 40%; 
+    background: #333; 
+}
+
+/* CONTADOR */
+.timer-text { 
+    display: flex; 
+    justify-content: center; 
+    align-items: baseline; 
+    gap: 10px; 
+    margin: 30px 0; 
+    color: var(--lila-texto); 
+    font-family: 'Cormorant Garamond', serif; 
+}
+.timer-group { 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+}
+.timer-val { 
+    font-size: 2.8rem; 
+    line-height: 1; 
+}
+.timer-sep { 
+    font-size: 2.2rem; 
+    opacity: 0.5; 
+}
+.timer-lab { 
+    font-size: 0.7rem; 
+    font-family: 'Montserrat', sans-serif; 
+    text-transform: uppercase; 
+    color: #999; 
+    margin-top: 5px; 
+}
+
+/* BOTONES */
+.btn-oliva { 
+    background-color: var(--verde-oliva); 
+    color: white; 
+    border: none; 
+    padding: 12px 20px; 
+    border-radius: 25px; 
+    cursor: pointer; 
+    text-decoration: none; 
+    display: block; 
+    margin: 12px auto; 
+    width: 85%; 
+    font-weight: 600; 
+    text-align: center; 
+    transition: all 0.2s ease;
+}
+.btn-oliva:hover {
+    background-color: var(--verde-oscuro);
+    transform: scale(1.02);
+}
+.btn-volver { 
+    background: rgba(255, 255, 255, 0.7); 
+    border: 1px solid var(--lila-borde); 
+    color: var(--lila-texto); 
+    padding: 8px 30px; 
+    border-radius: 50px; 
+    font-family: 'Cormorant Garamond', serif; 
+    font-size: 1.1rem; 
+    cursor: pointer; 
+}
+
+/* PARTES SOBRE */
+.envelope .front { 
+    border-right: 150px solid var(--verde-oscuro); 
+    border-top: 100px solid transparent; 
+    border-bottom: 100px solid var(--verde-oscuro); 
+    position: absolute; 
+    right: 0; 
+    bottom: 0; 
+    z-index: 4; 
+}
+.envelope .back { 
+    border-left: 150px solid var(--verde-oscuro); 
+    border-top: 100px solid transparent; 
+    border-bottom: 100px solid var(--verde-oscuro); 
+    position: absolute; 
+    left: 0; 
+    bottom: 0; 
+    z-index: 4; 
+}
+.envelope .top-flap { 
+    position: absolute; 
+    top: 0; 
+    left: 0; 
+    border-left: 150px solid transparent; 
+    border-right: 150px solid transparent; 
+    border-top: 115px solid var(--verde-oliva); 
+    transform-origin: top; 
+    transition: transform 1.2s; 
+    z-index: 6; 
+}
+.open .top-flap { 
+    transform: rotateX(180deg); 
+}
+.open .letter { 
+    transform: translateY(-135px); 
+}
+.wax-seal { 
+    position: absolute; 
+    top: 95px; 
+    left: 130px; 
+    width: 45px; 
+    height: 45px; 
+    background: var(--dorado); 
+    border-radius: 50%; 
+    z-index: 8; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    color: white; 
+    font-size: 11px; 
+}
+
+#content { 
+    display: none; 
+    max-width: 500px; 
+    width: 90%; 
+    background: rgba(255, 255, 255, 0.96); 
+    padding: 40px; 
+    text-align: center; 
+    opacity: 0; 
+    transition: opacity 2s ease; 
+    border-radius: 25px; 
+    backdrop-filter: blur(3px); 
+    z-index: 2; 
+    position: relative; 
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+}
+.falling-element { 
+    position: fixed; 
+    top: -10vh; 
+    z-index: 99; 
+    pointer-events: none; 
+    animation: fall linear forwards; 
+}
+@keyframes fall { 
+    to { transform: translateY(110vh) rotate(360deg); } 
+}
+
+.fecha-evento { 
+    margin: 20px auto 5px; 
+    text-align: center; 
+}
+.fecha-titulo { 
+    font-family: 'Cormorant Garamond', serif; 
+    font-size: 2rem; 
+    color: var(--dorado); 
+    font-weight: 600; 
+    margin: 0; 
+    letter-spacing: 4px;
+    text-shadow: 0 2px 8px rgba(197,160,89,0.25);
+}
+.fecha-hora { 
+    font-family: 'Montserrat', sans-serif; 
+    font-size: 0.8rem; 
+    letter-spacing: 2px; 
+    color: #888; 
+    margin: 5px 0 0; 
+    text-transform: uppercase; 
+}
+.fecha-sub { 
+    font-family: 'Cormorant Garamond', serif; 
+    font-style: italic; 
+    font-size: 1.15rem; 
+    color: var(--dorado); 
+    margin: 8px 0 0; 
+    letter-spacing: 1px;
+    opacity: 0.85;
+}
+
+/* Ajustes responsivos para móviles */
+@media (max-width: 550px) {
+    .rings-img-main {
+        max-width: 100px;
+    }
+    .rings-img-small {
+        max-width: 45px;
+        max-height: 35px;
+    }
+    .header-names {
+        font-size: 1.8rem;
+    }
+    #content {
+        padding: 25px;
+    }
+}
