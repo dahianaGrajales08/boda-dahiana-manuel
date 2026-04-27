@@ -2,175 +2,161 @@
    DAHIANA & MANUEL · script.js
    ================================================ */
 
-const envelopeWrapper = document.getElementById('envelopeWrapper');
-const content         = document.getElementById('content');
-const music           = document.getElementById('music');
-const letter          = document.getElementById('letter');
-const btnVolver       = document.getElementById('btnVolver');
-const playBtn         = document.getElementById('playBtn');
-const musicIcon       = document.getElementById('musicIcon');
-const progressFill    = document.getElementById('progressFill');
+// ── Referencias DOM ──────────────────────────────
+const sobre       = document.getElementById('sobre');
+const invitacion  = document.getElementById('invitacion');
+const music       = document.getElementById('music');
+const playBtn     = document.getElementById('playBtn');
+const progFill    = document.getElementById('progFill');
+const btnVolver   = document.getElementById('btnVolver');
 
-// Fragmento de la canción (segundos)
-const MUSIC_START = 90;
-const MUSIC_END   = 130;
+const MUSIC_START = 90;   // segundo de inicio
+const MUSIC_END   = 130;  // segundo de fin
 
-let petalInterval = null;
-let progressInterval = null;
-let musicStarted = false;
+let petalTimer = null;
 
 // ── APERTURA DEL SOBRE ──────────────────────────
-envelopeWrapper.addEventListener('click', () => {
-  if (envelopeWrapper.classList.contains('open')) return;
+sobre.addEventListener('click', abrirSobre);
 
-  envelopeWrapper.classList.add('open');
+function abrirSobre() {
+  if (sobre.classList.contains('abierto')) return;
+
+  // 1. Animación CSS del sobre
+  sobre.classList.add('abierto');
+
+  // 2. Intentar reproducir música (no bloquea el flujo)
+  try {
+    music.currentTime = MUSIC_START;
+    music.play().then(() => {
+      playBtn.textContent = '❚❚';
+    }).catch(() => {
+      // Autoplay bloqueado por el navegador — OK, el botón manual funciona
+    });
+  } catch(e) {}
+
+  // 3. Lluvia de pétalos
   startPetals();
 
-  // Música arranca con la apertura
-  startMusic();
-
-  // Tras la animación del sobre → mostrar invitación
+  // 4. Mostrar invitación tras la animación
   setTimeout(() => {
-    envelopeWrapper.style.opacity = '0';
-    envelopeWrapper.style.pointerEvents = 'none';
-  }, 3800);
+    sobre.style.transition = 'opacity 0.8s ease';
+    sobre.style.opacity = '0';
+  }, 3500);
 
   setTimeout(() => {
-    envelopeWrapper.style.display = 'none';
-    content.style.display = 'block';
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        content.style.opacity = '1';
-      });
-    });
-  }, 5000);
-});
+    sobre.style.display = 'none';
+    invitacion.style.display = 'block';
+    // Doble rAF garantiza que display:block se pinte antes de aplicar opacity
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      invitacion.style.opacity = '1';
+    }));
+  }, 4400);
+}
 
-// ── BOTÓN VOLVER ────────────────────────────────
+// ── VOLVER ──────────────────────────────────────
 btnVolver.addEventListener('click', () => {
-  content.style.opacity = '0';
+  invitacion.style.opacity = '0';
+
   setTimeout(() => {
-    content.style.display = 'none';
-    envelopeWrapper.classList.remove('open');
-    envelopeWrapper.style.display = 'flex';
-    envelopeWrapper.style.pointerEvents = 'auto';
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        envelopeWrapper.style.opacity = '1';
-      });
-    });
+    invitacion.style.display = 'none';
     stopPetals();
+    music.pause();
+    playBtn.textContent = '▶';
+
+    sobre.classList.remove('abierto');
+    sobre.style.transition = '';
+    sobre.style.opacity = '0';
+    sobre.style.display = 'flex';
+
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      sobre.style.transition = 'opacity 0.8s ease';
+      sobre.style.opacity = '1';
+    }));
   }, 1000);
 });
 
-// ── MÚSICA ──────────────────────────────────────
-function startMusic() {
-  if (musicStarted) return;
-  musicStarted = true;
-  music.currentTime = MUSIC_START;
-  music.play().catch(() => {}); // silencia el error si el navegador bloquea autoplay
-
-  music.addEventListener('timeupdate', () => {
-    if (music.currentTime >= MUSIC_END) {
+// ── REPRODUCTOR ─────────────────────────────────
+playBtn.addEventListener('click', () => {
+  if (music.paused) {
+    if (music.currentTime < MUSIC_START || music.currentTime >= MUSIC_END) {
       music.currentTime = MUSIC_START;
     }
-    // Actualizar barra de progreso
-    const pct = ((music.currentTime - MUSIC_START) / (MUSIC_END - MUSIC_START)) * 100;
-    if (progressFill) progressFill.style.width = Math.min(100, Math.max(0, pct)) + '%';
-  });
-
-  musicIcon.textContent = '❚❚';
-}
-
-function toggleMusic() {
-  if (!musicStarted) {
-    startMusic();
-    return;
-  }
-  if (music.paused) {
-    music.play();
-    musicIcon.textContent = '❚❚';
+    music.play().then(() => {
+      playBtn.textContent = '❚❚';
+    }).catch(() => {});
   } else {
     music.pause();
-    musicIcon.textContent = '▶';
+    playBtn.textContent = '▶';
   }
-}
+});
+
+music.addEventListener('timeupdate', () => {
+  if (music.currentTime >= MUSIC_END) {
+    music.currentTime = MUSIC_START;
+  }
+  const pct = ((music.currentTime - MUSIC_START) / (MUSIC_END - MUSIC_START)) * 100;
+  progFill.style.width = Math.min(100, Math.max(0, pct)) + '%';
+});
 
 // ── CUENTA REGRESIVA ─────────────────────────────
 function pad(n) { return String(n).padStart(2, '0'); }
 
-function updateCountdown() {
-  // 03 oct 2026 13:00 CET (UTC+1)
+function tick() {
   const target = new Date('2026-10-03T13:00:00+01:00').getTime();
-  const now    = Date.now();
-  const diff   = target - now;
+  const diff   = target - Date.now();
 
   if (diff <= 0) {
-    document.getElementById('cd-days').textContent  = '¡';
-    document.getElementById('cd-hours').textContent = 'H';
-    document.getElementById('cd-mins').textContent  = 'O';
-    document.getElementById('cd-secs').textContent  = 'Y';
+    document.getElementById('cdDays').textContent  = '0';
+    document.getElementById('cdHours').textContent = '00';
+    document.getElementById('cdMins').textContent  = '00';
+    document.getElementById('cdSecs').textContent  = '00';
     return;
   }
 
-  const days  = Math.floor(diff / 86400000);
-  const hours = Math.floor((diff % 86400000) / 3600000);
-  const mins  = Math.floor((diff % 3600000)  / 60000);
-  const secs  = Math.floor((diff % 60000)    / 1000);
-
-  document.getElementById('cd-days').textContent  = days;
-  document.getElementById('cd-hours').textContent = pad(hours);
-  document.getElementById('cd-mins').textContent  = pad(mins);
-  document.getElementById('cd-secs').textContent  = pad(secs);
+  document.getElementById('cdDays').textContent  = Math.floor(diff / 86400000);
+  document.getElementById('cdHours').textContent = pad(Math.floor((diff % 86400000) / 3600000));
+  document.getElementById('cdMins').textContent  = pad(Math.floor((diff % 3600000)  / 60000));
+  document.getElementById('cdSecs').textContent  = pad(Math.floor((diff % 60000)    / 1000));
 }
 
-updateCountdown();
-setInterval(updateCountdown, 1000);
+tick();
+setInterval(tick, 1000);
 
-// ── LLUVIA DE PÉTALOS ────────────────────────────
-const PETAL_COLORS = [
-  'rgba(197,160,89,0.55)',
-  'rgba(226,194,122,0.45)',
-  'rgba(122,132,80,0.40)',
-  'rgba(197,160,89,0.35)',
-  'rgba(93,102,61,0.35)',
-  'rgba(240,220,160,0.50)',
+// ── PÉTALOS ──────────────────────────────────────
+const COLORES = [
+  'rgba(197,160,89,0.6)',
+  'rgba(226,194,122,0.5)',
+  'rgba(122,132,80,0.45)',
+  'rgba(93,102,61,0.4)',
+  'rgba(240,220,160,0.55)',
 ];
 
-function createPetal() {
-  const container = document.getElementById('falling-flowers');
-  const el = document.createElement('div');
+function crearPetalo() {
+  const el  = document.createElement('div');
   el.className = 'petal';
-
-  const size     = 8 + Math.random() * 10;
-  const left     = Math.random() * 98;
-  const duration = 5 + Math.random() * 7;
-  const delay    = Math.random() * 2;
-  const color    = PETAL_COLORS[Math.floor(Math.random() * PETAL_COLORS.length)];
-  const rX       = 30 + Math.random() * 40;
-  const rY       = 10 + Math.random() * 20;
-
+  const size = 7 + Math.random() * 9;
+  const dur  = 5 + Math.random() * 7;
   el.style.cssText = `
-    left: ${left}vw;
+    left: ${Math.random() * 100}vw;
     width: ${size}px;
-    height: ${size * 1.4}px;
-    background: ${color};
-    animation: petalDrop ${duration}s ${delay}s linear forwards;
-    border-radius: ${rX}% ${rY}% ${rX}% ${rY}%;
-    transform: rotate(${Math.random()*360}deg);
+    height: ${size * 1.5}px;
+    background: ${COLORES[Math.floor(Math.random() * COLORES.length)]};
+    animation-duration: ${dur}s;
+    animation-delay: ${Math.random() * 1.5}s;
+    opacity: ${0.5 + Math.random() * 0.5};
+    transform: rotate(${Math.random() * 360}deg);
   `;
-
-  container.appendChild(el);
-  setTimeout(() => el.remove(), (duration + delay + 0.5) * 1000);
+  document.getElementById('petals').appendChild(el);
+  setTimeout(() => el.remove(), (dur + 2) * 1000);
 }
 
 function startPetals() {
-  createPetal(); // primera inmediata
-  petalInterval = setInterval(createPetal, 350);
+  crearPetalo();
+  petalTimer = setInterval(crearPetalo, 380);
 }
 
 function stopPetals() {
-  clearInterval(petalInterval);
-  petalInterval = null;
-  document.getElementById('falling-flowers').innerHTML = '';
+  clearInterval(petalTimer);
+  petalTimer = null;
+  document.getElementById('petals').innerHTML = '';
 }
