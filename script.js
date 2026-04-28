@@ -4,9 +4,48 @@ const music = document.getElementById("music");
 const letter = document.querySelector(".letter");
 const btnVolver = document.getElementById("btnVolver");
 
-// Configuración de música según tus parámetros originales
+// Configuración de música
 const tiempoInicio = 90; 
 const tiempoFin = 130;   
+
+// --- DETECCIÓN DE DISPOSITIVO ---
+function isAndroid() {
+    return /Android/i.test(navigator.userAgent);
+}
+
+function isiOS() {
+    return /iPhone|iPad|iPod/i.test(navigator.userAgent);
+}
+
+// --- FUNCIÓN WHATSAPP UNIVERSAL ---
+function abrirWhatsApp(telefono, mensaje) {
+    const mensajeCodificado = encodeURIComponent(mensaje);
+    let url;
+    
+    if (isAndroid()) {
+        // Android nativo: usa intent o esquema whatsapp://
+        url = `whatsapp://send?phone=${telefono}&text=${mensajeCodificado}`;
+    } else if (isiOS()) {
+        // iOS: usa esquema whatsapp://
+        url = `whatsapp://send?phone=${telefono}&text=${mensajeCodificado}`;
+    } else {
+        // Desktop/otros: usa web.whatsapp.com
+        url = `https://wa.me/${telefono}?text=${mensajeCodificado}`;
+    }
+    
+    window.location.href = url;
+}
+
+// --- BOTONES DE CONFIRMACIÓN ---
+function confirmarDahiana() {
+    const mensaje = "¡Hola Dahiana! Confirmo mi asistencia a vuestra boda el 03 de octubre de 2026. ¡Qué emoción! 🌿💍";
+    abrirWhatsApp("34602732290", mensaje);
+}
+
+function confirmarManuel() {
+    const mensaje = "¡Hola Manuel! Confirmo mi asistencia a vuestra boda el 03 de octubre de 2026. ¡Qué emoción! 🌿💍";
+    abrirWhatsApp("34664593119", mensaje);
+}
 
 // --- EVENTO DE APERTURA ---
 wrapper.addEventListener("click", () => {
@@ -14,7 +53,7 @@ wrapper.addEventListener("click", () => {
     
     // Iniciar Música en el segundo 90
     music.currentTime = tiempoInicio;
-    music.play().catch(() => {}); // evita error si el navegador bloquea autoplay
+    music.play().catch(() => {}); 
 
     // Mantener el bucle personalizado
     music.addEventListener("timeupdate", () => {
