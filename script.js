@@ -89,3 +89,9 @@ function iniciarLluviaFlores() {
         setTimeout(() => element.remove(), 8000);
     }, 400);
 }
+    // --- WHATSAPP UNIVERSAL (Android + iOS + Desktop) ---
+    function abrirWhatsApp(telefono, mensaje) {
+        const textoCodificado = encodeURIComponent(mensaje);
+        const url = `https://wa.me/${telefono}?text=${textoCodificado}`;
+        window.open(url, '_blank');
+    }
