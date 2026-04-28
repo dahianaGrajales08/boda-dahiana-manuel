@@ -21,7 +21,7 @@ body {
     overflow-x: hidden; 
 }
 
-/* ✅ Fondo floral real */
+/* ✅ Fondo floral real - imagen image_1.png */
 .bg-floral { 
     background-image: url('image_1.png');
     background-size: cover;
@@ -31,6 +31,7 @@ body {
     position: relative;
 }
 
+/* Sombra semitransparente sobre el fondo para mejorar legibilidad del texto (opcional) */
 .bg-floral::before {
     content: "";
     position: fixed;
@@ -43,21 +44,17 @@ body {
     z-index: 0;
 }
 
-/* ==================== SOBRE RESPONSIVE ==================== */
+/* SOBRE */
 .envelope-wrapper { 
     position: relative; 
     cursor: pointer; 
     z-index: 10; 
     transition: opacity 1.5s ease; 
 }
-
 .envelope { 
     position: relative; 
-    /* Móvil: proporción más vertical (casi cuadrada) */
-    width: 85vw;
-    max-width: 550px;
-    height: 75vw; /* Proporción ~1:0.88 en móvil */
-    max-height: 367px;
+    width: 300px; 
+    height: 200px; 
     background-color: var(--verde-oliva); 
     box-shadow: 0 15px 35px rgba(0,0,0,0.2); 
     z-index: 5; 
@@ -65,10 +62,10 @@ body {
 
 .letter { 
     position: absolute; 
-    bottom: 3%;
-    left: 7%;
-    width: 86%;
-    height: 85%;
+    bottom: 10px; 
+    left: 20px; 
+    width: 260px; 
+    height: 170px; 
     background: white; 
     padding: 15px; 
     box-sizing: border-box; 
@@ -80,15 +77,14 @@ body {
     align-items: center; 
     justify-content: center; 
 }
-
 .letter.front-view { 
     z-index: 7 !important; 
 }
 
-/* ✅ Anillos dentro de la carta */
+/* ✅ Estilo para los anillos DENTRO de la carta (pequeños y discretos) */
 .rings-img-small {
-    max-width: clamp(40px, 10vw, 60px);
-    max-height: clamp(35px, 8vw, 50px);
+    max-width: 55px;
+    max-height: 45px;
     width: auto;
     height: auto;
     display: block;
@@ -96,9 +92,9 @@ body {
     object-fit: contain;
 }
 
-/* ✅ Anillos en contenido principal */
+/* ✅ Estilo para los anillos en el CONTENIDO PRINCIPAL (tamaño justo y elegante) */
 .rings-img-main {
-    max-width: clamp(100px, 20vw, 140px);
+    max-width: 130px;
     width: auto;
     height: auto;
     display: block;
@@ -114,46 +110,24 @@ body {
     margin: 0; 
     text-shadow: 0 1px 2px rgba(0,0,0,0.05);
 }
-
-.letter .gold-text {
-    font-size: clamp(1.4rem, 4vw, 2rem);
-}
-
-.date-text {
-    font-family: 'Montserrat', sans-serif;
-    font-size: clamp(0.85rem, 2.5vw, 1.1rem);
-    color: #666;
-    margin: 5px 0;
-    letter-spacing: 2px;
-}
-
-.tap-text {
-    font-size: clamp(0.7rem, 2vw, 0.85rem);
-    color: #999;
-    font-style: italic;
-}
-
 .header-names { 
-    font-size: clamp(1.8rem, 5vw, 2.4rem);
+    font-size: 2.2rem; 
 }
-
 .subtitle { 
-    font-size: clamp(0.7rem, 2vw, 0.85rem);
+    font-size: 0.8rem; 
     letter-spacing: 1px; 
     color: #666; 
     margin: 10px 0; 
 }
-
 .mensaje { 
     color: var(--texto); 
-    font-size: clamp(0.9rem, 2.5vw, 1rem);
-    line-height: 1.6; 
-    margin: 20px auto; 
-    max-width: 95%; 
-    background: rgba(255,255,240,0.7);
-    padding: 15px 20px;
-    border-radius: 20px;
-    font-style: italic;
+    font-size: 0.95rem; 
+    line-height: 1.4; 
+    margin: 25px auto; 
+    max-width: 90%; 
+    background: rgba(255,255,240,0.6);
+    padding: 12px;
+    border-radius: 30px;
 }
 
 /* REPRODUCTOR */
@@ -162,16 +136,14 @@ body {
     flex-direction: column; 
     align-items: center; 
     gap: 10px; 
-    margin: 15px auto; 
+    margin: 20px auto; 
     max-width: 250px; 
 }
-
 .player-controls { 
     display: flex; 
     align-items: center; 
     gap: 20px; 
 }
-
 .play-pause-btn { 
     background: #333; 
     color: white; 
@@ -184,14 +156,12 @@ body {
     align-items: center; 
     justify-content: center; 
 }
-
 .player-progress { 
     position: relative; 
     width: 100%; 
     height: 2px; 
     background: #ddd; 
 }
-
 .progress-bar { 
     position: absolute; 
     height: 100%; 
@@ -204,30 +174,26 @@ body {
     display: flex; 
     justify-content: center; 
     align-items: baseline; 
-    gap: clamp(6px, 2vw, 12px);
-    margin: 15px 0 20px; 
+    gap: 10px; 
+    margin: 30px 0; 
     color: var(--lila-texto); 
     font-family: 'Cormorant Garamond', serif; 
 }
-
 .timer-group { 
     display: flex; 
     flex-direction: column; 
     align-items: center; 
 }
-
 .timer-val { 
-    font-size: clamp(2rem, 6vw, 2.8rem);
+    font-size: 2.8rem; 
     line-height: 1; 
 }
-
 .timer-sep { 
-    font-size: clamp(1.6rem, 5vw, 2.2rem);
+    font-size: 2.2rem; 
     opacity: 0.5; 
 }
-
 .timer-lab { 
-    font-size: clamp(0.65rem, 1.8vw, 0.75rem);
+    font-size: 0.7rem; 
     font-family: 'Montserrat', sans-serif; 
     text-transform: uppercase; 
     color: #999; 
@@ -244,20 +210,16 @@ body {
     cursor: pointer; 
     text-decoration: none; 
     display: block; 
-    margin: 10px auto; 
+    margin: 12px auto; 
     width: 85%; 
-    max-width: 400px;
     font-weight: 600; 
     text-align: center; 
     transition: all 0.2s ease;
-    font-size: clamp(0.85rem, 2.2vw, 0.95rem);
 }
-
 .btn-oliva:hover {
     background-color: var(--verde-oscuro);
     transform: scale(1.02);
 }
-
 .btn-volver { 
     background: rgba(255, 255, 255, 0.7); 
     border: 1px solid var(--lila-borde); 
@@ -265,55 +227,50 @@ body {
     padding: 8px 30px; 
     border-radius: 50px; 
     font-family: 'Cormorant Garamond', serif; 
-    font-size: clamp(0.95rem, 2.5vw, 1.1rem);
+    font-size: 1.1rem; 
     cursor: pointer; 
 }
 
-/* ==================== PARTES DEL SOBRE ==================== */
+/* PARTES SOBRE */
 .envelope .front { 
-    border-right: 50% solid var(--verde-oscuro); 
-    border-top: 37.5% solid transparent; 
-    border-bottom: 37.5% solid var(--verde-oscuro); 
+    border-right: 150px solid var(--verde-oscuro); 
+    border-top: 100px solid transparent; 
+    border-bottom: 100px solid var(--verde-oscuro); 
     position: absolute; 
     right: 0; 
     bottom: 0; 
     z-index: 4; 
 }
-
 .envelope .back { 
-    border-left: 50% solid var(--verde-oscuro); 
-    border-top: 37.5% solid transparent; 
-    border-bottom: 37.5% solid var(--verde-oscuro); 
+    border-left: 150px solid var(--verde-oscuro); 
+    border-top: 100px solid transparent; 
+    border-bottom: 100px solid var(--verde-oscuro); 
     position: absolute; 
     left: 0; 
     bottom: 0; 
     z-index: 4; 
 }
-
 .envelope .top-flap { 
     position: absolute; 
     top: 0; 
     left: 0; 
-    border-left: 50% solid transparent; 
-    border-right: 50% solid transparent; 
-    border-top: 57.5% solid var(--verde-oliva); 
+    border-left: 150px solid transparent; 
+    border-right: 150px solid transparent; 
+    border-top: 115px solid var(--verde-oliva); 
     transform-origin: top; 
     transition: transform 1.2s; 
     z-index: 6; 
 }
-
 .open .top-flap { 
     transform: rotateX(180deg); 
 }
-
 .open .letter { 
-    transform: translateY(-80%);
+    transform: translateY(-135px); 
 }
-
 .wax-seal { 
     position: absolute; 
-    top: 47%;
-    left: calc(50% - 22.5px);
+    top: 95px; 
+    left: 130px; 
     width: 45px; 
     height: 45px; 
     background: var(--dorado); 
@@ -326,13 +283,12 @@ body {
     font-size: 11px; 
 }
 
-/* CONTENIDO PRINCIPAL */
 #content { 
     display: none; 
     max-width: 500px; 
     width: 90%; 
     background: rgba(255, 255, 255, 0.96); 
-    padding: 30px 25px;
+    padding: 40px; 
     text-align: center; 
     opacity: 0; 
     transition: opacity 2s ease; 
@@ -341,10 +297,7 @@ body {
     z-index: 2; 
     position: relative; 
     box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-    max-height: 95vh;
-    overflow-y: auto;
 }
-
 .falling-element { 
     position: fixed; 
     top: -10vh; 
@@ -352,115 +305,54 @@ body {
     pointer-events: none; 
     animation: fall linear forwards; 
 }
-
 @keyframes fall { 
     to { transform: translateY(110vh) rotate(360deg); } 
 }
 
 .fecha-evento { 
-    margin: 15px auto 5px; 
+    margin: 20px auto 5px; 
     text-align: center; 
 }
-
 .fecha-titulo { 
     font-family: 'Cormorant Garamond', serif; 
-    font-size: clamp(1.6rem, 4.5vw, 2rem);
+    font-size: 2rem; 
     color: var(--dorado); 
     font-weight: 600; 
     margin: 0; 
     letter-spacing: 4px;
     text-shadow: 0 2px 8px rgba(197,160,89,0.25);
 }
-
 .fecha-hora { 
     font-family: 'Montserrat', sans-serif; 
-    font-size: clamp(0.7rem, 2vw, 0.85rem);
+    font-size: 0.8rem; 
     letter-spacing: 2px; 
     color: #888; 
     margin: 5px 0 0; 
     text-transform: uppercase; 
 }
-
 .fecha-sub { 
     font-family: 'Cormorant Garamond', serif; 
     font-style: italic; 
-    font-size: clamp(1rem, 2.8vw, 1.2rem);
+    font-size: 1.15rem; 
     color: var(--dorado); 
     margin: 8px 0 0; 
     letter-spacing: 1px;
     opacity: 0.85;
 }
 
-.botones {
-    margin-top: 20px;
-}
-
-/* ==================== RESPONSIVE MÓVIL ==================== */
+/* Ajustes responsivos para móviles */
 @media (max-width: 550px) {
+    .rings-img-main {
+        max-width: 100px;
+    }
+    .rings-img-small {
+        max-width: 45px;
+        max-height: 35px;
+    }
+    .header-names {
+        font-size: 1.8rem;
+    }
     #content {
-        padding: 20px 18px;
-        max-height: 92vh;
-    }
-    
-    .mensaje {
-        margin: 15px auto;
-        padding: 12px 16px;
-    }
-    
-    .fecha-evento {
-        margin: 12px auto 5px;
-    }
-    
-    .timer-text {
-        margin: 12px 0 15px;
-    }
-    
-    .botones {
-        margin-top: 15px;
-    }
-    
-    .btn-oliva {
-        margin: 8px auto;
-        padding: 11px 18px;
-    }
-}
-
-/* Desktop grande */
-@media (min-width: 1024px) {
-    .envelope {
-        max-width: 600px;
-        height: 400px; /* Proporción 3:2 en desktop */
-    }
-    
-    .envelope .front,
-    .envelope .back { 
-        border-top-width: calc(400px * 0.333);
-        border-bottom-width: calc(400px * 0.333);
-    }
-    
-    .envelope .top-flap {
-        border-top-width: calc(600px * 0.383);
-    }
-    
-    .wax-seal {
-        top: 42%;
-    }
-    
-    #content {
-        padding: 40px 35px;
-    }
-}
-
-/* Tablet/desktop mediano - transición suave */
-@media (min-width: 600px) and (max-width: 1023px) {
-    .envelope {
-        width: 70vw;
-        height: 55vw;
-        max-width: 500px;
-        max-height: 390px;
-    }
-    
-    .wax-seal {
-        top: 45%;
+        padding: 25px;
     }
 }
