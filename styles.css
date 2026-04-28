@@ -53,9 +53,10 @@ body {
 
 .envelope { 
     position: relative; 
-    width: 90vw;
+    /* Móvil: proporción más vertical (casi cuadrada) */
+    width: 85vw;
     max-width: 550px;
-    height: calc((90vw) * 0.667); /* Mantiene proporción 3:2 */
+    height: 75vw; /* Proporción ~1:0.88 en móvil */
     max-height: 367px;
     background-color: var(--verde-oliva); 
     box-shadow: 0 15px 35px rgba(0,0,0,0.2); 
@@ -271,8 +272,8 @@ body {
 /* ==================== PARTES DEL SOBRE ==================== */
 .envelope .front { 
     border-right: 50% solid var(--verde-oscuro); 
-    border-top: calc(50% * 0.667) solid transparent; 
-    border-bottom: calc(50% * 0.667) solid var(--verde-oscuro); 
+    border-top: 37.5% solid transparent; 
+    border-bottom: 37.5% solid var(--verde-oscuro); 
     position: absolute; 
     right: 0; 
     bottom: 0; 
@@ -281,8 +282,8 @@ body {
 
 .envelope .back { 
     border-left: 50% solid var(--verde-oscuro); 
-    border-top: calc(50% * 0.667) solid transparent; 
-    border-bottom: calc(50% * 0.667) solid var(--verde-oscuro); 
+    border-top: 37.5% solid transparent; 
+    border-bottom: 37.5% solid var(--verde-oscuro); 
     position: absolute; 
     left: 0; 
     bottom: 0; 
@@ -295,7 +296,7 @@ body {
     left: 0; 
     border-left: 50% solid transparent; 
     border-right: 50% solid transparent; 
-    border-top: calc(50% * 0.767) solid var(--verde-oliva); 
+    border-top: 57.5% solid var(--verde-oliva); 
     transform-origin: top; 
     transition: transform 1.2s; 
     z-index: 6; 
@@ -306,12 +307,12 @@ body {
 }
 
 .open .letter { 
-    transform: translateY(-67%);
+    transform: translateY(-80%);
 }
 
 .wax-seal { 
     position: absolute; 
-    top: calc(50% * 0.633);
+    top: 47%;
     left: calc(50% - 22.5px);
     width: 45px; 
     height: 45px; 
@@ -428,10 +429,38 @@ body {
 @media (min-width: 1024px) {
     .envelope {
         max-width: 600px;
-        max-height: 400px;
+        height: 400px; /* Proporción 3:2 en desktop */
+    }
+    
+    .envelope .front,
+    .envelope .back { 
+        border-top-width: calc(400px * 0.333);
+        border-bottom-width: calc(400px * 0.333);
+    }
+    
+    .envelope .top-flap {
+        border-top-width: calc(600px * 0.383);
+    }
+    
+    .wax-seal {
+        top: 42%;
     }
     
     #content {
         padding: 40px 35px;
+    }
+}
+
+/* Tablet/desktop mediano - transición suave */
+@media (min-width: 600px) and (max-width: 1023px) {
+    .envelope {
+        width: 70vw;
+        height: 55vw;
+        max-width: 500px;
+        max-height: 390px;
+    }
+    
+    .wax-seal {
+        top: 45%;
     }
 }
