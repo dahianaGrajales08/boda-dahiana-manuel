@@ -3,79 +3,220 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Boda Dahiana & Manuel</title>
-    <link rel="stylesheet" href="styles.css">
-    <!-- Favicon actualizado con image_0.png -->
-    <link rel="icon" type="image/png" href="image_0.png">
+    <title>Nuestra Boda - Dahiana y Manuel</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <link rel="stylesheet" href="style.css">
 </head>
-<body class="bg-floral"> 
-    <div id="falling-flowers"></div>
+<body>
 
-    <audio id="music" loop>
-        <source src="musica.mp3" type="audio/mpeg">
-    </audio>
+<div class="slider-container">
+    <button class="nav-btn prev-btn" id="prevBtn"><i class="fa-solid fa-chevron-left"></i></button>
+    <button class="nav-btn next-btn" id="nextBtn"><i class="fa-solid fa-chevron-right"></i></button>
 
-    <div class="envelope-wrapper" id="envelope-wrapper">
-        
-        <div class="envelope">
-            <div class="top-flap"></div>
-            <div class="wax-seal">D & M</div>
-            <div class="letter">
-                <div class="letter-content">
-                    <!-- Anillos pequeños dentro de la carta - image_2.png -->
-                    <img src="image_2.png" alt="Alianzas" class="rings-img-small">
-                    <h2 class="gold-text">Dahiana & Manuel</h2>
-                    <p class="date-text">03.10.2026</p>
-                    <small class="tap-text">Toca para abrir</small>
-                </div>
-            </div>
-            <div class="back"></div>
-            <div class="front"></div>
-        </div>
-    </div>
+    <div class="slider-wrapper" id="sliderWrapper">
 
-    <div id="content">
-        <div class="header-decor">
-            <!-- Anillos principales - tamaño justo con image_2.png -->
-            <img src="image_2.png" alt="Alianzas" class="rings-img-main">
-            <h1 class="header-names gold-text">Dahiana & Manuel</h1>
-            <p class="subtitle">DALE PLAY PARA ESCUCHAR NUESTRA CANCIÓN</p>
-            
-            <div class="custom-player">
-                <div class="player-controls">
-                    <span class="player-icon small">⏮</span>
-                    <button class="play-pause-btn" id="btnControlMusic" onclick="toggleMusic()">
-                        <span id="musicIcon">▶</span>
-                    </button>
-                    <span class="player-icon small">⏭</span>
+        <div class="slide" id="slide1">
+            <div class="slide-content" style="text-align: center;">
+                <p class="subtitle">Nuestra Boda</p>
+                <h1>Dahiana y Manuel</h1>
+                <div style="margin-top: 25px;">
+                    <p class="date-day">SÁBADO 03 OCTUBRE 2026</p>
+                    <p style="font-size: 22px; color: #5d6d3b; font-weight: bold;">13:00 hrs.</p>
                 </div>
-                <div class="player-progress">
-                    <div class="progress-bar"></div>
-                    <div class="progress-dot"></div>
+                
+                <div class="countdown-container" id="countdown">
+                    <div class="countdown-box"><div class="countdown-num" id="days">00</div><div class="countdown-label">Días</div></div>
+                    <div class="countdown-box"><div class="countdown-num" id="hours">00</div><div class="countdown-label">Horas</div></div>
+                    <div class="countdown-box"><div class="countdown-num" id="minutes">00</div><div class="countdown-label">Min</div></div>
+                    <div class="countdown-box"><div class="countdown-num" id="seconds">00</div><div class="countdown-label">Seg</div></div>
                 </div>
+
+                <div class="image-wrapper" style="max-width: 380px; height: 160px; margin-top: 35px;">
+                    <img src="http://googleusercontent.com/image_collection/image_retrieval/11137240958004057932" alt="Alianzas de boda">
+                </div>
+                <div class="swipe-hint"><i class="fa-solid fa-arrow-left-long"></i> Desliza o usa las flechas para explorar <i class="fa-solid fa-arrow-right-long"></i></div>
             </div>
         </div>
 
-        <div class="mensaje">
-            <p>"Nos encontramos, nos elegimos y hoy queremos compartir contigo nuestra felicidad."</p>
-        </div>
-        <div class="fecha-evento">
-            <p class="fecha-titulo">03 · 10 · 2026</p>
-            <p class="fecha-hora">13:00 H &nbsp;·&nbsp; Cortijo Triana, Andújar</p>
-            <p class="fecha-sub">✨ Cuenta atrás para el sí, quiero ✨</p>
-        </div>
-        <div id="countdown"></div>
-
-        <div class="botones">
-            <a href="https://www.google.com/maps/place/Jardines+Cortijo+Triana/@38.02466,-4.0586758,890m/data=!3m2!1e3!4b1!4m6!3m5!1s0xd6c364a7c61fbdb:0x937df16aa6a94629!8m2!3d38.0246558!4d-4.0561009!16s%2Fg%2F11yf_schx" class="btn-oliva" target="_blank">📍 Ver Ubicación</a>
-            <a href="#" class="btn-oliva" onclick="abrirWhatsApp('34602732290', '¡Hola Dahiana! Confirmo mi asistencia a vuestra boda el 03 de octubre de 2026. ¡Qué emoción! 🌿💍'); return false;">📱 Confirmar con Dahiana</a>
-            <a href="https://wa.me/34664593119?text=¡Hola%20Manuel!%20Confirmo%20mi%20asistencia%20a%20vuestra%20boda%20el%2003%20de%20octubre%20de%202026.%20¡Qué%20emoción!%20🌿💍" class="btn-oliva" onclick="abrirWhatsApp('34664593119', '¡Hola Manuel! Confirmo mi asistencia a vuestra boda el 03 de octubre de 2026. ¡Qué emoción! 🌿💍'); return false;">📱 Confirmar con Manuel</a>
+        <div class="slide" id="slide2" style="background-color: #f9f7f2;">
+            <div class="slide-content" style="text-align: center;">
+                <i class="fa-solid fa-leaf" style="font-size: 50px; color: #5d6d3b; margin-bottom: 20px;"></i>
+                <h2 style="font-family: 'Great Vibes', cursive; font-size: clamp(50px, 7vw, 75px); color: #4b3621; margin: 0;">Bienvenidos a Nuestra Historia</h2>
+                <div style="width: 80px; border: 1px solid #c5a059; margin: 25px auto;"></div>
+                <p style="max-width: 650px; margin: 0 auto; text-align: center;">Un camino de sueños compartidos que nos lleva a este gran día. Diseñamos este espacio interactivo para compartir con vosotros toda la ilusión de los preparativos.</p>
+            </div>
         </div>
 
-        <div style="margin-top: 30px;">
-            <button class="btn-volver" id="btnVolver">← Volver</button>
+        <div class="slide" id="slide3">
+            <div class="slide-content">
+                <h2 class="slide-title">Un Vínculo Inquebrantable</h2>
+                <div class="two-column">
+                    <div class="tile">
+                        <h3>Nuestros Comienzos</h3>
+                        <p>Todo comenzó con una mirada y un café. Desde aquel primer encuentro en Andújar, supimos que nuestras vidas estaban destinadas a entrelazarse bajo el sol de Andalucía.</p>
+                    </div>
+                    <div class="tile">
+                        <h3>El Gran Paso</h3>
+                        <p>Después de años de risas, viajes y apoyo mutuo, decidimos que no hay mejor lugar que el "nosotros". Este 3 de octubre celebramos la unión de dos almas en una sola.</p>
+                    </div>
+                </div>
+            </div>
         </div>
+
+        <div class="slide" id="slide4">
+            <div class="slide-content">
+                <h2 class="slide-title">Los Protagonistas</h2>
+                <div class="two-column">
+                    <div class="image-wrapper" style="border-radius: 50%; width: clamp(260px, 35vw, 400px); height: clamp(260px, 35vw, 400px); margin: 0 auto; border: 6px solid #fdfbf7; outline: 2px solid #c5a059;">
+                        <img src="http://googleusercontent.com/image_collection/image_retrieval/7027420885559025240" alt="Dahiana y Manuel">
+                    </div>
+                    <div>
+                        <p style="font-style: italic; font-size: 22px; color: #4b3621; font-family: 'Playfair Display', serif; margin-bottom: 20px;">"Encontré a quien mi alma ama."</p>
+                        <p>Dahiana y Manuel, una unión forjada en la sencillez y el amor verdadero. Juntos han construido un hogar lleno de luz, aromas de café y la frescura de los olivos que ahora desean compartir con sus seres más queridos.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide" id="slide5">
+            <div class="slide-content">
+                <h2 class="slide-title">El Cortijo de Triana</h2>
+                <div class="two-column">
+                    <div>
+                        <h3>Un Escenario con Alma</h3>
+                        <p>Ubicado en el corazón de Andújar, el Cortijo de Triana ofrece el marco perfecto para nuestro "Sí, quiero".</p>
+                        <p>Sus jardines centenarios y su arquitectura típica andaluza nos acogerán en una tarde llena de magia, tradición y elegancia rústica.</p>
+                    </div>
+                    <div class="image-wrapper" style="height: clamp(220px, 30vw, 350px);">
+                        <img src="http://googleusercontent.com/image_collection/image_retrieval/12625960003466816103" alt="Cortijo de Triana Exterior">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide" id="slide6">
+            <div class="slide-content">
+                <h2 class="slide-title">Bajo los Olivos</h2>
+                <div class="two-column">
+                    <div class="image-wrapper" style="height: clamp(220px, 30vw, 350px);">
+                        <img src="http://googleusercontent.com/image_collection/image_retrieval/15523605925601131338" alt="Jardines de Olivos">
+                    </div>
+                    <div>
+                        <p>Nuestra celebración se inspira en la tierra de Jaén. El verde de los olivos y la calidez del banquete al aire libre crearán una atmósfera inolvidable.</p>
+                        <p>Queremos que sientan la paz de este entorno mientras celebramos la vida y el amor en total libertad y armonía.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide" id="slide7">
+            <div class="slide-content">
+                <h2 class="slide-title">Nuestro Día Especial</h2>
+                <div class="tile-grid">
+                    <div class="tile">
+                        <div class="icon"><i class="fa-solid fa-church"></i></div>
+                        <h3>13:00 hrs.</h3>
+                        <p><strong>Ceremonia</strong><br>Cortijo de Triana</p>
+                    </div>
+                    <div class="tile">
+                        <div class="icon"><i class="fa-solid fa-utensils"></i></div>
+                        <h3>14:30 hrs.</h3>
+                        <p><strong>Banquete</strong><br>Celebración y Brindis</p>
+                    </div>
+                    <div class="tile">
+                        <div class="icon"><i class="fa-solid fa-music"></i></div>
+                        <h3>18:00 hrs.</h3>
+                        <p><strong>Baile y Fiesta</strong><br>¡Hasta que el cuerpo aguante!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide" id="slide8">
+            <div class="slide-content" style="text-align: center;">
+                <div class="quote-layout">
+                    <blockquote>"Amor no es mirarse el uno al otro, sino mirar los dos en la misma dirección."</blockquote>
+                    <cite>— Antoine de Saint-Exupéry</cite>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide" id="slide9">
+            <div class="slide-content">
+                <h2 class="slide-title" style="text-align: center; border: none;">Reserva la Fecha</h2>
+                <div class="date-highlight">
+                    <span class="date-day">SÁBADO</span><br>
+                    <span class="date-big">03</span><br>
+                    <span class="date-year">OCTUBRE · 2026</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide" id="slide10">
+            <div class="slide-content">
+                <h2 class="slide-title">Información para Invitados</h2>
+                <ul class="bullet-list">
+                    <li><i class="fa-solid fa-vest"></i> <strong>Código de Vestimenta:</strong> Elegante rústico. Recomendamos calzado cómodo para disfrutar adecuadamente de las zonas ajardinadas.</li>
+                    <li><i class="fa-solid fa-gift"></i> <strong>Regalos:</strong> Vuestra presencia es nuestro mejor regalo. Si desean tener un detalle, dispondremos de un rincón especial para ello en el Cortijo.</li>
+                    <li><i class="fa-solid fa-location-dot"></i> <strong>Ubicación:</strong> Carretera de Arjona Km1, Andújar. Hay amplio parking vigilado y gratuito disponible en el recinto.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="slide" id="slide11">
+            <div class="slide-content">
+                <h2 class="slide-title">Esencias del Día</h2>
+                <div class="tile-grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
+                    <div class="tile" style="padding: 0; overflow: hidden;">
+                        <div class="image-wrapper" style="height: 180px; border-radius: 0;">
+                            <img src="http://googleusercontent.com/image_collection/image_retrieval/3902245953163074411" alt="Olivo">
+                        </div>
+                        <p style="padding: 15px; font-weight: bold; margin: 0;">Tradición</p>
+                    </div>
+                    <div class="tile" style="padding: 0; overflow: hidden;">
+                        <div class="image-wrapper" style="height: 180px; border-radius: 0;">
+                            <img src="http://googleusercontent.com/image_collection/image_retrieval/4281655770473879737" alt="Café">
+                        </div>
+                        <p style="padding: 15px; font-weight: bold; margin: 0;">Aroma</p>
+                    </div>
+                    <div class="tile" style="padding: 0; overflow: hidden;">
+                        <div class="image-wrapper" style="height: 180px; border-radius: 0;">
+                            <img src="http://googleusercontent.com/image_collection/image_retrieval/9962539318616475723" alt="Atardecer">
+                        </div>
+                        <p style="padding: 15px; font-weight: bold; margin: 0;">Luz</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide" id="slide12" style="background-color: #fdfbf7;">
+            <div class="slide-content" style="text-align: center;">
+                <h2 style="font-family: 'Great Vibes', cursive; font-size: clamp(50px, 7vw, 75px); color: #4b3621; margin-bottom: 10px;">¡Acompáñanos!</h2>
+                <p style="font-size: 22px; margin-bottom: 30px;">Por favor, confirma tu asistencia antes de Septiembre 2026.</p>
+                
+                <div class="rsvp-buttons">
+                    <a href="https://wa.me/34602732290?text=¡Hola%20Dahiana!%20Confirmo%20con%20mucha%20alegría%20mi%20asistencia%20a%20vuestra%20boda." target="_blank" class="rsvp-btn dahiana">
+                        <i class="fa-brands fa-whatsapp"></i> Confirmar a Dahiana
+                    </a>
+                    <a href="https://wa.me/34664593119?text=¡Hola%20Manuel!%20Confirmo%20con%20mucha%20alegría%20mi%20asistencia%20a%20vuestra%20boda." target="_blank" class="rsvp-btn">
+                        <i class="fa-brands fa-whatsapp"></i> Confirmar a Manuel
+                    </a>
+                </div>
+
+                <p style="margin-top: 50px; font-family: 'Great Vibes', cursive; font-size: clamp(32px, 5vw, 45px); color: #c5a059;">¡Os esperamos con mucha ilusión!</p>
+            </div>
+        </div>
+
     </div>
 
-    <script src="script.js"></script>
+    <div class="pagination" id="paginationDots"></div>
+</div>
+
+<script src="script.js"></script>
 </body>
+</html>
